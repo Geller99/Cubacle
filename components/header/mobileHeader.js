@@ -45,6 +45,7 @@ const MobileHeader = () => {
               src={'/Images/notificationIcon.png'}
               height={18}
               width={15}
+              alt={''}
             />
           </span>
 

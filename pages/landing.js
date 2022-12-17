@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Profile from '../components/profile/profile';
-import Link from 'next/link';
 import { useAccount } from 'wagmi';
-import landingStyles from '../styles/landing.module.scss';
+import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const Landing = () => {
 
   const router = useRouter();
-  const accountValidator = false;
   const { address } = useAccount();
   const [user, setUser] = useState('');
 
@@ -19,11 +16,11 @@ const Landing = () => {
 
 
   return (
-    <section className={landingStyles.container}>
+    <section className={styles.container}>
       <main>
-        <div className={landingStyles.nfts} onClick={() => user ? router.push('/assets'): alert("Please connect wallet") }>
+        <div className={styles.nfts} onClick={() => user ? router.push('/assets'): alert("Please connect wallet") }>
           <Image
-            className={landingStyles.icon}
+            className={styles.icon}
             src={'/Images/1Icon.png'}
             height={80}
             width={80}
@@ -36,9 +33,9 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={landingStyles.roadmap} onClick={() => router.push('/')}>
+        <div className={styles.roadmap} onClick={() => router.push('/')}>
           <Image
-            className={landingStyles.icon}
+            className={styles.icon}
             src={'/Images/2Icon.png'}
             height={80}
             width={80}
@@ -51,9 +48,9 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={landingStyles.rewards} onClick={() => router.push('/rewards/rewards')}>
+        <div className={styles.rewards} onClick={() => router.push('/rewards/rewards')}>
           <Image
-            className={landingStyles.icon}
+            className={styles.icon}
             src={'/Images/3Icon.png'}
             height={76}
             width={62}
@@ -66,9 +63,9 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={landingStyles.claimRewards} onClick={() => router.push('/rewards/claim')}>
+        <div className={styles.claimRewards} onClick={() => router.push('/rewards/claim')}>
           <Image
-            className={landingStyles.icon}
+            className={styles.icon}
             src={'/Images/4Icon.png'}
             height={70}
             width={70}
@@ -81,9 +78,9 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={landingStyles.shop} onClick={() => router.push('/')}>
+        <div className={styles.shop} onClick={() => router.push('/')}>
           <Image
-            className={landingStyles.icon}
+            className={styles.icon}
             src={'/Images/5Icon.png'}
             height={80}
             width={80}

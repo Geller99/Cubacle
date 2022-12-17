@@ -1,9 +1,9 @@
 import React from 'react';
-import rewardStyles from '../../styles/rewards.module.scss';
+import styles from '../../styles/rewards.module.scss';
 import Image from 'next/image';
 
-const rewards = () => {
-  const rewards = [
+const Rewards = () => {
+  const rewardsList = [
     {
       rewardImg: '',
       rewardName: 'Reward name',
@@ -54,12 +54,12 @@ const rewards = () => {
     },
   ];
   return (
-    <div className={rewardStyles.container}>
-      <main className={rewardStyles.rewards}>
-        {rewards.map((reward, idx) => {
+    <div className={styles.container}>
+      <main className={styles.rewards}>
+        {rewardsList.map((reward, idx) => {
           return (
-            <div className={rewardStyles.reward} key={reward.rewardName}>
-              <div className={rewardStyles.rewardDetails}>
+            <div className={styles.reward} key={reward.rewardName}>
+              <div className={styles.rewardDetails}>
                 <Image src={reward.rewardImg} height={92} width={92} alt={''} />
 
                 <span>
@@ -68,9 +68,9 @@ const rewards = () => {
                 </span>
               </div>
 
-              <button className={rewardStyles.amount}>
+              <button className={styles.amount}>
                 <Image
-                  className={rewardStyles.icon}
+                  className={styles.icon}
                   src={'/Images/rewardIcon.svg'}
                   height={22}
                   width={22}
@@ -86,4 +86,4 @@ const rewards = () => {
   );
 };
 
-export default rewards;
+export default Rewards;

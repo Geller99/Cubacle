@@ -1,4 +1,4 @@
-import rewardStyles from '../../styles/rewards.module.scss';
+import styles from '../../styles/rewards.module.scss';
 import Image from 'next/image';
 import { usePrepareContractWrite, useContractWrite, useAccount } from 'wagmi'
 import { testabi } from '../../config/testabi';
@@ -103,13 +103,13 @@ const ClaimRewards = () => {
   ];
 
   return (
-    <div className={rewardStyles.container}>
-      <main className={rewardStyles.rewards}>
+    <div className={styles.container}>
+      <main className={styles.rewards}>
         {claimRewards.map((claimreward, idx) => {
           return (
-            <div className={rewardStyles.reward} key={claimreward.rewardName}>
+            <div className={styles.reward} key={claimreward.rewardName}>
 
-              <div className={rewardStyles.rewardDetails}>
+              <div className={styles.rewardDetails}>
                 <Image src={claimreward.rewardImg} height={92} width={92} alt={''} />
                 <span>
                   <h6>{claimreward.rewardName}</h6>
@@ -117,9 +117,9 @@ const ClaimRewards = () => {
                 </span>
               </div>
 
-              <button className={rewardStyles.amount} onClick={() => claimRewardsHandler()} >
+              <button className={styles.amount} onClick={() => claimRewardsHandler()} >
                 <Image
-                  className={rewardStyles.icon}
+                  className={styles.icon}
                   src={'/Images/4Icon.png'}
                   height={22}
                   width={22}

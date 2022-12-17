@@ -1,5 +1,5 @@
 {
-  "name": "cubexvote",
+  "name": "cubase",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,14 +14,11 @@
     "axios": "^1.1.3",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
-    "mongodb": "^4.11.0",
-    "mongoose": "^6.6.7",
     "next": "12.3.1",
     "normalize.css": "^8.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.55.0",
-    "styled-components": "^5.3.6",
     "wagmi": "^0.7.7"
   },
   "devDependencies": {

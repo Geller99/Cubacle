@@ -1,0 +1,174 @@
+@import './variable.module.scss';
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    
+
+    main {
+        background: #F3F3F3;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 75%;
+        margin-top: 12%;
+        padding: 36px;
+        border-radius: 20px;
+
+
+        .tab {
+            display: flex;
+            align-items: center;
+            min-height: 36px;
+            overflow: hidden;
+
+
+            p {
+                font-weight: 500;
+                font-size: 20px;
+                border-bottom: 2px solid #000;
+                padding-bottom: .5rem;
+                margin-right: 1rem;
+            }
+
+            span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #000;
+                color: #FFF;
+                font-size: 20px;
+                width: 48px;
+                height: 32px;
+                border-radius: 20px;
+            }
+        }
+
+        .assets {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            column-gap: 2rem;
+            row-gap: 2rem;
+            margin-top: 2rem;
+
+
+            .asset {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                background: #FFFFFF 0% 0% no-repeat padding-box;
+                border: 2px solid #ECEDEF;
+                border-radius: 20px;
+                height: 100%;
+                min-height: 350px;
+                overflow: hidden;
+
+                img {
+                    height: 200px;
+                    background: #FCFBFC 0% 0% no-repeat padding-box;
+                    border-radius: 20px 20px 0px 0px;
+                    width: 100%;
+                    overflow: hidden;
+                }
+                .circles {
+                    display: flex;
+                    // background-color: #000;
+                    position: absolute;
+                    right: 20px;
+                    bottom: 40%;
+                    transform: translateY(40%);
+                    z-index: 111;
+                    height: 50px;
+                    min-width: 84px;
+
+                    span {
+                        display: flex;
+                        flex-basis: 50%;
+                        height: 42px;
+                        width: 42px;
+                        border-radius: 50%;
+                        position: absolute;
+                    }
+                    #circle1 {
+                        background: #3C48DE 0% 0% no-repeat padding-box;
+                    }
+                    #circle2 {
+                        right: 8px;
+                        background: #3A85DC 0% 0% no-repeat padding-box;
+                        border-left: 2px solid #FFF;
+                    }
+
+                }
+
+
+                .assetTitle {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 30px 20px;
+
+                    .collectionName {
+                        text-align: left;
+                        font: normal normal normal 16px/25px Poppins;
+                        letter-spacing: 0px;
+                        color: #717171;
+                        padding-bottom: 12px;
+                        border-bottom: 2px solid #ECEDEF;
+                    }
+
+
+                    .assetName {
+                        font: normal normal 600 16px/25px Poppins;
+                        letter-spacing: 0px;
+                        color: #717171;
+                        margin-top: 12px;
+                    }
+                }
+
+
+            }
+        }
+
+    }
+
+
+
+}
+@media (max-width: 1086px) {
+    .container{ 
+        
+        main {
+            height: 85%;
+            margin-top: 15%;
+        }
+    }
+}
+
+@media (max-width: 786px) {
+    .container {
+        padding: 0 10px;
+        
+        main {
+            padding: 26px;
+            height: 100%;
+            margin-top: 0;
+
+            .tab {
+                min-height: 48px;
+                p {
+                    font-size: 18px;
+                }
+                span {
+                    width: 42px;
+                    height: 28px;
+                    font-size: 18px;
+                    border-radius: 16px;
+                }
+            }
+        }
+        .assets {
+            row-gap: 1.5rem;
+            margin-top: 1rem;
+        }
+    }
+}

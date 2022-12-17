@@ -1,4 +1,4 @@
-import { render } from 'enzyme';
+
 import Landing from './landing';
 
 const Home = () => {

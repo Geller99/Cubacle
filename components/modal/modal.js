@@ -17,11 +17,22 @@ const Modal = ({ show, onClose, children, title }) => {
   const modalContent = show ? (
     <div className={styles.ModalWrapper}>
       <div className={styles.ModalBody}>
+<<<<<<< Updated upstream
         <div className={styles.ModalHeader} >
           <a href="#" onClick={handleCloseClick}>
             x
           </a>
         </div>
+=======
+        <header className={styles.ModalHeader} >
+
+          <h4>Claiming Reward</h4>
+          <a href="#" onClick={handleCloseClick}>
+            x
+          </a>
+        </header>
+
+>>>>>>> Stashed changes
         {title && <div>{title}</div>}
         <div>{children}</div>
       </div>

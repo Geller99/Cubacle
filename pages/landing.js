@@ -33,7 +33,7 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={styles.roadmap} onClick={() => router.push('/')}>
+        <div className={styles.roadmap} onClick={() => user ? router.push('/'): alert("Please connect wallet")}>
           <Image
             className={styles.icon}
             src={'/Images/2Icon.png'}
@@ -48,7 +48,7 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={styles.rewards} onClick={() => router.push('/rewards/rewards')}>
+        <div className={styles.rewards} onClick={() => user ? router.push('/rewards/rewards'): alert("Please connect wallet") }>
           <Image
             className={styles.icon}
             src={'/Images/3Icon.png'}
@@ -63,7 +63,7 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={styles.claimRewards} onClick={() => router.push('/rewards/claim')}>
+        <div className={styles.claimRewards} onClick={() => user ? router.push('/rewards/claim'): alert("Please connect wallet") }>
           <Image
             className={styles.icon}
             src={'/Images/4Icon.png'}
@@ -78,7 +78,7 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={styles.shop} onClick={() => router.push('/')}>
+        <div className={styles.shop} onClick={() => user ? router.push('/'): alert("Please connect wallet") }>
           <Image
             className={styles.icon}
             src={'/Images/5Icon.png'}

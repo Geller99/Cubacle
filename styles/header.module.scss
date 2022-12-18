@@ -111,7 +111,7 @@
         flex-direction: column;
         position: relative;
         overflow: hidden;
-        min-height: 300px;
+        min-height: 264px;
         margin: 0;
 
         main {
@@ -120,10 +120,10 @@
             align-items: center;
             margin: 0  auto;
             padding: 0 1rem;
-            width: 80%;
+            width: 90%;
             background: $primaryBg;
             border-radius: 0px 0px 8px 8px;
-            min-height: 76px;
+            min-height: 70px;
 
 
             .leftCta {
@@ -176,26 +176,46 @@
         .mobileLogo {
             display: flex;
             justify-content: center;
-            padding: 24px 0;
+            padding: 20px 0;
             border-bottom: 2px solid #D3D3D3;
-            min-height:110px;
+            // min-height:110px;
         }
 
-        .headerText {
+        .headerCtaContainer {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin: 2rem auto; 
-            overflow: hidden;
+            width: 100%;
+            max-width: 90%;
 
-            h3 {
-                overflow: hidden;
-                font-size: 24px;            
+            margin: 0 auto;
+            margin-top: 1rem;
+
+            .headerCta {
+                height: 46px;
+                margin: auto 0;
+                background: $primaryBg;
+                outline: none;
+                border: none;
+                padding: 0 1.2rem;
+                color: #FFFFFF;
+                border-radius: 10px;
+                cursor: pointer;
             }
-
-            span {
-                p {
-                    font-size: 13px;
+            .headerText {
+                display: flex;
+                overflow: hidden;
+    
+                h3 {
+                    overflow: hidden;
+                    font-size: 22px;            
+                }
+    
+                span {
+                    p {
+                        overflow: hidden;
+                        font-size: 12px;
+                    }
                 }
             }
         }

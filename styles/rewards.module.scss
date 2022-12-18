@@ -61,26 +61,38 @@
                 }
             }
 
+            .claimRewardCta {
 
-            .amount {
                 display: flex;
-                justify-content: center;
-                align-items: center;
-                background: #3D0DDF 0% 0% no-repeat padding-box;
-                width: 140px;
-                min-height: 50px;
-                overflow: hidden;
-                border-radius: 8px;
-                outline: none;
-                border: none;
-                color: #FFF;
+                column-gap: 1rem;
 
-                p {
-                    margin-left: 14px;
-                    font-size: 18px;
+                .amount, 
+                .learnMore{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: #3D0DDF 0% 0% no-repeat padding-box;
+                    width: 140px;
+                    min-height: 50px;
+                    overflow: hidden;
+                    border-radius: 8px;
+                    outline: none;
+                    border: none;
                     color: #FFF;
+    
+                    p {
+                        margin-left: 14px;
+                        font-size: 18px;
+                        color: #FFF;
+                    }
+                }
+                .learnMore {
+                    background: none;
+                    border: 1px solid #3D09DF;
+                    color: #333;
                 }
             }
+
 
         }
     }
@@ -134,22 +146,36 @@
 
                 }
 
-                .amount {
-                    margin: auto 0;
-                    width: 100px;
-                    min-height: 32px !important;
-                    margin-top: .5rem;
-                    margin-left: -16px;
+                .claimRewardCta {
+                    column-gap: .5rem;
 
-                    img {
-                        width: 18px;
-                        height: 18px;
+                    .amount,
+                    .learnMore {
+                        // width: 100%;
+                        flex-basis: 50%;
+                        margin: 0;
+                        // width: 100px;
+                        min-height: 36px !important;
+                        margin-top: .5rem;
+    
+                        img {
+                            width: 14px !important;
+                            height: 14px !important;
+                        }
+    
+                        p {
+                            font-size: 14px !important;
+                            margin-left: 8px;
+                        }
                     }
 
-                    p {
-                        font-size: 14px !important;
+                    .learnMore {
+                        font-size: 14px;
                     }
+
                 }
+
+
             }
         }
     }

@@ -1,19 +1,19 @@
-import styles from "../../styles/rewards.module.scss";
-import Image from "next/image";
+import styles from '../../styles/rewards.module.scss';
+import Image from 'next/image';
 import {
   usePrepareContractWrite,
   useContractWrite,
   useAccount,
   useProvider,
-} from "wagmi";
-import { testabi } from "../../config/testabi";
-import { rewardsabi } from "../../config/rewardsabi";
-import { useContractRead } from "wagmi";
-import { useEffect } from "react";
-import { useState } from "react";
-import { ethers } from "ethers";
-import Modal from "../../components/modal/modal";
-import { StakingClaim } from "../../components/rewards/stakingclaim";
+} from 'wagmi';
+import { testabi } from '../../config/testabi';
+import { rewardsabi } from '../../config/rewardsabi';
+import { useContractRead } from 'wagmi';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { ethers } from 'ethers';
+import Modal from '../../components/modal/modal';
+import { StakingClaim } from '../../components/rewards/stakingclaim';
 
 /**
  *
@@ -34,7 +34,7 @@ const ClaimRewards = () => {
   const [showModal, setShowModal] = useState(false);
 
   let myContract = new ethers.Contract(
-    "0x4F4c1A5A493b91D1F79A0c82e31e5e11850D3aA2",
+    '0x4F4c1A5A493b91D1F79A0c82e31e5e11850D3aA2',
     rewardsabi,
     provider
   );
@@ -63,7 +63,7 @@ const ClaimRewards = () => {
         try {
           const result = await callback();
           if (result === false) {
-            console.log("Current Approved Token", token);
+            console.log('Current Approved Token', token);
             unique.push(token);
           }
           resolve(result);
@@ -77,14 +77,14 @@ const ClaimRewards = () => {
   };
 
   const { config: tokenFetchConfig, error: tokenFetchError } = useContractRead({
-    address: "0x8661cD0C4A3fD3Dc6B31cD24B20368851749Df00",
+    address: '0x8661cD0C4A3fD3Dc6B31cD24B20368851749Df00',
     abi: testabi,
-    functionName: "getOwnerTokens",
+    functionName: 'getOwnerTokens',
     args: [address && address],
     onSuccess: (data) => {
       setTokenIds(data.map((el) => el.toString()));
       console.log(
-        "Founder owned tokens!",
+        'Founder owned tokens!',
         data.map((el) => el.toString())
       );
     },
@@ -97,16 +97,16 @@ const ClaimRewards = () => {
 
   const { config: claimRewardsConfig, error: claimRewardsError } =
     usePrepareContractWrite({
-      address: "0x4F4c1A5A493b91D1F79A0c82e31e5e11850D3aA2",
+      address: '0x4F4c1A5A493b91D1F79A0c82e31e5e11850D3aA2',
       abi: rewardsabi,
-      functionName: "claimRewards",
+      functionName: 'claimRewards',
       args: [tokenIds.map((el) => parseInt(el))],
       onSuccess: (data) => {
-        console.log("Approved Tokens!");
+        console.log('Approved Tokens!');
       },
       onError: (error) => {
         console.log(error);
-        setError("Claim Not Allowed at this time");
+        setError('Claim Not Allowed at this time');
       },
     });
   const { writeAsync: claim } = useContractWrite(claimRewardsConfig);
@@ -121,19 +121,18 @@ const ClaimRewards = () => {
     //eslint-disable-next-line
   }, [tokenIds]);
 
-
   const claimRewardsHandler = async () => {
     if (tokenIds.length < 1) {
-      alert("You do not own any Cubex Cards");
+      alert('You do not own any Cubex Cards');
       return;
     }
     if (unique.length < 1) {
-      alert("All of your tokens have been claimed");
+      alert('All of your tokens have been claimed');
       return;
     }
     let totalPay = unique.length * 11;
     alert(`Your claim for the CubeX staking rewards is $${totalPay}`);
-    console.log("User Token List", unique);
+    console.log('User Token List', unique);
 
     try {
       await claim?.();
@@ -145,16 +144,20 @@ const ClaimRewards = () => {
 
   const claimRewards = [
     {
-      rewardImg: "",
-      rewardName: "Staking Reward",
-      rewardDescription: "Eth Drop Reward For Cubex Cards",
+      rewardImg: '',
+      rewardName: 'Staking Reward',
+      rewardDescription: 'Eth Drop Reward For Cubex Cards',
     },
   ];
 
   return (
     <div className={styles.container}>
       <Modal onClose={() => setShowModal(false)} show={showModal}>
-            <StakingClaim setShowModal={setShowModal} claimRewardsHandler={claimRewardsHandler} unique={unique} />
+        <StakingClaim
+          setShowModal={setShowModal}
+          claimRewardsHandler={claimRewardsHandler}
+          unique={unique}
+        />
       </Modal>
 
       <main className={styles.rewards}>
@@ -166,7 +169,7 @@ const ClaimRewards = () => {
                   src={claimreward.rewardImg}
                   height={92}
                   width={92}
-                  alt={""}
+                  alt={''}
                 />
                 <span>
                   <h6>{claimreward.rewardName}</h6>
@@ -174,21 +177,25 @@ const ClaimRewards = () => {
                 </span>
               </div>
 
-              <button onClick={() => setShowModal(true)}> Learn More </button>
+              <span className={styles.claimRewardCta}>
+                <button
+                className={styles.learnMore}
+                onClick={() => setShowModal(true)}> Learn More </button>
 
-              <button
-                className={styles.amount}
-                onClick={() => claimRewardsHandler()}
-              >
-                <Image
-                  className={styles.icon}
-                  src={"/Images/4Icon.png"}
-                  height={22}
-                  width={22}
-                  alt={""}
-                />
-                <p>Claim</p>
-              </button>
+                <button
+                  className={styles.amount}
+                  onClick={() => claimRewardsHandler()}
+                >
+                  <Image
+                    className={styles.icon}
+                    src={'/Images/4Icon.png'}
+                    height={22}
+                    width={22}
+                    alt={''}
+                  />
+                  <p>Claim</p>
+                </button>
+              </span>
             </div>
           );
         })}

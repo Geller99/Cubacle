@@ -54,12 +54,14 @@ const ClaimRewards = () => {
     });
 
     const output = await Promise.all(promises);
-
     const newUnique = [...unique];
+   
     for(let i = 0; i < tokenIds.length; ++i ){
-      if(!output[i]){
+      console.log(tokenIds[i], output[i])
+      if(output[i] === false){
         newUnique.push(tokenIds[i]);
       }
+      console.log(newUnique)
     }
     setUnique(newUnique);
   };

@@ -40,8 +40,8 @@
     }
 
     a {
-      font-size: 32px;
-      color: #aa0909;
+      font-size: 28px;
+      color: #e12424;
       text-decoration: none;
       overflow: hidden;
     }
@@ -95,7 +95,7 @@
 
       @mixin child($n) {
         &:nth-child(#{$n}){
-              background-color:red;
+              background:red;
         }
     }
    
@@ -115,21 +115,40 @@
     padding: 0 1rem;
 
     .ModalBody {
-      min-height: 550px;
+      min-height: 400px;
       padding: 2rem 1.5rem;
+
+
+      .ModalHeader {
+
+        h4 {
+          font-size: 20px;
+        }
+      }
       .contentContainer {
         margin-top: 2rem;
 
 
+
+
+
         p {
-          font-size: 16px;
+          font-size: 14px;
           color: #333333;
-          line-height: 32px;
+          line-height: 26px;
     
+        }
+        main {
+          margin-top: 0;
         }
         span {
           column-gap: .5rem;
-          margin-top: 2rem;
+          margin-top: 1rem;
+
+          button {
+            height: 42px;
+            font-size: 14px;
+          }
         }
       }
     }
@@ -140,11 +159,19 @@
 }
 
 .closeBtn {
-  border: 1px solid #aa0909;
+  border: 1px solid #e12424;
   background: none;
+}
+.closeBtn:hover {
+  transition: all 0.2s linear;
+  transform: scale(0.97);
 }
 .connectBtn {
   border: none;
   color: #FFF;
   background: $primaryBg;
+}
+.connectBtn:hover {
+  transition: all 0.2s linear;
+  transform: scale(0.97);
 }

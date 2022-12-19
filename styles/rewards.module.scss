@@ -79,17 +79,31 @@
                     outline: none;
                     border: none;
                     color: #FFF;
-    
+                    cursor: pointer;
+                    
                     p {
                         margin-left: 14px;
                         font-size: 18px;
                         color: #FFF;
                     }
+
+                }
+                .amount:hover {
+                    transform: scale(0.97);
+                    opacity: 0.9;
+                    transition: all 0.2s linear;
                 }
                 .learnMore {
                     background: none;
                     border: 1px solid #3D09DF;
                     color: #333;
+                }
+                .learnMore:hover {
+                    opacity: 0.9;
+                    background-color: #3D09DF;
+                    transform: scale(0.97);
+                    transition: all 0.2s linear;
+                    color: #FFF;
                 }
             }
 

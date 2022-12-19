@@ -67,17 +67,18 @@ const Rewards = () => {
                   <p>{reward.rewardDescription}</p>
                 </span>
               </div>
-
-              <button className={styles.amount}>
-                <Image
-                  className={styles.icon}
-                  src={'/Images/rewardIcon.svg'}
-                  height={22}
-                  width={22}
-                  alt={''}
-                />
-                <p>{reward.rewardAmount}</p>
-              </button>
+              <span>
+                <button className={styles.amount}>
+                  <Image
+                    className={styles.icon}
+                    src={'/Images/rewardIcon.svg'}
+                    height={22}
+                    width={22}
+                    alt={''}
+                  />
+                  <p>{reward.rewardAmount}</p>
+                </button>
+              </span>
             </div>
           );
         })}

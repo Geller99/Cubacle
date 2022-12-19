@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Image from 'next/image';
 import ReactDOM from "react-dom";
 import styles from '../../styles/modal.module.scss';
 
@@ -21,7 +22,7 @@ const Modal = ({ show, onClose, children, title }) => {
 
           <h4>Claiming Reward</h4>
           <a href="#" onClick={handleCloseClick}>
-            x
+            X
           </a>
         </header>
 

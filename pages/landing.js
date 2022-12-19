@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const Landing = () => {
-
   const router = useRouter();
   const { address } = useAccount();
   const [user, setUser] = useState('');
@@ -14,11 +13,15 @@ const Landing = () => {
     setUser(address);
   }, [address]);
 
-
   return (
     <section className={styles.container}>
       <main>
-        <div className={styles.nfts} onClick={() => user ? router.push('/assets'): alert("Please connect wallet") }>
+        <div
+          className={styles.nfts}
+          onClick={() =>
+            user ? router.push('/assets') : alert('Please connect wallet')
+          }
+        >
           <Image
             className={styles.icon}
             src={'/Images/1Icon.png'}
@@ -33,7 +36,12 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={styles.roadmap} onClick={() => user ? router.push('/'): alert("Please connect wallet")}>
+        <div
+          className={styles.roadmap}
+          onClick={() =>
+            user ? router.push('/') : alert('Please connect wallet')
+          }
+        >
           <Image
             className={styles.icon}
             src={'/Images/2Icon.png'}
@@ -48,7 +56,14 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={styles.rewards} onClick={() => user ? router.push('/rewards/rewards'): alert("Please connect wallet") }>
+        <div
+          className={styles.rewards}
+          onClick={() =>
+            user
+              ? router.push('/rewards/rewards')
+              : alert('Please connect wallet')
+          }
+        >
           <Image
             className={styles.icon}
             src={'/Images/3Icon.png'}
@@ -63,7 +78,14 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={styles.claimRewards} onClick={() => user ? router.push('/rewards/claim'): alert("Please connect wallet") }>
+        <div
+          className={styles.claimRewards}
+          onClick={() =>
+            user
+              ? router.push('/rewards/claim')
+              : alert('Please connect wallet')
+          }
+        >
           <Image
             className={styles.icon}
             src={'/Images/4Icon.png'}
@@ -78,7 +100,12 @@ const Landing = () => {
           </span>
         </div>
 
-        <div className={styles.shop} onClick={() => user ? router.push('/'): alert("Please connect wallet") }>
+        <div
+          className={styles.shop}
+          onClick={() =>
+            user ? router.push('/') : alert('Please connect wallet')
+          }
+        >
           <Image
             className={styles.icon}
             src={'/Images/5Icon.png'}
@@ -93,7 +120,6 @@ const Landing = () => {
           </span>
         </div>
       </main>
-
     </section>
   );
 };

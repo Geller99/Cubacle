@@ -53,7 +53,15 @@ const ClaimRewards = () => {
       }, token);
     });
 
-    await Promise.all(promises);
+    const output = await Promise.all(promises);
+
+    const newUnique = [...unique];
+    for(let i = 0; i < tokenIds.length; ++i ){
+      if(!output[i]){
+        newUnique.push(tokenIds[i]);
+      }
+    }
+    setUnique(newUnique);
   };
 
   const threeTry = (callback, token) => {
@@ -62,10 +70,6 @@ const ClaimRewards = () => {
       for (let i = 0; i < 1; ++i) {
         try {
           const result = await callback();
-          if (result === false) {
-            console.log('Current Approved Token', token);
-            unique.push(token);
-          }
           resolve(result);
           return;
         } catch (err) {
@@ -117,9 +121,9 @@ const ClaimRewards = () => {
   }, []);
 
   useEffect(() => {
-    if (tokenIds.length > 0) bulkCheck();
-    //eslint-disable-next-line
-  }, [tokenIds]);
+    bulkCheck();
+  },[tokenIds]);
+
 
   const claimRewardsHandler = async () => {
     if (tokenIds.length < 1) {
@@ -196,6 +200,7 @@ const ClaimRewards = () => {
                   <p>Claim</p>
                 </button>
               </span>
+             
             </div>
           );
         })}

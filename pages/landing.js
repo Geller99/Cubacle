@@ -32,7 +32,7 @@ const Landing = () => {
 
           <span>
             <h3>Your NFTS</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <p>Click here to see all your Cubex NFTs and Assets...</p>
           </span>
         </div>
 
@@ -52,7 +52,7 @@ const Landing = () => {
 
           <span>
             <h3>Roadmap</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <p>Keep up with the team at Cubex, checkout our roadmap!...</p>
           </span>
         </div>
 
@@ -74,7 +74,7 @@ const Landing = () => {
 
           <span>
             <h3>Rewards</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <p>Explore upcoming rewards for the community...</p>
           </span>
         </div>
 
@@ -95,8 +95,8 @@ const Landing = () => {
           />
 
           <span>
-            <h3>Claim Rewards</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <h3>Claim</h3>
+            <p>Explore and Claim Your CubeX Rewards Here!...</p>
           </span>
         </div>
 
@@ -116,7 +116,7 @@ const Landing = () => {
 
           <span>
             <h3>Shop</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+            <p>The Official CubeX Shop for Holders, Coming Soon...</p>
           </span>
         </div>
       </main>

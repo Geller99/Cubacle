@@ -172,7 +172,7 @@ const ClaimRewards = () => {
             <div className={styles.reward} key={claimreward.rewardName}>
               <div className={styles.rewardDetails}>
                 <Image
-                  src={claimreward.rewardImg}
+                  src={'/Images/claimImageCard.gif'}
                   height={92}
                   width={92}
                   alt={''}

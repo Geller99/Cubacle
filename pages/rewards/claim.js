@@ -163,7 +163,7 @@ const ClaimRewards = () => {
       rewardImg: CubexXmasImg,
       rewardName: 'CubeVerse Christmas Gift',
       rewardDescription: 'Eth Drop Reward For Cubex Cards',
-      learnMoreBtn: () => setShowModal(true),
+      learnMoreBtn: () => console.log('add a learn more details'),
       claimRewardBtn: () => console.log('rewward2 clicked!'),
     },
   ];

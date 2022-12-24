@@ -156,13 +156,15 @@ const ClaimRewards = () => {
       rewardImg: CubexRewardImg,
       rewardName: 'Staking Reward',
       rewardDescription: 'Eth Drop Reward For Cubex Cards',
-      onClick: () => claimRewardsHandler(),
+      learnMoreBtn: () => setShowModal(true),
+      claimRewardBtn: () => claimRewardsHandler(),
     },
     {
       rewardImg: CubexXmasImg,
       rewardName: 'CubeVerse Christmas Gift',
       rewardDescription: 'Eth Drop Reward For Cubex Cards',
-      onClick: () => console.log('rewward2 clicked!'),
+      learnMoreBtn: () => setShowModal(true),
+      claimRewardBtn: () => console.log('rewward2 clicked!'),
     },
   ];
 
@@ -198,7 +200,7 @@ const ClaimRewards = () => {
               <span className={styles.claimRewardCta}>
                 <button
                   className={styles.learnMore}
-                  onClick={() => setShowModal(true)}
+                  onClick={claimreward.learnMoreBtn}
                 >
                   {' '}
                   Learn More{' '}
@@ -206,7 +208,7 @@ const ClaimRewards = () => {
 
                 <button
                   className={styles.amount}
-                  onClick={claimreward.onClick}
+                  onClick={claimreward.claimRewardBtn}
                 >
                   <Image
                     className={styles.icon}

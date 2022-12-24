@@ -1,7 +1,7 @@
 import styles from '../../styles/rewards.module.scss';
 import Image from 'next/image';
-import CubexRewardImg from '../../public/Images/claimImageCard.gif'
-import CubexXmasImg from '../../public/Images/xmasClaim.jpg'
+import CubexRewardImg from '../../public/Images/claimImageCard.gif';
+import CubexXmasImg from '../../public/Images/xmasClaim.jpg';
 import {
   usePrepareContractWrite,
   useContractWrite,
@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { ethers } from 'ethers';
 import Modal from '../../components/modal/modal';
 import { StakingClaim } from '../../components/rewards/stakingclaim';
+// import { element } from '@rainbow-me/rainbowkit/dist/css/reset.css';
 
 /**
  *
@@ -149,13 +150,17 @@ const ClaimRewards = () => {
       rewardImg: CubexRewardImg,
       rewardName: 'Staking Reward',
       rewardDescription: 'Eth Drop Reward For Cubex Cards',
+      onClick: () => claimRewardsHandler(),
     },
     {
       rewardImg: CubexXmasImg,
       rewardName: 'CubeVerse Christmas Gift',
       rewardDescription: 'Eth Drop Reward For Cubex Cards',
+      onClick: () => console.log('rewward2 clicked!'),
     },
   ];
+
+
 
   return (
     <div className={styles.container}>
@@ -186,12 +191,16 @@ const ClaimRewards = () => {
 
               <span className={styles.claimRewardCta}>
                 <button
-                className={styles.learnMore}
-                onClick={() => setShowModal(true)}> Learn More </button>
+                  className={styles.learnMore}
+                  onClick={() => setShowModal(true)}
+                >
+                  {' '}
+                  Learn More{' '}
+                </button>
 
                 <button
                   className={styles.amount}
-                  onClick={() => claimRewardsHandler()}
+                  onClick={claimreward.onClick}
                 >
                   <Image
                     className={styles.icon}

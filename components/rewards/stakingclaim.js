@@ -6,7 +6,7 @@ export const StakingClaim = ({ setShowModal, claimRewardsHandler, unique }) => {
   return (
     <div className={styles.contentContainer}>
       <p>
-        This claim will redeem .085 ETH per CubeX Card in your wallet. You will
+        This claim will redeem .0085 ETH per CubeX Card in your wallet. You will
         only be able to claim once per wallet and once per card. Gas may vary,
         but if you are patient you could find a time for under $0.50 in gas.
       </p>

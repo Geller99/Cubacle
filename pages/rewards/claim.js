@@ -159,7 +159,7 @@ const ClaimRewards = () => {
     {
       rewardImg: CubexXmasImg,
       rewardName: 'CubeVerse Christmas Gift',
-      rewardDescription: 'Eth Drop Reward For Cubex Cards',
+      rewardDescription: 'Merry Christmas CubeVerse! Head Over To the Discord To Find Out More!',
     },
   ];
 

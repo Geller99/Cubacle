@@ -1,5 +1,7 @@
 import styles from '../../styles/rewards.module.scss';
 import Image from 'next/image';
+import CubexRewardImg from '../../public/Images/claimImageCard.gif'
+import CubexXmasImg from '../../public/Images/xmasClaim.jpg'
 import {
   usePrepareContractWrite,
   useContractWrite,
@@ -150,8 +152,13 @@ const ClaimRewards = () => {
 
   const claimRewards = [
     {
-      rewardImg: '',
+      rewardImg: CubexRewardImg,
       rewardName: 'Staking Reward',
+      rewardDescription: 'Eth Drop Reward For Cubex Cards',
+    },
+    {
+      rewardImg: CubexXmasImg,
+      rewardName: 'CubeVerse Christmas Gift',
       rewardDescription: 'Eth Drop Reward For Cubex Cards',
     },
   ];
@@ -172,7 +179,7 @@ const ClaimRewards = () => {
             <div className={styles.reward} key={claimreward.rewardName}>
               <div className={styles.rewardDetails}>
                 <Image
-                  src={'/Images/claimImageCard.gif'}
+                  src={claimreward.rewardImg}
                   height={92}
                   width={92}
                   alt={''}

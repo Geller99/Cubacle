@@ -2,8 +2,12 @@
 
 .container {
     width: 100%;
-    height: 100%;
-    margin-top: 30%;
+    // height: 100%;
+    position: absolute;
+    top: 55%;
+    transform: translateY(-55%); 
+    padding: 0 4%;
+
 
     main {
         display: grid;
@@ -11,7 +15,6 @@
         column-gap: 2rem;
         row-gap: 2rem;
         width: 100%;
-
 
 
         div {
@@ -86,11 +89,18 @@
 
 @media (max-width: 1568px) {
     .container {
-        padding-bottom: 10rem;
+        height: 100%;
+        // top: 42%;x
+        // transform: translateY(-50%); 
+        margin-top: 18%;  
+
+        main {
+            margin-bottom: 18rem;
+        }
 
         div {
             height: 100%;
-            min-height: 400px;
+            min-height: 350px;
         }
     }
 }
@@ -98,22 +108,38 @@
 @media (max-width: 1268px) {
     .container {
         height: 100%;
-        margin-top: 25%;
-        padding-bottom: 8rem;
+        margin-top: 10%;
+        // margin-bottom: 1rem;
+        padding-bottom: 4rem;
+
+        main {
+            margin-bottom: 12rem;
+        }
     }
 }
-@media (max-width: 868px) {
+@media (max-width: 1087px) {
+    .container {
+        height: 100%;
+        margin-top: 14%;
+        padding-bottom: 4rem;
 
+        main {
+            margin-bottom: 10rem;
+        }
+    }
 }
 @media (max-width: 768px) {
     .container {
         margin: 0%;
+        position: relative;
+        padding: 0;
         padding-bottom: 2rem;
 
         main {
             padding: 0 10px;
             row-gap: 1.5rem;
             margin-top: 0rem;
+            margin-bottom: 0rem;
 
             div {
                 position: relative;

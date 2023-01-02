@@ -12,6 +12,7 @@
     min-height: 100vh;
     overflow: hidden;
     position: fixed;
+    z-index: 111;
 
     .logo {
         display: flex;

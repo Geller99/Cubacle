@@ -1,15 +1,97 @@
-import Image from 'next/image';
-import React from 'react';
-import styles from '../styles/assets.module.scss';
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { useAccount, useContractRead, useContractWrite } from "wagmi";
+import styles from "../styles/assets.module.scss";
+import { Network, Alchemy } from "alchemy-sdk";
+import { cubexAbi } from "../config/cubexNTFabi";
+import axios from "axios";
+// import ipfsClient from 'ipfs-http-client';
+
+// const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
+/**
+ *
+ * @returns
+ *
+ * Grab balanceOf wallet
+ * Grab tokenIds of wallet address -  tokenOfOwnerByIndex
+ * Grab Token URI from contract
+ * Parse metadata response to JSON
+ * Display image on site
+ */
+
+const settings = {
+  apiKey: "Nvjk-5BRH6VLoWqiFTVWzZPacNMGaHYC",
+  network: Network.ETH_MAINNET,
+};
+
+const alchemy = new Alchemy(settings);
 
 const Assets = () => {
-  const assests = [
-    {
-      assetImg: '',
-      collectionName: 'Gummy Invasions',
-      assetName: 'Gummy Invasions #1234',
+  const { address } = useAccount();
+  const [tokenIds, setTokenIds] = useState([]);
+  const [tokenInfo, setTokenInfo] = useState(null);
+  const [user, setUser] = useState(null);
+  const contractAddy = "0x92C93fAfc20fE882a448f86e594d9667259c42C8";
+
+  const { config: tokenFetchConfig, error: tokenFetchError } = useContractRead({
+    address: "0x92C93fAfc20fE882a448f86e594d9667259c42C8",
+    abi: cubexAbi,
+    functionName: "getOwnerTokens",
+    args: [address && address],
+    onSuccess: (data) => {
+      setTokenIds(data.map((el) => el.toString()));
+      console.log(
+        "Founder owned tokens!",
+        data.map((el) => el.toString())
+      );
     },
-  ];
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+  const { write: fetchTokenIds } = useContractWrite(tokenFetchConfig);
+  const fetchTokenData = async () => {
+    const sortedTokens = tokenIds.map((el) => {
+      return {
+        contractAddress: contractAddy,
+        tokenId: el,
+      };
+    });
+    try {
+      const response = await alchemy.nft.getNftMetadataBatch(sortedTokens);
+      setTokenInfo(response);
+      console.log("Data", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkListingStatus = () => {
+    try {
+      axios({
+        method: "post",
+        url: "/api/fetchTokenData",
+        data: tokenIds && tokenIds,
+      }).then((res) => {
+        // process the response
+        console.log("status data", res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTokenIds?.();
+  }, []);
+
+  useEffect(() => {
+    if (tokenIds.length > 0) {
+      fetchTokenData();
+      checkListingStatus();
+    }
+  }, [tokenIds.length]);
+
 
   return (
     <section className={styles.container}>
@@ -22,26 +104,33 @@ const Assets = () => {
         </div>
 
         <div className={styles.assets}>
-          {assests.map((asset, idx) => {
-            return (
-              <div className={styles.asset} key={asset.assetName} >
-                <Image src={asset.assetImg} alt={''} />
+          {tokenInfo &&
+            tokenInfo.map((asset) => {
+              return (
+                <div className={styles.asset} key={asset.rawMetadata.name}>
+                  <Image
+                    src={`https://ipfs.io/ipfs/${asset.rawMetadata.image.substr(7)}`}
+                    alt={""}
+                    height={'250px'}
+                    width={'100px'}
+                    priority
+                  />
 
-                <div className={styles.circles}>
-                  <span id={styles.circle1}></span>
-                  <span id={styles.circle2}></span>
+                  <div className={styles.circles}>
+                    {/* <span id={styles.circle1}>unstaked</span> */}
+                    {/* <span id={styles.circle2}></span> */}
+                  </div>
+
+                  <div className={styles.assetTitle}>
+                    <p className={styles.collectionName}>
+                      {asset.rawMetadata.name}
+                    </p>
+
+                    <p> days not listed: 3 </p>
+                  </div>
                 </div>
-
-                <div className={styles.assetTitle}>
-                  <p className={styles.collectionName}>
-                    {asset.collectionName}
-                  </p>
-
-                  <p className={styles.assetName}>{asset.assetName}</p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </main>
     </section>

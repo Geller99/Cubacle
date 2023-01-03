@@ -37,7 +37,7 @@ const ClaimRewards = () => {
   const [showModal, setShowModal] = useState(false);
 
   let myContract = new ethers.Contract(
-    '0x4F4c1A5A493b91D1F79A0c82e31e5e11850D3aA2',
+    '0x53C0340464BB6C3b443dd45459e12D996a247F77',
     rewardsabi,
     provider
   );
@@ -106,7 +106,7 @@ const ClaimRewards = () => {
 
   const { config: claimRewardsConfig, error: claimRewardsError } =
     usePrepareContractWrite({
-      address: '0x4F4c1A5A493b91D1F79A0c82e31e5e11850D3aA2',
+      address: '0x53C0340464BB6C3b443dd45459e12D996a247F77',
       abi: rewardsabi,
       functionName: 'claimRewards',
       args: [tokenIds.map((el) => parseInt(el))],

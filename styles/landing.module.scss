@@ -2,7 +2,6 @@
 
 .container {
     width: 100%;
-    // height: 100%;
     position: absolute;
     top: 55%;
     transform: translateY(-55%); 
@@ -141,28 +140,41 @@
             margin-top: 0rem;
             margin-bottom: 0rem;
 
+            .nfts {
+                background-image: url(../public/Images/Bg1Mobile.png);
+            }
+            .roadmap {
+                background-image: url(../public/Images/Bg2Mobile.png);
+            }
+            .rewards {
+                background-image: url(../public/Images/Bg3Mobile.png);
+            }
+            .claimRewards {
+                background-image: url(../public/Images/Bg1Mobile.png);
+            }
+            .shop {
+                background-image: url(../public/Images/Bg5Mobile.png);
+            }
+
             div {
                 position: relative;
                 min-width: 100%;
                 justify-content: space-between;
                 flex-direction: row;
-                min-height: 180px;
+                min-height: 150px;
                 padding: 1.5rem;
                 border-radius: 12px;
 
 
-                .nfts {
-                    min-width: 50px;
-                    height: 50px;
-                }
-                img {
-                    width: 50px;
-                    height: max-content;
+                .icon {
+                    padding: 1rem !important;
+                    height: fit-content;
+                    width: 50px !important;
                 }
 
                 span {
                     row-gap: 1rem;
-                    position: absolute;
+                    // position: absolute;
                     right: 1.5rem;
                     bottom: 1.5rem;
                     max-width: 156px;

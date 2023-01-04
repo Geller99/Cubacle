@@ -61,12 +61,12 @@
                 border: 2px solid #ECEDEF;
                 border-radius: 20px;
                 height: 100%;
-                min-height: 350px;
-                max-width: 350px;
+                min-height: 380px;
+                max-width: 320px;
                 overflow: hidden;
 
                 img {
-                    height: 200px;
+                    height: 240px;
                     background: #FCFBFC 0% 0% no-repeat padding-box;
                     border-radius: 20px 20px 0px 0px;
                     width: 100%;
@@ -106,23 +106,48 @@
                 .assetTitle {
                     display: flex;
                     flex-direction: column;
-                    padding: 30px 20px;
+                    padding: 24px 20px;
 
-                    .collectionName {
-                        text-align: left;
-                        font: normal normal normal 16px/25px Poppins;
-                        letter-spacing: 0px;
-                        color: #717171;
-                        padding-bottom: 12px;
+                    div {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding-bottom: 1rem;
                         border-bottom: 2px solid #ECEDEF;
+                        overflow: hidden;
+                        
+
+                        .assetState {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50px;
+                            padding: 4px 1.5rem;
+                            border: 1px solid #3C48DE;
+                            font-size: 14px;
+                            overflow: hidden;
+                        }
+
+                        .collectionName {
+                            text-align: left;
+                            font-size: 16px;
+                            font-weight: 500;
+                            letter-spacing: 0px;
+                            color: #111;
+                            overflow: hidden;
+                        }
+
                     }
 
 
-                    .assetName {
-                        font: normal normal 600 16px/25px Poppins;
+
+
+                    .assetDays {
+                        font: normal normal 400 16px/25px Poppins;
                         letter-spacing: 0px;
-                        color: #717171;
-                        margin-top: 12px;
+                        color: #646464;
+                        margin-top: 16px;
+                        overflow: hidden;
                     }
                 }
 
@@ -170,6 +195,16 @@
         .assets {
             row-gap: 1.5rem;
             margin-top: 1rem;
+
+
+            .asset {
+                min-height: 330px !important;
+
+
+                img {
+                    height: 200px !important;
+                }
+            }
         }
     }
 }

@@ -3,17 +3,22 @@
 .container {
     display: flex;
     height: 75%;
-    width: 100%;
+    width: 200%;
     margin-top: 13%;
     border-radius: 20px;
     background: $primaryBg;
+    overflow: scroll;
 
 
 
     .mapContainer {
+        background: url(../public/Images/Map1.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
         position: relative;
         height: 100%;
-        width: 100%;
+        min-width: 100%;
 
 
         .mapId {
@@ -31,8 +36,8 @@
             letter-spacing: 0px;
             color: #000000;
             position: absolute;
-            left: 40%;
-            top: 40%;
+            left: 33%;
+            top: 28%;
             cursor: pointer;
             // transform: translate(50%);
         }
@@ -42,13 +47,12 @@
             cursor: pointer;
         }
 
-        main {
+        .mapContentContainer {
             display: flex;
-            // align-items: center;
             position: absolute;
-            left: 45%;
-            top: 25%;
-            transform: translateX(-40%);
+            left: 41%;
+            top:25%;
+            transform: translateX(-41%);
             transform: translateY(0%);
 
 
@@ -59,7 +63,7 @@
                 border-width: 16px 0 16px 30px;
                 border-color: transparent transparent transparent #FFFFFF;
                 transform: rotate(180deg);
-                margin-top: 4rem;
+                margin-top: 8rem;
             }
 
 
@@ -175,7 +179,8 @@
     .container {
         margin-top: 0;
         height: 100%;
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
+
 
 
         .mapContainer {
@@ -187,7 +192,7 @@
                 flex-direction: column-reverse;
                 position: absolute;
                 left: 0%;
-                top: 10%;
+                top: 5%;
                 transform: translateX(-5%);
                 transform: translateY(0%);
                 margin: 0 1rem;
@@ -210,7 +215,7 @@
                     }
 
                     article {
-                        font-size: 12px;
+                        font-size: 10px;
                         line-height: 18px;
                         
 

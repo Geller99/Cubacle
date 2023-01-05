@@ -99,7 +99,7 @@ const Assets = () => {
       <main>
         <div className={styles.tab}>
           <p>Owned</p>
-          <span>32</span>
+          <span>{tokenIds.length && tokenIds.length}</span>
         </div>
 
          <div className={styles.assets}>

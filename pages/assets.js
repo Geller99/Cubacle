@@ -102,7 +102,7 @@ const Assets = () => {
           <span>32</span>
         </div>
 
-         <div className={styles.assets}>
+         {/* <div className={styles.assets}>
           {tokenInfo &&
             tokenInfo.map((asset) => {
               return (
@@ -128,9 +128,9 @@ const Assets = () => {
                 </div>
               );
             })}
-        </div> 
+        </div>  */}
 
-        {/* <div className={styles.assets}>
+        <div className={styles.assets}>
           <div className={styles.asset}>
             <img src={'/Images/userImg.jpg'} alt="" />
 
@@ -147,7 +147,7 @@ const Assets = () => {
 
 
           
-          </div> */}
+          </div>
 
       </main>
     </section>

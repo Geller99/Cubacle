@@ -60,7 +60,7 @@
                 background: #FFF;
                 border: 2px solid #ECEDEF;
                 border-radius: 20px;
-                min-height: 380px;
+                height: 380px;
                 max-width: 250px;
                 cursor: pointer;
                 overflow: hidden;
@@ -164,6 +164,7 @@
 
 
 }
+
 @media (max-width: 1086px) {
     .container{ 
         
@@ -206,18 +207,25 @@
 
             .asset {
                 width: 100%;
-                max-width: 250px !important;
-                min-height: 330px !important;
+                max-width: 270px !important;
+                // max-height: -moz-max-content;
+                height: 100%;
+                min-height: 430px; 
+                overflow: hidden;
 
 
                 img {
-                    height: 200px !important;
+                    height: 300px !important;
                 }
 
 
                 .collectionName {
                     font-size: 14px;
                 }
+            }
+            .asset:hover {
+                transition: all 0.1s linear;
+                transform: rotate(2deg);
             }
         }
     }

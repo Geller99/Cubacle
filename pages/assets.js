@@ -102,13 +102,13 @@ const Assets = () => {
           <span>32</span>
         </div>
 
-        {/* <div className={styles.assets}>
+         <div className={styles.assets}>
           {tokenInfo &&
             tokenInfo.map((asset) => {
               return (
                 <div className={styles.asset} key={asset.rawMetadata.name}>
                   <Image
-                    src=""
+                    src={`https://ipfs.io/ipfs/${asset.rawMetadata.image.substr(7)}`}
                     alt={''}
                     height={'250px'}
                     width={'100px'}
@@ -120,7 +120,7 @@ const Assets = () => {
                       <p className={styles.collectionName}>
                         {asset.rawMetadata.name}
                       </p>
-                      <span className={styles.assetState}>Unstaked</span>
+                      <span className={styles.assetState}>Unlisted</span>
                     </div>
 
                     <p className={styles.assetDays}> Days not listed: 3 </p>
@@ -128,9 +128,9 @@ const Assets = () => {
                 </div>
               );
             })}
-        </div> */}
+        </div> 
 
-        <div className={styles.assets}>
+        {/* <div className={styles.assets}>
           <div className={styles.asset}>
             <img src={'/Images/userImg.jpg'} alt="" />
 
@@ -146,90 +146,8 @@ const Assets = () => {
           </div>
 
 
-          <div className={styles.asset}>
-            <img src={'/Images/userImg.jpg'} alt="" />
-
-            <div className={styles.assetTitle}>
-              <div>
-                <p className={styles.collectionName}> Cubex #11120</p>
-
-                <span className={styles.assetState}>Unstacked</span>
-              </div>
-
-              <p className={styles.assetDays}> Days not listed: 3 </p>
-            </div>
-          </div>
-
-          <div className={styles.asset}>
-            <img src={'/Images/userImg.jpg'} alt="" />
-
-            <div className={styles.assetTitle}>
-              <div>
-                <p className={styles.collectionName}> Cubex #11120</p>
-
-                <span className={styles.assetState}>Unstacked</span>
-              </div>
-
-              <p className={styles.assetDays}> Days not listed: 3 </p>
-            </div>
-          </div>
-
-          <div className={styles.asset}>
-            <img src={'/Images/userImg.jpg'} alt="" />
-
-            <div className={styles.assetTitle}>
-              <div>
-                <p className={styles.collectionName}> Cubex #11120</p>
-
-                <span className={styles.assetState}>Unstacked</span>
-              </div>
-
-              <p className={styles.assetDays}> Days not listed: 3 </p>
-            </div>
-          </div>
-
-          <div className={styles.asset}>
-            <img src={'/Images/userImg.jpg'} alt="" />
-
-            <div className={styles.assetTitle}>
-              <div>
-                <p className={styles.collectionName}> Cubex #11120</p>
-
-                <span className={styles.assetState}>Unstacked</span>
-              </div>
-
-              <p className={styles.assetDays}> Days not listed: 3 </p>
-            </div>
-          </div>
-
-          <div className={styles.asset}>
-            <img src={'/Images/userImg.jpg'} alt="" />
-
-            <div className={styles.assetTitle}>
-              <div>
-                <p className={styles.collectionName}> Cubex #11120</p>
-
-                <span className={styles.assetState}>Unstacked</span>
-              </div>
-
-              <p className={styles.assetDays}> Days not listed: 3 </p>
-            </div>
-          </div>
-
-          <div className={styles.asset}>
-            <img src={'/Images/userImg.jpg'} alt="" />
-
-            <div className={styles.assetTitle}>
-              <div>
-                <p className={styles.collectionName}> Cubex #11120</p>
-
-                <span className={styles.assetState}>Unstacked</span>
-              </div>
-
-              <p className={styles.assetDays}> Days not listed: 3 </p>
-            </div>
-          </div>
-        </div>
+          
+          </div> */}
 
       </main>
     </section>

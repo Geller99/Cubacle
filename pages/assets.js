@@ -108,9 +108,7 @@ const Assets = () => {
               return (
                 <div className={styles.asset} key={asset.rawMetadata.name}>
                   <Image
-                    src={`https://ipfs.io/ipfs/${asset.rawMetadata.image.substr(
-                      7
-                    )}`}
+                    src=""
                     alt={''}
                     height={'250px'}
                     width={'100px'}
@@ -122,7 +120,7 @@ const Assets = () => {
                       <p className={styles.collectionName}>
                         {asset.rawMetadata.name}
                       </p>
-                      <span className={styles.assetState}>Unstacked</span>
+                      <span className={styles.assetState}>Unstaked</span>
                     </div>
 
                     <p className={styles.assetDays}> Days not listed: 3 </p>

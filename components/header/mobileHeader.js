@@ -94,7 +94,7 @@ const MobileHeader = () => {
             <Image src={"/Images/1Icon.png"} height={32} width={32} alt={""} />
           </li>
 
-          <li onClick={() => router.push("/nft")}>
+          <li onClick={() => router.push("/roadmap")}>
             <Image src={"/Images/2Icon.png"} height={32} width={32} alt={""} />
           </li>
 

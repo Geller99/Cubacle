@@ -39,7 +39,7 @@ const Landing = () => {
         <div
           className={styles.roadmap}
           onClick={() =>
-            user ? router.push('/') : alert('Please connect wallet')
+            user ? router.push('/roadmap') : alert('Please connect wallet')
           }
         >
           <Image

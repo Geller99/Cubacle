@@ -102,7 +102,7 @@ const Assets = () => {
           <span>32</span>
         </div>
 
-        <div className={styles.assets}>
+        {/* <div className={styles.assets}>
           {tokenInfo &&
             tokenInfo.map((asset) => {
               return (
@@ -128,11 +128,11 @@ const Assets = () => {
                 </div>
               );
             })}
-        </div>
+        </div> */}
 
-        {/* <div className={styles.assets}>
+        <div className={styles.assets}>
           <div className={styles.asset}>
-            <img src="" alt="" />
+            <img src={'/Images/userImg.jpg'} alt="" />
 
             <div className={styles.assetTitle}>
               <div>
@@ -144,7 +144,93 @@ const Assets = () => {
               <p className={styles.assetDays}> Days not listed: 3 </p>
             </div>
           </div>
-        </div> */}
+
+
+          <div className={styles.asset}>
+            <img src={'/Images/userImg.jpg'} alt="" />
+
+            <div className={styles.assetTitle}>
+              <div>
+                <p className={styles.collectionName}> Cubex #11120</p>
+
+                <span className={styles.assetState}>Unstacked</span>
+              </div>
+
+              <p className={styles.assetDays}> Days not listed: 3 </p>
+            </div>
+          </div>
+
+          <div className={styles.asset}>
+            <img src={'/Images/userImg.jpg'} alt="" />
+
+            <div className={styles.assetTitle}>
+              <div>
+                <p className={styles.collectionName}> Cubex #11120</p>
+
+                <span className={styles.assetState}>Unstacked</span>
+              </div>
+
+              <p className={styles.assetDays}> Days not listed: 3 </p>
+            </div>
+          </div>
+
+          <div className={styles.asset}>
+            <img src={'/Images/userImg.jpg'} alt="" />
+
+            <div className={styles.assetTitle}>
+              <div>
+                <p className={styles.collectionName}> Cubex #11120</p>
+
+                <span className={styles.assetState}>Unstacked</span>
+              </div>
+
+              <p className={styles.assetDays}> Days not listed: 3 </p>
+            </div>
+          </div>
+
+          <div className={styles.asset}>
+            <img src={'/Images/userImg.jpg'} alt="" />
+
+            <div className={styles.assetTitle}>
+              <div>
+                <p className={styles.collectionName}> Cubex #11120</p>
+
+                <span className={styles.assetState}>Unstacked</span>
+              </div>
+
+              <p className={styles.assetDays}> Days not listed: 3 </p>
+            </div>
+          </div>
+
+          <div className={styles.asset}>
+            <img src={'/Images/userImg.jpg'} alt="" />
+
+            <div className={styles.assetTitle}>
+              <div>
+                <p className={styles.collectionName}> Cubex #11120</p>
+
+                <span className={styles.assetState}>Unstacked</span>
+              </div>
+
+              <p className={styles.assetDays}> Days not listed: 3 </p>
+            </div>
+          </div>
+
+          <div className={styles.asset}>
+            <img src={'/Images/userImg.jpg'} alt="" />
+
+            <div className={styles.assetTitle}>
+              <div>
+                <p className={styles.collectionName}> Cubex #11120</p>
+
+                <span className={styles.assetState}>Unstacked</span>
+              </div>
+
+              <p className={styles.assetDays}> Days not listed: 3 </p>
+            </div>
+          </div>
+        </div>
+
       </main>
     </section>
   );

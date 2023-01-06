@@ -33,3 +33,10 @@
 - User can see how long their tokens have been staked or NOT
 
 
+// create an array of tokenIds.length number of objects
+
+// for each one... update the image string with data from alchemy
+
+// for each one... update other attributes with data from DB
+
+// map over array...

@@ -56,7 +56,7 @@ const Assets = () => {
           : token;
       });
 
-    setFinalData(res);
+    return setFinalData(res);
   };
 
   const { config: tokenFetchConfig, error: tokenFetchError } = useContractRead({
@@ -123,7 +123,9 @@ const Assets = () => {
   }, [tokenInfo.length]);
 
   useEffect(() => {
-    updateFinalData();
+      if(finalData.length > 0) {
+        updateFinalData();
+      }
   }, [finalData.length]);
 
   return (
@@ -139,6 +141,7 @@ const Assets = () => {
         <div className={styles.assets}>
           {finalData &&
             finalData.map((asset) => {
+              console.log(asset.listingStatus) 
               return (
                 <div className={styles.asset} key={asset.assetName}>
                   <Image
@@ -154,7 +157,7 @@ const Assets = () => {
                       <p className={styles.collectionName}>{asset.assetName}</p>
                       <span className={styles.assetState}>
                         {" "}
-                        {asset.listingStatus == false
+                        {asset.listingStatus === false
                           ? "unlisted"
                           : "listed"}{" "}
                       </span>

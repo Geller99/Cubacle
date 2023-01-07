@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import styles from '../../styles/roadmap.module.scss';
 import Image from 'next/image';
 
-const Map2 = () => {
+const Map2 = (props) => {
+
+  
   const [showContent, setShowContent] = useState(false);
   const [display, setDisplay] = useState('none');
   const [visibility, setVisibility] = useState('visible');
@@ -13,6 +15,8 @@ const Map2 = () => {
 
   return (
     <div className={styles.mapContainer}>
+
+
       <div
         className={styles.mapId}
         style={{ visibility }}
@@ -27,6 +31,15 @@ const Map2 = () => {
       >
         #02
       </div>
+
+
+      <div
+        className={`${styles.mapId} ${styles.mobileMapId}`}
+        onClick={() => props.mapContentModal2()}
+      >
+        #02
+      </div>
+
 
       <main
         style={{ display }}

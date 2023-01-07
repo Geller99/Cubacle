@@ -14,70 +14,63 @@ const settings = {
 const alchemy = new Alchemy(settings);
 
 const Assets = () => {
-  const { address } = useAccount();
-  const [tokenIds, setTokenIds] = useState([]);
-  const [tokenInfo, setTokenInfo] = useState([]);
-  const [finalData, setFinalData] = useState([]);
-  const [db, setdb] = useState([]);
+  //const { address } = useAccount();
+  const address = "0xa33a70FABFeb361Fe891C208B1c27ec0b64baBEB";
+  const [tokenIds, setTokenIds] = useState(null);
+  const [finalData, setFinalData] = useState(null);
   const contractAddy = "0x92C93fAfc20fE882a448f86e594d9667259c42C8";
 
 
-  const updateListingData = () => {
-    let res =
-      tokenInfo &&
-      tokenInfo.map((token) => {
-        return {
-          imageUri: `https://ipfs.io/ipfs/${token.rawMetadata.image.substr(7)}`,
-          stakingCount: 0,
-          assetName: token.rawMetadata.name,
-          listingStatus: false,
+  // step 4: combine db and finalData 
+  const updateFinalData = (tokenInfos, dbData) => {
+    const infoMap = tokenInfos.reduce((combined, info) => {
+      const tokenId = parseInt(info.assetName.substr(7));
+      combined[tokenId] = info;
+      return combined;
+    }, {});
+
+    dbData.forEach(dbItem => {
+      const info = infoMap[dbItem.tokenId];
+      if(info){
+        console.log(`updating token ${dbItem.tokenId}`);
+        infoMap[dbItem.tokenId] = {
+          ...info,
+          stakingCount:  dbItem.numberOfDaysListed,
+          listingStatus: dbItem.listingStatus,
         };
-      });
+      }
+    });
 
-    setFinalData(res);
+    setFinalData(Object.values(infoMap));
   };
 
-  const updateFinalData = () => {
-    let res =
-      finalData &&
-      finalData.map((token) => {
-        const matchers =
-          db &&
-          db.find(
-            (item) => item.tokenId === parseInt(token.assetName.substr(7))
-          );
-        return matchers
-          ? {
-              imageUri: token.imageUri,
-              stakingCount: matchers.numberOfDaysListed,
-              assetName: token.assetName,
-              listingStatus: matchers.listingStatus,
-            }
-          : token;
-      });
-
-    return setFinalData(res);
-  };
-
-  const { config: tokenFetchConfig, error: tokenFetchError } = useContractRead({
+  // step 1
+  useContractRead({
     address: "0x92C93fAfc20fE882a448f86e594d9667259c42C8",
     abi: cubexAbi,
     functionName: "getOwnerTokens",
-    args: [address && address],
+    args: [address],
     onSuccess: (data) => {
-      setTokenIds(data.map((el) => el.toString()));
+      console.log("step 1: getOwnerTokens", {address, data});
+      const tokenIds = data.map((el) => el.toString());
+      setTokenIds(tokenIds);
       console.log(
         "Founder owned tokens!",
-        data.map((el) => el.toString())
+        tokenIds
       );
     },
     onError: (error) => {
-      console.log(error);
+      console.log("step 1b", error);
+      //console.log(error);
     },
-  });
-  const { write: fetchTokenIds } = useContractWrite(tokenFetchConfig);
-  const fetchTokenData = async () => {
-    const sortedTokens = tokenIds.map((el) => {
+  }, [address]);
+  //const { write: fetchTokenIds } = useContractWrite(tokenFetchConfig);
+
+  // step 3a
+  const fetchTokenData = async (fetchTokenIds) => {
+    console.log("step 3a", fetchTokenIds);
+
+    const sortedTokens = fetchTokenIds.map((el) => {
       return {
         contractAddress: contractAddy,
         tokenId: el,
@@ -85,48 +78,65 @@ const Assets = () => {
     });
     try {
       const response = await alchemy.nft.getNftMetadataBatch(sortedTokens);
-      setTokenInfo(response);
-      console.log("Data", response);
+      //console.log("Data", response);
+      //setTokenInfo(response);
+      return response;
     } catch (error) {
       console.log(error);
+      return [];
     }
   };
 
-  const checkListingStatus = () => {
+  // step 3b
+  const fetchDbData = async (checkTokenIds) => {
     try {
-      axios({
+      console.log("step 3b", checkTokenIds);
+      const res = await axios({
         method: "post",
         url: "/api/fetchTokenData",
-        data: tokenIds && tokenIds,
-      }).then((res) => {
-        setdb(res.data.data.tokenData);
-        console.log("status data", res.data.data.tokenData);
+        data: checkTokenIds,
       });
+
+      console.log("status data", res.data.data.tokenData);
+      return res.data.data.tokenData;
     } catch (error) {
       console.log(error);
+      return [];
     }
   };
 
-  useEffect(() => {
-    fetchTokenIds?.();
-  }, []);
+  // step 3c
+  const mapTokenData = (updateTokenInfos) => {
+    return updateTokenInfos.map((token) => ({
+      imageUri: `https://ipfs.io/ipfs/${token.rawMetadata.image.substr(7)}`,
+      stakingCount: 0,
+      assetName: token.rawMetadata.name,
+      listingStatus: false,
+    }));
+  };
 
-  useEffect(() => {
-    if (tokenIds.length > 0) {
-      fetchTokenData();
-      checkListingStatus();
+  // step 2
+  const loadTokenData = async (loadTokenIds) => {
+    const [ tokenInfos, dbData ] = await Promise.all([
+      fetchTokenData(loadTokenIds).then(mapTokenData),
+      fetchDbData(loadTokenIds)
+    ]);
+
+    if(tokenInfos.length && dbData.length){
+      updateFinalData(tokenInfos, dbData);
     }
-  }, [tokenIds.length]);
+    else{
+      setFinalData(tokenInfos);
+    }
+  };
 
+  // step 2 trigger
   useEffect(() => {
-    updateListingData();
-  }, [tokenInfo.length]);
-
-  useEffect(() => {
-      if(finalData.length > 0) {
-        updateFinalData();
-      }
-  }, [finalData.length]);
+    if (tokenIds?.length) {
+      console.log("step 2", { tokenIds })
+      loadTokenData(tokenIds);
+    }
+  }, [tokenIds]);
 
   return (
     <section className={styles.container}>
@@ -135,7 +145,7 @@ const Assets = () => {
       <main>
         <div className={styles.tab}>
           <p>Owned</p>
-          <span>{tokenIds.length && tokenIds.length}</span>
+          <span>{tokenIds?.length || 0}</span>
         </div>
 
         <div className={styles.assets}>

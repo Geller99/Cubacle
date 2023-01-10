@@ -14,14 +14,19 @@ const settings = {
 const alchemy = new Alchemy(settings);
 
 const Assets = () => {
-  //const { address } = useAccount();
-  const address = "0xa33a70FABFeb361Fe891C208B1c27ec0b64baBEB";
+  const { address } = useAccount();
   const [tokenIds, setTokenIds] = useState(null);
   const [finalData, setFinalData] = useState(null);
   const contractAddy = "0x92C93fAfc20fE882a448f86e594d9667259c42C8";
 
+  const defaultData = new Array(6).fill({
+    imageUri: "",
+    stakingCount: 0,
+    assetName: "Loading...",
+    listingStatus: false,
+  });
 
-  // step 4: combine db and finalData 
+  // step 4: combine db and finalData
   const updateFinalData = (tokenInfos, dbData) => {
     const infoMap = tokenInfos.reduce((combined, info) => {
       const tokenId = parseInt(info.assetName.substr(7));
@@ -29,13 +34,13 @@ const Assets = () => {
       return combined;
     }, {});
 
-    dbData.forEach(dbItem => {
+    dbData.forEach((dbItem) => {
       const info = infoMap[dbItem.tokenId];
-      if(info){
+      if (info) {
         console.log(`updating token ${dbItem.tokenId}`);
         infoMap[dbItem.tokenId] = {
           ...info,
-          stakingCount:  dbItem.numberOfDaysListed,
+          stakingCount: dbItem.numberOfDaysListed,
           listingStatus: dbItem.listingStatus,
         };
       }
@@ -45,26 +50,24 @@ const Assets = () => {
   };
 
   // step 1
-  useContractRead({
-    address: "0x92C93fAfc20fE882a448f86e594d9667259c42C8",
-    abi: cubexAbi,
-    functionName: "getOwnerTokens",
-    args: [address],
-    onSuccess: (data) => {
-      console.log("step 1: getOwnerTokens", {address, data});
-      const tokenIds = data.map((el) => el.toString());
-      setTokenIds(tokenIds);
-      console.log(
-        "Founder owned tokens!",
-        tokenIds
-      );
+  useContractRead(
+    {
+      address: "0x92C93fAfc20fE882a448f86e594d9667259c42C8",
+      abi: cubexAbi,
+      functionName: "getOwnerTokens",
+      args: [address],
+      onSuccess: (data) => {
+        console.log("step 1: getOwnerTokens", { address, data });
+        const tokenIds = data.map((el) => el.toString());
+        setTokenIds(tokenIds);
+        console.log("Founder owned tokens!", tokenIds);
+      },
+      onError: (error) => {
+        console.log("step 1b", error);
+      },
     },
-    onError: (error) => {
-      console.log("step 1b", error);
-      //console.log(error);
-    },
-  }, [address]);
-  //const { write: fetchTokenIds } = useContractWrite(tokenFetchConfig);
+    [address]
+  );
 
   // step 3a
   const fetchTokenData = async (fetchTokenIds) => {
@@ -117,15 +120,14 @@ const Assets = () => {
 
   // step 2
   const loadTokenData = async (loadTokenIds) => {
-    const [ tokenInfos, dbData ] = await Promise.all([
+    const [tokenInfos, dbData] = await Promise.all([
       fetchTokenData(loadTokenIds).then(mapTokenData),
-      fetchDbData(loadTokenIds)
+      fetchDbData(loadTokenIds),
     ]);
 
-    if(tokenInfos.length && dbData.length){
+    if (tokenInfos.length && dbData.length) {
       updateFinalData(tokenInfos, dbData);
-    }
-    else{
+    } else {
       setFinalData(tokenInfos);
     }
   };
@@ -133,58 +135,61 @@ const Assets = () => {
   // step 2 trigger
   useEffect(() => {
     if (tokenIds?.length) {
-      console.log("step 2", { tokenIds })
+      console.log("step 2", { tokenIds });
       loadTokenData(tokenIds);
     }
   }, [tokenIds]);
 
-  return (
-    <section className={styles.container}>
-      <header></header>
+  const render = (data) => {
+    return (
+      <section className={styles.container}>
+        <header></header>
 
-      <main>
-        <div className={styles.tab}>
-          <p>Owned</p>
-          <span>{tokenIds?.length || 0}</span>
-        </div>
+        <main>
+          <div className={styles.tab}>
+            <p>Owned</p>
+            <span>{tokenIds?.length || 0}</span>
+          </div>
 
-        <div className={styles.assets}>
-          {finalData &&
-            finalData.map((asset) => {
-              console.log(asset.listingStatus) 
-              return (
-                <div className={styles.asset} key={asset.assetName}>
-                  <Image
-                    src={asset.imageUri}
-                    alt={""}
-                    height={"250px"}
-                    width={"100px"}
-                    priority
-                  />
-
-                  <div className={styles.assetTitle}>
-                    <div>
-                      <p className={styles.collectionName}>{asset.assetName}</p>
-                      <span className={styles.assetState}>
+          <div className={styles.assets}>
+            {data &&
+              data.map((asset) => {
+                return (
+                  <div className={styles.asset} key={asset.assetName}>
+                    <Image
+                      src={asset.imageUri}
+                      alt={""}
+                      height={"250px"}
+                      width={"100px"}
+                      priority
+                    />
+                    <div className={styles.assetTitle}>
+                      <div>
+                        <p className={styles.collectionName}>
+                          {asset.assetName}
+                        </p>
+                        <span className={styles.assetState}>
+                          {" "}
+                          {asset.listingStatus === false
+                            ? "unlisted"
+                            : "listed"}{" "}
+                        </span>
+                      </div>
+                      <p className={styles.assetDays}>
                         {" "}
-                        {asset.listingStatus === false
-                          ? "unlisted"
-                          : "listed"}{" "}
-                      </span>
+                        Days not listed: {asset.stakingCount}
+                      </p>
                     </div>
-
-                    <p className={styles.assetDays}>
-                      {" "}
-                      Days not listed: {asset.stakingCount}
-                    </p>
                   </div>
-                </div>
-              );
-            })}
-        </div>
-      </main>
-    </section>
-  );
+                );
+              })}
+          </div>
+        </main>
+      </section>
+    );
+  };
+
+  return render(finalData);
 };
 
 export default Assets;

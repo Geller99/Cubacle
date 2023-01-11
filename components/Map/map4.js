@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../../styles/roadmap.module.scss';
 import Image from 'next/image';
 
-const Map1 = (props) => {
+const Map4 = (props) => {
   const [showContent, setShowContent] = useState(false);
   const [display, setDisplay] = useState('none');
   const [visibility, setVisibility] = useState('visible');
@@ -27,15 +27,15 @@ const Map1 = (props) => {
           setDisplay('flex');
           // setVisibility('visible');
         }}
-        onClick={() => props.mapContentModal()}
+        // onClick={() => props.mapContentModal()}
       >
-        #01
+        #04
       </div>
       <div
         className={`${styles.mapId} ${styles.mobileMapId}`}
-        onClick={() => props.mapContentModal()}
+        onClick={() => props.mapContentModal4()}
       >
-        #01
+        #04
       </div>
 
       <main style={{ display }} className={styles.mapContentContainer}>
@@ -43,8 +43,8 @@ const Map1 = (props) => {
 
         <div className={styles.mapContent}>
           <header>
-            <h3>#1</h3>
-            <h4>Commic Book</h4>
+            <h3>#4</h3>
+            <h4>CubeX Community built video game!</h4>
           </header>
 
           <div className={styles.mapContentTag}>
@@ -75,4 +75,4 @@ const Map1 = (props) => {
   );
 };
 
-export default Map1;
+export default Map4;

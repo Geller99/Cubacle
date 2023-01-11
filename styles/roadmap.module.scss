@@ -6,7 +6,6 @@
     width: 200%;
     margin-top: 13%;
     border-radius: 20px;
-    background: $primaryBg;
     overflow: scroll;
 
 
@@ -66,7 +65,7 @@
                 border-width: 16px 0 16px 30px;
                 border-color: transparent transparent transparent #FFFFFF;
                 transform: rotate(180deg);
-                margin-top: 8rem;
+                margin-top: 7rem;
             }
 
 
@@ -81,20 +80,25 @@
 
                 header {
                     display: flex;
+                    justify-content: flex-start;
                     align-items: center;
                     column-gap: .5rem;
+                    // max-width: 250px;
 
-                    h3 {
-                        font-size: 28px;
-                        font-weight: bold;
-                        color: #000;
-                        overflow: hidden;
-                    }
+                    // h3 {
+                    //     font-size: 24px;
+                    //     font-weight: bold;
+                    //     color: #000;
+                    //     overflow: hidden;
+                    //     flex-basis: 18%;
+                    // }
 
                     h4 {
-                        font-size: 28px;
+                        font-size: 22px;
                         color: #000;
                         font-weight: 500;
+                        // flex-basis: 82%;
+                        // width: fit-content;
                         overflow: hidden;
                     }
                 }
@@ -280,7 +284,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: #00000082;
     position: absolute;
     top: 0;
     left: 0;
@@ -293,19 +296,7 @@
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 111111;
 
-    .closeBtn {
-        position: absolute;
-        right: 1rem;
-        top: 5%;
-        width: 40px;
-        height: 40px;
-        border: 2px solid #FFF;
-        color: #c31a1a;
-        font-size: 20px;
-        background: #33323247;
-        border-radius: 50%;
-        // margin: auto 0;
-    }
+
 
     main {
         max-height:85%;
@@ -314,27 +305,46 @@
         background: #FFF;
         padding: 1rem 1rem;
         border-radius: 10px;
+        position: relative;
 
 
 
         header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
             column-gap: .5rem;
 
-            h3 {
-                font-size: 28px;
-                font-weight: bold;
-                color: #000;
-                overflow: hidden;
+
+            span {
+                display: flex;
+                column-gap: 4px;
+
+                h3 {
+                    font-size: 22px;
+                    font-weight: bold;
+                    color: #000;
+                    overflow: hidden;
+                }
+    
+                h4 {
+                    font-size: 20px;
+                    color: #000;
+                    font-weight: 500;
+                    overflow: hidden;
+                }
             }
 
-            h4 {
-                font-size: 28px;
-                color: #000;
-                font-weight: 500;
-                overflow: hidden;
+            .closeBtn {
+                min-width: 36px;
+                height: 36px;
+                border: 2px solid #FFF;
+                color: #c31a1a;
+                font-size: 20px;
+                background: #33323247;
+                border-radius: 50%;
             }
+
         }
 
         .mapContentTag {

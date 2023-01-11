@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from '../../styles/roadmap.module.scss';
 
-const MobileMap2 = ({ setOpenModal2, show2 }) => {
+const MobileMap10 = ({ setOpenModal10, show10 }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   useEffect(() => {
     setIsBrowser(true);
   }, []);
   const handleClose = (e) => {
     e.preventDefault();
-    setOpenModal2(false);
+    setOpenModal10(false);
   };
 
   const content =
@@ -17,13 +17,14 @@ const MobileMap2 = ({ setOpenModal2, show2 }) => {
   const image1 = '/Images/userImg.jpg';
   const image2 = '/Images/userImg.jpg';
 
-  const modalContent2 = show2 ? (
+  const modalContent10 = show10 ? (
     <section className={styles.mobileContainer}>
       <main>
         <header>
           <span>
-            <h3>#2</h3>
-            <h4>BFC x CubeX events</h4>
+            <h4>
+              <b>#10 </b>The CubeX House Party
+            </h4>
           </span>
 
           <button onClick={handleClose} className={styles.closeBtn}>
@@ -49,7 +50,7 @@ const MobileMap2 = ({ setOpenModal2, show2 }) => {
 
   if (isBrowser) {
     return ReactDOM.createPortal(
-      modalContent2,
+      modalContent10,
       document.getElementById('modal-root')
     );
   } else {
@@ -57,4 +58,4 @@ const MobileMap2 = ({ setOpenModal2, show2 }) => {
   }
 };
 
-export default MobileMap2;
+export default MobileMap10;

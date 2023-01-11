@@ -15,7 +15,7 @@ const Map7 = (props) => {
   return (
     <div className={styles.mapContainer}>
       <div
-        className={styles.mapId}
+        className={`${styles.mapId} ${styles.mapId7}`}
         style={{ visibility }}
         onMouseEnter={() => {
           setDisplay('flex');
@@ -27,13 +27,13 @@ const Map7 = (props) => {
         }}
         // onClick={() => props.mapContentModal()}
       >
-        #07 & %08
+        #7 & #8
       </div>
       <div
-        className={`${styles.mapId} ${styles.mobileMapId}`}
+        className={`${styles.mapId} ${styles.mapId7} ${styles.mobileMapId}`}
         onClick={() => props.mapContentModal7()}
       >
-        #07 & 08
+        #7 & #8
       </div>
 
       <main style={{ display }} className={styles.mapContentContainer}>
@@ -42,7 +42,7 @@ const Map7 = (props) => {
         <div className={styles.mapContent}>
           <header>
             <h4>
-              <b>#07 & #8 </b>CubeX Gaming Gear & Ambassadors
+              <b>#7 & #8 </b>CubeX Gaming Gear & Ambassadors
             </h4>
           </header>
 

@@ -286,6 +286,8 @@
                     // }
 
                     h4 {
+                        // max-width: 250px;
+                        max-width: 425px;
                         font-size: 22px;
                         color: #000;
                         font-weight: 500;
@@ -333,7 +335,7 @@
                         transition: all 0.4s linear;
                     }
                     .lessContent {
-                        max-width: 250px;
+                        max-width: 300px;
                         overflow: hidden;
                         transition: all 0.4s linear;
                     }

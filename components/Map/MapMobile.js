@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import styles from '../../styles/roadmap.module.scss';
 import MapData from './MapData';
 
-const MobileMap = ({setOpenModal, show}) => {
-
+const MobileMap = ({ setOpenModal, show, contentId }) => {
   const [isBrowser, setIsBrowser] = useState(false);
   useEffect(() => {
     setIsBrowser(true);
@@ -13,16 +12,21 @@ const MobileMap = ({setOpenModal, show}) => {
     e.preventDefault();
     setOpenModal(false);
   };
+  //   const [selectedDivs, setSelectedDivs] = useState([]);
+  //   const handleButtonClick = (i) => {
+  //     setSelectedDivs([i]);
 
-
-
+  //   };
 
   const modalContent = show ? (
     <section className={styles.mobileContainer}>
-      {MapData.map((map, idx) => {
+      {MapData?.filter((item) => contentId === item.mapId).map((map, idx) => {
         return (
           <main
-          key={idx}
+            key={idx}
+            //   style={{
+            //     display: selectedDivs.indexOf(map.idx) !== -1 ? 'flex' : 'none',
+            //   }}
           >
             <header>
               <h4>
@@ -40,15 +44,13 @@ const MobileMap = ({setOpenModal, show}) => {
             </div>
 
             <article className={styles.contentParagraph}>
-
-                <div className={styles.fullContent}>
-                  {map.mapContent}
-                  <span className={styles.contentImgMobile}>
-                    <img src={map.mapImage1} alt="Content image" />
-                    <img src={map.mapImage2} alt="Content image" />
-                  </span>
-                </div>
-
+              <div className={styles.fullContent}>
+                {map.mapContent}
+                <span className={styles.contentImgMobile}>
+                  <img src={map.mapImage1} alt="Content image" />
+                  <img src={map.mapImage2} alt="Content image" />
+                </span>
+              </div>
             </article>
           </main>
         );

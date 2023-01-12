@@ -15,11 +15,11 @@ const Map = (props) => {
 
   return (
     <div className={styles.mapContainer}>
-      {MapData.map((mapId, id) => {
+      {MapData.map((mapId, idx) => {
         return (
           <>
             <div
-              key={id}
+              key={mapId.idx}
               id={styles.mapId}
               className={styles[`mapId-${mapId.idx}`]}
               onClick={() => handleButtonClick(mapId.idx)}
@@ -33,8 +33,11 @@ const Map = (props) => {
             <div
               id={styles.mobileMapId}
               className={styles[`mapId-${mapId.idx}`] + ' ' + styles.mat}
-              key={mapId.id}
-              onClick={() => props.mapContentModal()}
+              key={mapId.idx}
+              style={{
+                display: props.selectedButton === mapId.idx ? 'none' : 'flex',
+              }}
+              onClick={() => props.mapContentModal(mapId.mapId)}
             >
               {mapId.mapId}
             </div>
@@ -42,26 +45,24 @@ const Map = (props) => {
         );
       })}
 
-      {MapData.map((map, id) => {
+      {MapData.map((mapContent, idx) => {
         return (
           <div
-            // style={{ display }}
             id={styles.mapContentContainer}
             style={{
-              display: selectedDivs.indexOf(map.idx) !== -1 ? 'flex' : 'none',
+              display:
+                selectedDivs.indexOf(mapContent.idx) !== -1 ? 'flex' : 'none',
             }}
-            className={styles[`mapContentContainer-${map.idx}`]}
-            // className={`${styles.mapContentContainer}`}
-            // className={styles.mapContentContainer}
-            key={id}
+            className={styles[`mapContentContainer-${mapContent.idx}`]}
+            key={mapContent.idx}
           >
             <div className={styles.triangle}></div>
 
             <div className={styles.mapContent}>
               <header>
                 <h4>
-                  <b>{map.mapId} </b>
-                  {map.mapTitle}
+                  <b>{mapContent.mapId} </b>
+                  {mapContent.mapTitle}
                 </h4>
               </header>
 
@@ -73,18 +74,18 @@ const Map = (props) => {
               <article>
                 {showContent ? (
                   <div className={styles.fullContent}>
-                    {map.mapContent}
+                    {mapContent.mapContent}
                     <small onClick={() => setShowContent(false)}>
                       See less
                     </small>
                     <span className={styles.contentImg}>
-                      <img src={map.mapImage1} alt="Content image" />
-                      <img src={map.mapImage2} alt="Content image" />
+                      <img src={mapContent.mapImage1} alt="Content image" />
+                      <img src={mapContent.mapImage2} alt="Content image" />
                     </span>
                   </div>
                 ) : (
                   <div className={styles.lessContent}>
-                    {map.mapContent.substring(0, 150)}...
+                    {mapContent.mapContent.substring(0, 180)}...
                     <small onClick={() => setShowContent(true)}>See more</small>
                   </div>
                 )}

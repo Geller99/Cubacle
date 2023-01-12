@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import styles from '../../styles/roadmap.module.scss';
 
 const MobileMap1 = ({ setOpenModal, show }) => {
+
+  
   const [isBrowser, setIsBrowser] = useState(false);
   useEffect(() => {
     setIsBrowser(true);

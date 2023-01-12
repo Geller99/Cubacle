@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import MapData from './MapData';
 import styles from '../../styles/roadmap.module.scss';
-import Image from 'next/image';
 
 const Map = (props) => {
   const [showContent, setShowContent] = useState(false);
@@ -15,11 +14,11 @@ const Map = (props) => {
 
   return (
     <div className={styles.mapContainer}>
-      {MapData.map((mapId, idx) => {
+      {MapData.map((mapId) => {
         return (
-          <>
+          <React.Fragment key={mapId.mapTitle}>
             <div
-              key={mapId.idx}
+              key={mapId.mapTitle}
               id={styles.mapId}
               className={styles[`mapId-${mapId.idx}`]}
               onClick={() => handleButtonClick(mapId.idx)}
@@ -41,7 +40,7 @@ const Map = (props) => {
             >
               {mapId.mapId}
             </div>
-          </>
+          </React.Fragment>
         );
       })}
 

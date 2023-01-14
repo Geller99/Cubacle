@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MapData from './MapData';
 import styles from '../../styles/roadmap.module.scss';
 import Image from 'next/image';
@@ -13,8 +13,18 @@ const Map = (props) => {
     setSelectedButton(i);
   };
 
+
   return (
-    <div className={styles.mapContainer}>
+    <div
+
+      className={styles.mapContainer + ' ' + 'scroll-container'}
+    >
+      <Image
+        className={styles.mapImage}
+        src={'/Images/Map1New.jpg'}
+        layout="fill"
+        alt={''}
+      />
       {MapData.map((mapId, idx) => {
         return (
           <>

@@ -59,7 +59,7 @@ const RoadMap = forwardRef((props, ref) => {
     _scroller.current = scroller;
   };
   return (
-    <>
+    <React.Fragment>
       <section
         onScroll={onScroll}
         onMouseDown={onMouseDown}
@@ -87,7 +87,7 @@ const RoadMap = forwardRef((props, ref) => {
 
         <Map mapContentModal={mapContentModal} />
       </section>
-    </>
+    </React.Fragment>
   );
 });
 

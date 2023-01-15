@@ -12,22 +12,13 @@ const MobileMap = ({ setOpenModal, show, contentId }) => {
     e.preventDefault();
     setOpenModal(false);
   };
-  //   const [selectedDivs, setSelectedDivs] = useState([]);
-  //   const handleButtonClick = (i) => {
-  //     setSelectedDivs([i]);
-
-  //   };
 
   const modalContent = show ? (
     <section className={styles.mobileContainer}>
+      
       {MapData?.filter((item) => contentId === item.mapId).map((map, idx) => {
         return (
-          <main
-            key={idx}
-            //   style={{
-            //     display: selectedDivs.indexOf(map.idx) !== -1 ? 'flex' : 'none',
-            //   }}
-          >
+          <main key={idx}>
             <header>
               <h4>
                 <b>{map.mapId} </b>

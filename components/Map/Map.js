@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MapData from './MapData';
 import styles from '../../styles/roadmap.module.scss';
+import Image from 'next/image';
 
 const Map = (props) => {
   const [showContent, setShowContent] = useState(false);
@@ -12,13 +13,21 @@ const Map = (props) => {
     setSelectedButton(i);
   };
 
+  const mapImage = '/Images/Map1New.jpg'
+
   return (
-    <div className={styles.mapContainer}>
-      {MapData.map((mapId) => {
+    <div className={styles.mapContainer + ' ' + 'scroll-container'}>
+      <Image
+        className={styles.mapImage}
+        src={mapImage}
+        layout="fill"
+        alt={''}
+      />
+      {MapData.map((mapId, id) => {
         return (
           <React.Fragment key={mapId.mapTitle}>
             <div
-              key={mapId.mapTitle}
+              key={id}
               id={styles.mapId}
               className={styles[`mapId-${mapId.idx}`]}
               onClick={() => handleButtonClick(mapId.idx)}
@@ -53,7 +62,7 @@ const Map = (props) => {
                 selectedDivs.indexOf(mapContent.idx) !== -1 ? 'flex' : 'none',
             }}
             className={styles[`mapContentContainer-${mapContent.idx}`]}
-            key={mapContent.idx}
+            key={idx}
           >
             <div className={styles.triangle}></div>
 

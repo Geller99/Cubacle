@@ -163,7 +163,7 @@ const ClaimRewards = () => {
       rewardImg: CubexXmasImg,
       rewardName: 'CubeVerse Christmas Gift',
 
-      rewardDescription: 'To earn this CubeXMAS gift you must complete the Christmas Chaos quest inside of the CubeVerse. Game And Earn.',
+      rewardDescription: 'Checkout the CubeVerse to Learn More!',
       learnMoreBtn: () => console.log('add a learn more details'),
       claimRewardBtn: () => console.log('rewward2 clicked!'),
     },

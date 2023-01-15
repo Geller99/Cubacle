@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
-import bowser from 'bowser';
 import styles from '../styles/roadmap.module.scss';
-import Image from 'next/image';
 import Map from '../components/Map/Map';
 import MobileMap from '../components/Map/MapMobile';
 
+/* eslint-disable react/display-name */
 const RoadMap = forwardRef((props, ref) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [contentId, setContentId] = useState(null);

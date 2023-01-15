@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MapData from './MapData';
 import styles from '../../styles/roadmap.module.scss';
+import Image from 'next/image';
 
 const Map = (props) => {
   const [showContent, setShowContent] = useState(false);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MapData from './MapData';
 import styles from '../../styles/roadmap.module.scss';
 import Image from 'next/image';
+// import mapImage from '../../public/Images/Map1New.jpg'
 
 const Map = (props) => {
   const [showContent, setShowContent] = useState(false);
@@ -13,15 +14,18 @@ const Map = (props) => {
     setSelectedButton(i);
   };
 
-  const mapImage = '/Images/Map1New.jpg'
+  // const mapImage = '/Images/Map1New.jpg'
 
   return (
     <div className={styles.mapContainer + ' ' + 'scroll-container'}>
       <Image
         className={styles.mapImage}
-        src={mapImage}
+        src={'Images/Map1New.jpg'}
         layout="fill"
         alt={''}
+        unoptimized={true}
+        placeholder="blur"
+        blurDataURL={'/Images/Map1New.jpg'}
       />
       {MapData.map((mapId, id) => {
         return (

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, forwardRef } from "react";
-import styles from "../styles/roadmap.module.scss";
-import Map from "../components/Map/Map";
-import MobileMap from "../components/Map/MapMobile";
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
+import styles from '../styles/roadmap.module.scss';
+import Map from '../components/Map/Map';
+import MobileMap from '../components/Map/MapMobile';
 
 /* eslint-disable react/display-name */
 const RoadMap = forwardRef((props, ref) => {
@@ -70,7 +70,7 @@ const RoadMap = forwardRef((props, ref) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <section
         onScroll={onScroll}
         onMouseDown={onMouseDown}
@@ -95,7 +95,7 @@ const RoadMap = forwardRef((props, ref) => {
 
         <Map mapContentModal={mapContentModal} />
       </section>
-    </React.Fragment>
+    </>
   );
 });
 

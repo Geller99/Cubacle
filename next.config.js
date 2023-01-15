@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
 };
-const path = require("path");
+const path = require('path');
 
 module.exports = {
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
+    includePaths: [path.join(__dirname, 'styles')],
   },
   ...nextConfig,
   webpack(config) {
@@ -15,7 +15,7 @@ module.exports = {
       // by next.js will be dropped. Doesn't make much sense, but how it is
       fs: false,
       net: false,
-      tls: false // the solution
+      tls: false, // the solution
     };
 
     return config;

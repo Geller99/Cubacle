@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import bowser from 'bowser';
 import styles from '../styles/roadmap.module.scss';
-import Image from 'next/image';
+
 import Map from '../components/Map/Map';
 import MobileMap from '../components/Map/MapMobile';
 
@@ -59,7 +59,7 @@ const RoadMap = forwardRef((props, ref) => {
     _scroller.current = scroller;
   };
   return (
-    <React.Fragment>
+    <>
       <section
         onScroll={onScroll}
         onMouseDown={onMouseDown}
@@ -87,7 +87,7 @@ const RoadMap = forwardRef((props, ref) => {
 
         <Map mapContentModal={mapContentModal} />
       </section>
-    </React.Fragment>
+    </>
   );
 });
 

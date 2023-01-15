@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef } from 'react';
+import bowser from 'bowser';
 import styles from '../styles/roadmap.module.scss';
 import Image from 'next/image';
 import Map from '../components/Map/Map';
 import MobileMap from '../components/Map/MapMobile';
 
-const RoadMap = () => {
+const RoadMap = forwardRef((props, ref) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [contentId, setContentId] = useState(null);
 
@@ -13,7 +14,7 @@ const RoadMap = () => {
     setContentId(id);
   };
 
-  
+
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
@@ -22,19 +23,21 @@ const RoadMap = () => {
   const _scroller = useRef(null);
 
   useEffect(() => {
-    if (isScrolling) {
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('mouseup', onMouseUp);
-    } else {
-      window.removeEventListener('mousemove', onMouseMove);
-    }
+      if (isScrolling) {
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+      } else {
+        window.removeEventListener('mousemove', onMouseMove);
+      }
+    
   }, [isScrolling]);
 
   const onScroll = (event) => {};
 
   const onMouseMove = (event) => {
-    _scroller.current.scrollLeft = scrollLeft - clientX + event.clientX;
-    _scroller.current.scrollTop = scrollTop - clientY + event.clientY;
+      _scroller.current.scrollLeft = scrollLeft - clientX + event.clientX;
+      _scroller.current.scrollTop = scrollTop - clientY + event.clientY;
+    
   };
 
   const onMouseUp = () => {
@@ -52,26 +55,40 @@ const RoadMap = () => {
     setClientX(event.clientX);
     setClientY(event.clientY);
   };
-
   const attachScroller = (scroller) => {
     _scroller.current = scroller;
   };
-
   return (
-    <section 
-    onScroll={onScroll}
-    onMouseDown={onMouseDown}
-    ref={attachScroller}
-    className={styles.container}>
-      <MobileMap
-        setOpenModal={setModalOpen}
-        show={modalOpen}
-        contentId={contentId}
-      />
+    <>
+      <section
+        onScroll={onScroll}
+        onMouseDown={onMouseDown}
+        ref={attachScroller}
+        id={styles.containerWindows}
+        className={styles.container}
+      >
+        <MobileMap
+          setOpenModal={setModalOpen}
+          show={modalOpen}
+          contentId={contentId}
+        />
 
-      <Map mapContentModal={mapContentModal} />
-    </section>
+        <Map mapContentModal={mapContentModal} />
+      </section>
+      <section
+        id={styles.containerMobile}
+        className={styles.container}
+      >
+        <MobileMap
+          setOpenModal={setModalOpen}
+          show={modalOpen}
+          contentId={contentId}
+        />
+
+        <Map mapContentModal={mapContentModal} />
+      </section>
+    </>
   );
-};
+});
 
 export default RoadMap;

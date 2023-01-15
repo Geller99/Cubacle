@@ -4,7 +4,9 @@
     display: none;
 
 }
-
+#containerMobile {
+    display: none;
+}
 .container {
     display: flex;
     height: 75%;
@@ -27,7 +29,7 @@
         overflow: hidden;
 
         .mapImage {
-            min-height: 350%;
+            // min-height: 350%;
             cursor: move;
         }
 
@@ -52,6 +54,7 @@
             left: 43%;
             top: 43%;
             cursor: pointer !important;
+            // z-index: 11111;
             // transform: translate(50%);
         }
         #mapId:hover {
@@ -400,6 +403,12 @@
     
 }
 @media screen and (max-width: 786px) {
+    #containerMobile {
+        display: flex;
+    }
+    #containerWindows {
+        display: none;
+    }
     .container {
         margin-top: 0;
         height: 100%;
@@ -410,7 +419,7 @@
         .mapContainer {
             height: 200%;
             min-width: 450%;
-            overflow: visible;
+            // z-index: 11111;
 
             #mapId {
                 display: none !important;
@@ -433,6 +442,7 @@
                 letter-spacing: 0px;
                 // color: #000000;
                 position: absolute;
+                z-index: 111111;
             }
  
             .mapContentContainer-2 {

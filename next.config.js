@@ -28,4 +28,8 @@ module.exports = {
       },
     ],
   },
+  images: {
+    optimizeImages: false
+  }
+
 };

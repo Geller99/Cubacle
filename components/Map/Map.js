@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import MapData from './MapData';
 import styles from '../../styles/roadmap.module.scss';
-import Image from 'next/image';
 
 const Map = (props) => {
   const [showContent, setShowContent] = useState(false);
@@ -25,7 +24,7 @@ const Map = (props) => {
       />
       {MapData.map((mapId, id) => {
         return (
-          <>
+          <React.Fragment key={mapId.mapTitle}>
             <div
               key={id}
               id={styles.mapId}
@@ -49,7 +48,7 @@ const Map = (props) => {
             >
               {mapId.mapId}
             </div>
-          </>
+          </React.Fragment>
         );
       })}
 

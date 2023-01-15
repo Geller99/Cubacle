@@ -27,9 +27,5 @@ module.exports = {
         hostname: 'ipfs.io',
       },
     ],
-  },
-  images: {
-    optimizeImages: false
   }
-
 };

@@ -119,7 +119,53 @@ const Landing = () => {
             <p>The Official CubeX Shop for Holders, Coming Soon...</p>
           </span>
         </div>
+
+        <div
+          className={styles.nfts}
+          onClick={() =>
+            user ? router.push('/assets') : alert('Please connect wallet')
+          }
+        >
+          <Image
+            className={styles.icon}
+            src={'/Images/1Icon.png'}
+            height={80}
+            width={80}
+            alt={''}
+          />
+
+          <span>
+            <h3>Vote</h3>
+            <p>Click here to see all your Cubex NFTs and Assets...</p>
+          </span>
+        </div>
+
+        <div
+          className={styles.nfts}
+          onClick={() =>
+            user ? router.push('/assets') : alert('Please connect wallet')
+          }
+        >
+          <Image
+            className={styles.icon}
+            src={'/Images/1Icon.png'}
+            height={80}
+            width={80}
+            alt={''}
+          />
+
+          <span>
+            <h3>Admim</h3>
+            <p>Click here to see all your Cubex NFTs and Assets...</p>
+          </span>
+        </div>
       </main>
+
+      <span className={styles.scrollIcon}>
+        <span className={styles.scrollIconWheelOuter}>
+          <span className={styles.scrollIconWheelInner}></span>
+        </span>
+      </span>
     </section>
   );
 };

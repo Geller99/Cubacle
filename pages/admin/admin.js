@@ -1,23 +1,55 @@
-import React, { useReducer, useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import ActiveProposals from "../../components/admin/proposal-active";
 import CreateRewardForm from "../../components/admin/reward-form";
 import ActiveRewards from "../../components/admin/rewards-active";
-import { rewardInitialState } from "../../models/rewardReducer";
-// import dynamic from 'next/dynamic';
+import TokenItem from "../../components/admin/tokenItem/tokenItem";
 
 const Admin = () => {
-
   const [selectedReward, setSelectedReward] = useState(null);
+  const [rewards, setRewards] = useState(null);
+  const [tokenData, setTokenData] = useState(null);
+  const [count, setCount] = useState(0);
 
-  const [reward, setReward] = useState(selectedReward);
+  useEffect(() => {
+    if (!rewards) {
+      fetchActiveRewards();
+    }
+  }, [rewards]);
 
-  const handleFormChange = event => {
-    const { name, value } = event.target;
-    const newReward = {...reward};
-    newReward[name] = value;
-    setReward(newReward);
+  const fetchActiveRewards = async () => {
+    await fetch("/api/rewards-getAll")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Rewards data", data);
+        setRewards(data.data);
+      });
   };
 
+  const fetchTokenData = async () => {
+    try {
+      await axios({
+        method: "post",
+        url: "http://localhost:3000/api/fetchUserData",
+        data: {
+          count: count ? count : 0,
+          fetchListedOwners: null,
+          fetchUnlistedOwners: null,
+        },
+      }).then((data) => {
+        console.log("Token Data", data.data.data.tokenData);
+        setTokenData(data.data.data.tokenData);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (count) {
+      fetchTokenData();
+    }
+  }, [count]);
 
   return (
     <div>
@@ -32,21 +64,20 @@ const Admin = () => {
         </div>
       </div>
 
-      {/**
-       * Handle Reward Form Components and Behavior
-       */}
       {selectedReward && (
         <CreateRewardForm
           selectedReward={selectedReward}
           setSelectedReward={setSelectedReward}
-          reward={reward}
-          setReward={setReward}
-          handleFormChange={handleFormChange}
+          setRewards={setRewards}
         />
       )}
 
       <div className="Active-Rewards">
-        <ActiveRewards setSelectedReward={setSelectedReward} />
+        <ActiveRewards
+          rewards={rewards}
+          setRewards={setRewards}
+          setSelectedReward={setSelectedReward}
+        />
       </div>
 
       <div className="Active-Proposal">
@@ -54,24 +85,29 @@ const Admin = () => {
       </div>
 
       <div className="Admin-SearchBar">
-        <div> Search Bar </div>
-        <button> Show Listed/Unlisted </button>
+        <input
+          type={"text"}
+          name="count"
+          value={count}
+          onChange={(e) => setCount(e.target.value)}
+        />
+        <button> Show Listed</button>
+        <button>Show Unlisted</button>
       </div>
-      {console.log(
-          "State Values",
-          reward && reward.title,
-          reward && reward.detail,
-          reward && reward.eligibilityCount
-        )}
+
       <div className="Admin-TokenInfo">
-        {/**
-         * This component displays token Info based on SearchBar
-         *
-         * Display tokens that have been unListed 30 days etc
-         *
-         * Click button to show list of all listed/unlisted tokens
-         */}
-        <div>Token Info</div>
+        {tokenData &&
+          tokenData.slice(0, 5).map((token) => {
+            return (
+              <TokenItem
+                key={token.tokenId}
+                tokenId={token.tokenId}
+                ownerAddress={token.ownerAddress}
+                listingStatus={token.listingStatus}
+                numberOfDaysListed={token.numberOfDaysListed}
+              />
+            );
+          })}
       </div>
     </div>
   );

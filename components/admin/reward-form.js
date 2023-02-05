@@ -1,12 +1,22 @@
 import axios from "axios";
+import React, { useState } from "react";
 
-const CreateRewardForm = ({
-  selectedReward,
-  setSelectedReward,
-  reward,
-  setReward,
-  handleFormChange,
-}) => {
+/**
+ * 
+ * @dev is missing Image upload component
+ * @returns 
+ */
+
+const CreateRewardForm = ({  selectedReward, setSelectedReward, setRewards }) => {
+  const [reward, setReward] = useState(selectedReward);
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    const newReward = { ...reward };
+    newReward[name] = value;
+    setReward(newReward);
+  };
+
   const handleSubmitReward = async (e) => {
     e.preventDefault();
     try {
@@ -20,6 +30,8 @@ const CreateRewardForm = ({
           eligibilityCount: reward && reward.eligibilityCount,
         },
       });
+      setRewards(null);
+      setSelectedReward(null);
       alert("Successfully Created New Reward");
     } catch (error) {
       console.log(error);
@@ -33,12 +45,15 @@ const CreateRewardForm = ({
         method: "post",
         url: "http://localhost:3000/api/rewards-update",
         data: {
-          title: reward && reward.title,
+          title: selectedReward && selectedReward.title,
+          updatedTitle: reward && reward.title,
           detail: reward && reward.detail,
           imageStr: "",
           eligibilityCount: reward && reward.eligibilityCount,
         },
       });
+      setRewards(null);
+      setSelectedReward(null);
       alert("Successfully Updated Reward");
     } catch (error) {
       console.log(error);
@@ -47,13 +62,17 @@ const CreateRewardForm = ({
 
   return (
     <div>
-      <form onSubmit={selectedReward ? handleSubmitReward : handleUpdateReward }>
+      <form
+        onSubmit={
+          selectedReward.title ? handleUpdateReward : handleSubmitReward
+        }
+      >
         <input
           className="Form-Title"
           type={"text"}
           name={"title"}
           placeholder={"Enter Title..."}
-          value={selectedReward && selectedReward.title}
+          value={reward && reward.title}
           onChange={handleFormChange}
         />
         <input
@@ -61,20 +80,28 @@ const CreateRewardForm = ({
           type={"text"}
           name={"detail"}
           placeholder={"Enter Details..."}
-          value={selectedReward && selectedReward.detail}
+          value={reward && reward.detail}
           onChange={handleFormChange}
         />
         {/* <img src="#" alt=""> Upload Icon </img> */}
+        {/* <input
+          className="Form-Image"
+          type={"text"}
+          name={"image"}
+          placeholder={"Enter Image..."}
+          value={reward && reward.image}
+          onChange={handleFormChange}
+        /> */}
         <input
           className="Form-EligibilityCount"
           type={"number"}
           name={"eligibilityCount"}
           placeholder={"Enter Count..."}
-          value={selectedReward && selectedReward.eligibilityCount}
+          value={reward && reward.eligibilityCount}
           onChange={handleFormChange}
         />
         <button onClick={() => setSelectedReward(null)}> Close </button>
-
+        
         <button type="submit"> Submit </button>
       </form>
     </div>

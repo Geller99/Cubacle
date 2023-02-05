@@ -8,6 +8,7 @@ const RewardItem = ({
   eligibilityCount,
   setSelectedReward,
   reward,
+  setRewards
 }) => {
   const handleDeleteReward = async () => {
     try {
@@ -18,6 +19,7 @@ const RewardItem = ({
           title: reward.title,
         },
       });
+      setRewards(null);
       alert("Successfully Deleted");
     } catch (error) {
       console.log(error);

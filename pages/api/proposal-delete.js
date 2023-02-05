@@ -1,28 +1,36 @@
+import connectMongo from "../../config/connectMongo";
+import ProposalModel from "../../models/proposal-schema";
 
-// /**
-//  * @dev fetches proposal id, deletes from DB
-//  * 
-//  * @dev uses EIP signature to verify before api can be called
-//  * 
-//  * 
-//  */
+const deleteProposal = async (req, res) => {
 
-// export const deleteProposal = (req, res) => {
-//     try {
-        
-//         // grab proposal Id and delete from DB
-//         // const { id } = req.body;
+    const { title, typedData, signature } = req.body;
+    
+     try {
+        connectMongo();
 
-//         // A.findByIdAndRemove(id, callback) // executes
-//         res.send('Proposal Deleted');
-        
-//       } catch (error) {
-//         res.status(400).json({
-//           status: "failed",
-//           data: {
-//             user: "unable to delete Proposal",
-//           },
-//         });
-//       }
-  
-// }
+       await ProposalModel.findOneAndDelete(
+         { title: title }
+       ).then((data) => {
+         console.log("Updated DB", data);
+       });
+         
+         
+       res.status(201).json({
+         status: "success",
+         data: {
+           proposal: "Proposal Successfully Deleted",
+         },
+       });
+         
+       } catch (error) {
+         res.status(400).json({
+           status: "failed",
+           data: {
+             user: "unable to delete target proposal",
+           },
+         });
+       }
+   
+ }
+
+ export default deleteProposal;

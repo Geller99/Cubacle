@@ -136,14 +136,14 @@ const Landing = () => {
 
           <span>
             <h3>Vote</h3>
-            <p>Click here to see all your Cubex NFTs and Assets...</p>
+            <p>Click here to Vote on Active Proposals For CubexDAO...</p>
           </span>
         </div>
 
         <div
           className={styles.nfts}
           onClick={() =>
-            user ? router.push('/assets') : alert('Please connect wallet')
+            user ? router.push('/admin/admin') : alert('Please connect wallet')
           }
         >
           <Image
@@ -155,8 +155,8 @@ const Landing = () => {
           />
 
           <span>
-            <h3>Admim</h3>
-            <p>Click here to see all your Cubex NFTs and Assets...</p>
+            <h3>Admin</h3>
+            <p>Click here to Access Your Admin Dashboard TFG...</p>
           </span>
         </div>
       </main>

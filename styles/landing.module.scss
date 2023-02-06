@@ -4,76 +4,23 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow-x: scroll;
-    position: absolute;
-    top: 60%;
-    transform: translateY(-55%); 
-    padding: 0 4%;
-    padding-bottom: 5rem;
+    overflow-x: auto;
+    padding-bottom: 2rem;
+    transition: all 0.5s ease-out;
 
-    .scrollIcon {
-        display: block;
-        position: absolute;
-        right: 4%;
-        bottom: 1rem;
-        height: 3rem;
-        width: 1.5rem;
-        border: .25rem solid #4d4866;
-        border-radius: 1rem;
-        transform: rotate(90deg);
-      }
-
-    @keyframes scroll_1 {
-        0%   { transform: translateY(0); }
-        25%  { transform: translateY(-0.6em); }
-        50%  { transform: translateY(0); }
-        75%  { transform: translateY(0.6em); }
-        100% { transform: translateY(0); }
-    }
-
-      .example {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .scrollIconWheelOuter {
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: .6em;
-        height: 1em;
-        width: .4em;
-        margin-left: -.2em;
-        border-radius: .4em;
-        overflow: hidden;
-        color: #4d4866;
-      }
-      
-      .scrollIconWheelInner {
-        display: block;
-        height: 100%;
-        width: 100%;
-        border-radius: inherit;
-        background: #4d4866;
-        z-index: 1111;
-        animation: scroll_1 2.75s ease-in-out infinite;
-        cursor: pointer;
-      }
 
     main {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        column-gap: 1.5rem;
+        column-gap: 2rem;
         row-gap: 2rem;
         width: 100%;
-        min-width: 150%;
+        width: 140% !important;
         // overflow-x: scroll;
         // overflow-x: hidden;
         position: relative;
         padding-right: 0rem;
+        transition: all 0.5s ease-out;
 
 
         div {
@@ -83,7 +30,7 @@
             align-items: flex-start;
             height: 100%;
             width: 100%;
-            max-width: 300px;
+            max-width: 400px;
             background-color: $primaryBg;
             background-blend-mode: multiply;
             background-position: center center;
@@ -136,8 +83,32 @@
             }
         }
     }
-    
 
+}
+.landingContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 92%;
+    left: 8%;
+    top: 61%;
+    transform: translateY(-55%); 
+    padding: 0 4%;
+
+    .scrollBtn {
+        display: flex;
+        
+        margin-left: auto;
+        column-gap: 1rem;
+        margin-top: 2rem;
+
+        button {
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 32px;
+        }
+    }
 }
 @media screen and (min-width: 768px) {
     .container {
@@ -146,16 +117,9 @@
             min-height: 500px;
         }
     }
-}
-@media screen and (min-width: 1269px) {
-    .container {
-        div {
-            min-width: 290px;
-        }
-    }
     .container::-webkit-scrollbar{
-        height: 1px;
-        width: 1px;
+        height: 2px;
+        width: 2px;
         background: gray;
     }
     
@@ -172,80 +136,131 @@
     }
     
     .container::-webkit-scrollbar-thumb:horizontal{
-        background: #000;
+        background: rgb(81, 81, 81);
         border-radius: 10px;
     }
 }
-
-@media (max-width: 1568px) {
+@media screen and (max-width: 1567px) {
     .container {
         main {
-            min-width: 200%;
+            min-width: 150%;
         }
-
     }
 }
 
+
 @media (max-width: 1268px) {
-    .container {
+
+    .landingContainer {
         height: 100%;
-        margin-top: 10%;
-        padding-bottom: 4rem;
-        overflow-x: hidden !important;
+        margin:  0 !important;
+        padding-bottom: 0;
+        width: 100%;
+        padding: 0 !important;
+        position: relative;
+        left: 0%;
+        right: 0 !important;
+        top: 0;
+        transform: translateY(0%) !important; 
+        overflow: hidden;
+        margin-top: 2rem;
 
-        main {
-            min-width: 100%;
-            // min-width: 200%;
+        .container {
             padding: 0;
-            overflow-x: hidden;
+            overflow: hidden !important;
+            height: 100%;
+            margin-top: 6%;
+            margin-bottom: 8rem;
 
+    
+            main {
+                grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+                max-width: 100%;
+                min-width: 100%;
+                padding: 0 !important;
+                overflow-x: hidden;
+                column-gap: 2rem;
+    
+    
+                div {
+                    height: 100%;
+                    min-height: 300px;
 
-            div {
-                min-height: 350px;
-
+                    .icon {
+                        width: 60px !important;
+                        height: 60px;
+                    }
+                }
             }
         }
-        .scrollIcon {
+
+        .scrollBtn {
             display: none;
         }
     }
 }
+// @media (max-width: 1287px) {
+//     .container {
+//         height: 100%;
+//         margin-top: 5%;
+//         margin-bottom: 0;
+//         padding-bottom: 0rem;
+
+//         main {
+//             grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+//             width: 100%;
+//             max-width: 100%;
+//             margin-bottom: 10rem;
+//             padding: 0;
+//             column-gap: 2rem;
+
+//             div {
+//                 padding: 1.5rem;
+//                 // min-width: 220px;
+//             }
+//         }
+
+//     }
+// }
+
 @media (max-width: 1087px) {
     .container {
-        height: 100%;
-        margin-top: 5%;
-        margin-bottom: 0;
-        padding-bottom: 4rem;
+        margin-top: 12% !important;
+        margin-bottom: 4rem;
 
         main {
-            width: 100%;
-            min-width: 100%;
-            margin-bottom: 10rem;
-            padding-right: 0;
-            column-gap: 1rem;
 
             div {
                 padding: 1.5rem;
+
+                .icon {
+                    min-width: 50px !important;
+                    min-height: 60px !important;
+                }
             }
         }
-
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 808px) {
     .container {
-        margin: 0%;
+        margin: 1rem 0 !important;
+    }
+}
+@media (max-width: 608px) {
+    .container {
+        margin: 0 !important;
         position: relative;
-        padding: 0;
-        padding-bottom: 2rem;
+        padding: 0 !important;
+        width: 100%;
 
-        .scrollIcon {
-            display: none;
-        }
         main {
-            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            padding: 0 10px !important;
             row-gap: 1.5rem;
-            margin-top: 0rem;
-            margin-bottom: 0rem;
+            margin: 0;
+            max-width: 100%;
+
 
             .nfts {
                 background-image: url(../public/Images/Bg1Mobile.png);
@@ -265,23 +280,22 @@
 
             div {
                 position: relative;
-                min-width: 100%;
+                min-width: 100% !important;
                 justify-content: space-between;
                 flex-direction: row;
-                min-height: 150px;
-                padding: 1.5rem;
+                min-height: 150px !important;
+                padding: 1.5rem !important;
                 border-radius: 12px;
 
 
                 .icon {
-                    padding: 1rem !important;
+                    padding: .5rem !important;
                     height: fit-content;
                     width: 50px !important;
                 }
 
                 span {
                     row-gap: 1rem;
-                    // position: absolute;
                     right: 1.5rem;
                     bottom: 1.5rem;
                     max-width: 156px;

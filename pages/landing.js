@@ -129,46 +129,46 @@ const Landing = () => {
             </span>
           </div>
 
-          <div
-            className={styles.nfts}
-            onClick={() =>
-              user ? router.push('/assets') : alert('Please connect wallet')
-            }
-          >
-            <Image
-              className={styles.icon}
-              src={'/Images/1Icon.png'}
-              height={80}
-              width={80}
-              alt={''}
-            />
+        <div
+          className={styles.nfts}
+          onClick={() =>
+            user ? router.push('/feed') : alert('Please connect wallet')
+          }
+        >
+          <Image
+            className={styles.icon}
+            src={'/Images/1Icon.png'}
+            height={80}
+            width={80}
+            alt={''}
+          />
 
-            <span>
-              <h3>Vote</h3>
-              <p>Click here to see all your Cubex NFTs and Assets...</p>
-            </span>
-          </div>
+          <span>
+            <h3>Vote</h3>
+            <p>Click here to Vote on Active Proposals For CubexDAO...</p>
+          </span>
+        </div>
 
-          <div
-            className={styles.nfts}
-            onClick={() =>
-              user ? router.push('/assets') : alert('Please connect wallet')
-            }
-          >
-            <Image
-              className={styles.icon}
-              src={'/Images/1Icon.png'}
-              height={80}
-              width={80}
-              alt={''}
-            />
+        <div
+          className={styles.nfts}
+          onClick={() =>
+            user ? router.push('/admin/admin') : alert('Please connect wallet')
+          }
+        >
+          <Image
+            className={styles.icon}
+            src={'/Images/1Icon.png'}
+            height={80}
+            width={80}
+            alt={''}
+          />
 
-            <span>
-              <h3>Admim</h3>
-              <p>Click here to see all your Cubex NFTs and Assets...</p>
-            </span>
-          </div>
-        </main>
+          <span>
+            <h3>Admin</h3>
+            <p>Click here to Access Your Admin Dashboard For The Cubicle TFG...</p>
+          </span>
+        </div>
+      </main>
 
         {/* <span className={styles.scrollIcon}>
         <span className={styles.scrollIconWheelOuter}>

@@ -123,7 +123,7 @@ const Landing = () => {
         <div
           className={styles.nfts}
           onClick={() =>
-            user ? router.push('/assets') : alert('Please connect wallet')
+            user ? router.push('/feed') : alert('Please connect wallet')
           }
         >
           <Image
@@ -156,7 +156,7 @@ const Landing = () => {
 
           <span>
             <h3>Admin</h3>
-            <p>Click here to Access Your Admin Dashboard TFG...</p>
+            <p>Click here to Access Your Admin Dashboard For The Cubicle TFG...</p>
           </span>
         </div>
       </main>

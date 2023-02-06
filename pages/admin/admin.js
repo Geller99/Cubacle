@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import ActiveProposals from "../../components/admin/proposal-active";
+import CreateProposalForm from "../../components/admin/proposal-form";
 import CreateRewardForm from "../../components/admin/reward-form";
 import ActiveRewards from "../../components/admin/rewards-active";
 import TokenItem from "../../components/admin/tokenItem/tokenItem";
@@ -8,6 +9,8 @@ import TokenItem from "../../components/admin/tokenItem/tokenItem";
 const Admin = () => {
   const [selectedReward, setSelectedReward] = useState(null);
   const [rewards, setRewards] = useState(null);
+  const [selectedProposal, setSelectedProposal] = useState(null);
+  const [proposals, setProposals] = useState(null);
   const [tokenData, setTokenData] = useState(null);
   const [count, setCount] = useState(0);
 
@@ -17,13 +20,36 @@ const Admin = () => {
     }
   }, [rewards]);
 
+  useEffect(() => {
+    if (!proposals) {
+      fetchActiveProposals();
+    }
+  }, [proposals]);
+
   const fetchActiveRewards = async () => {
-    await fetch("/api/rewards-getAll")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Rewards data", data);
-        setRewards(data.data);
-      });
+    try {
+      await fetch("/api/rewards-getAll")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Rewards data", data);
+          setRewards(data.data);
+        });
+    } catch (error) {
+      console.log("Rewards Fetch Error, error");
+    }
+  };
+
+  const fetchActiveProposals = async () => {
+    try {
+      await fetch("/api/proposal-getAll")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Proposal data", data);
+          setProposals(data.data);
+        });
+    } catch (error) {
+      console.log("Proposal error", error);
+    }
   };
 
   const fetchTokenData = async () => {
@@ -56,7 +82,10 @@ const Admin = () => {
       <div className="Admin-Nav">
         <p> Welcome to Your Dashboard TFG </p>
         <div>
-          <button> Create New Proposal </button>
+          <button onClick={() => setSelectedProposal({})}>
+            {" "}
+            Create New Proposal{" "}
+          </button>
           <button onClick={() => setSelectedReward({})}>
             {" "}
             Create New Reward{" "}
@@ -72,16 +101,28 @@ const Admin = () => {
         />
       )}
 
-      <div className="Active-Rewards">
+      {selectedProposal && (
+        <CreateProposalForm
+          selectedProposal={selectedProposal}
+          setSelectedProposal={setSelectedProposal}
+          setProposals={setProposals}
+        />
+      )}
+
+      {/* <div className="Active-Rewards">
         <ActiveRewards
           rewards={rewards}
           setRewards={setRewards}
           setSelectedReward={setSelectedReward}
         />
-      </div>
+      </div> */}
 
       <div className="Active-Proposal">
-        <ActiveProposals />
+        <ActiveProposals
+          proposals={proposals}
+          setProposals={setProposals}
+          setSelectedProposal={setSelectedProposal}
+        />
       </div>
 
       <div className="Admin-SearchBar">
@@ -91,8 +132,6 @@ const Admin = () => {
           value={count}
           onChange={(e) => setCount(e.target.value)}
         />
-        <button> Show Listed</button>
-        <button>Show Unlisted</button>
       </div>
 
       <div className="Admin-TokenInfo">

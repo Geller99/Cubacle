@@ -1,4 +1,3 @@
-
 import RewardItem from "./rewardItem/rewardItem";
 
 /**
@@ -7,7 +6,6 @@ import RewardItem from "./rewardItem/rewardItem";
  */
 
 const ActiveRewards = ({ rewards, setRewards, setSelectedReward }) => {
-  
   return (
     <div>
       {rewards &&
@@ -22,7 +20,6 @@ const ActiveRewards = ({ rewards, setRewards, setSelectedReward }) => {
               setSelectedReward={setSelectedReward && setSelectedReward}
               reward={reward}
               setRewards={setRewards}
-              
             />
           );
         })}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useS3Upload } from "next-s3-upload";
+
+const BUCKET_URL = "https://cubacle.s3.us-east-2.amazonaws.com/";
 
 const CreateRewardForm = ({
   selectedReward,
@@ -10,25 +11,41 @@ const CreateRewardForm = ({
   const [reward, setReward] = useState(selectedReward);
   const [file, setFile] = useState(null);
   let [imageUrl, setImageUrl] = useState();
-  let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
+
+  const uploadFile = async () => {
+    if (file) {
+      let { data } = await axios.post("/api/image-upload", {
+        name: file.name,
+        type: file.type,
+      });
+
+      const url = data.data.data;
+
+      let result = await axios.put(url, file, {
+        headers: {
+          "Content-type": file.type,
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+
+      console.log("This is the S3 data", result.config.url);
+      setImageUrl(result.config.url);
+      setFile(null);
+    }
+  };
 
   const handleFileUpload = (event) => {
     if (event.target.files.length) {
       setFile(event.target.files[0]);
-      console.log("This is the uploaded file", file);
     }
   };
-
-  // let handleFileChange = async file => {
-  //   let { url } = await uploadToS3(file);
-  //   setImageUrl(url);
-  // };
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
     const newReward = { ...reward };
     newReward[name] = value;
     setReward(newReward);
+    console.log("Reward form data", reward)
   };
 
   const handleSubmitReward = async (e) => {
@@ -43,7 +60,7 @@ const CreateRewardForm = ({
         data: {
           title: reward && reward.title,
           detail: reward && reward.detail,
-          imageStr: file && file,
+          imageStr: imageUrl && imageUrl,
           eligibilityCount: reward && reward.eligibilityCount,
         },
       });
@@ -65,7 +82,7 @@ const CreateRewardForm = ({
           title: selectedReward && selectedReward.title,
           updatedTitle: reward && reward.title,
           detail: reward && reward.detail,
-          imageStr: file && file,
+          imageStr: imageUrl && imageUrl,
           eligibilityCount: reward && reward.eligibilityCount,
         },
       });
@@ -101,9 +118,12 @@ const CreateRewardForm = ({
           onChange={handleFormChange}
         />
 
-        
-
         <input type="file" onChange={handleFileUpload} />
+        <button type="button" onClick={uploadFile}>
+          {" "}
+          Upload Reward Image{" "}
+        </button>
+
         <input
           className="Form-EligibilityCount"
           type={"number"}
@@ -113,7 +133,6 @@ const CreateRewardForm = ({
           onChange={handleFormChange}
         />
         <button onClick={() => setSelectedReward(null)}> Close </button>
-          {console.log(imageUrl)}
         <button type="submit"> Submit </button>
       </form>
     </div>

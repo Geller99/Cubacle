@@ -9,7 +9,7 @@ import React, { useState } from "react";
 
 const CreateProposalForm = ({  selectedProposal, setSelectedProposal, setProposals }) => {
   const [proposal, setProposal] = useState(selectedProposal);
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState(false);
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -87,8 +87,9 @@ const CreateProposalForm = ({  selectedProposal, setSelectedProposal, setProposa
           className="Form-Active"
           type={"checkbox"}
           name={"active"}
-          checked={proposal && proposal.active}
+          
           onChange={() => setActive((prev) => !prev)}
+          value={proposal && proposal.active}
         />
         <button onClick={() => setSelectedProposal(null)}> Close </button>
         <button type="submit"> Submit </button>

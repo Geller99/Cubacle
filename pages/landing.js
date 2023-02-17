@@ -1,13 +1,123 @@
 import React, { useState, useEffect } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
+import { domain, types, value } from "../config/EIPValidator";
 import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const Landing = () => {
   const router = useRouter();
-  const { address } = useAccount();
+  const { address, connector } = useAccount();
+  const { disconnect } = useDisconnect();
   const [user, setUser] = useState('');
+  const [authStatus, setAuthStatus] = useState(null);
+  const [validator, setValidator] = useState(null);
+
+  
+  const getTypedData = () => {
+    const typedData = {
+      domain,
+      message: value,
+      primaryType: "Message",
+      types: {
+        ...types,
+        EIP712Domain: [
+          { name: "name", type: "string" },
+          { name: "chainId", type: "uint256" },
+          { name: "version", type: "string" },
+          { name: "verifyingContract", type: "address" },
+        ],
+      },
+    };
+    return typedData;
+  };
+
+  const requestSignature = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        if (!connector) {
+          resolve(null);
+          return;
+        }
+        const request = {
+          method: "eth_signTypedData_v4",
+          from: address,
+          params: [address, JSON.stringify(getTypedData())],
+        };
+        const provider = await connector.getProvider();
+        await provider.request(request).then(resolve).catch(reject);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  };
+
+  const handleSignature = async () => {
+    try {
+      const signature = await requestSignature();
+      if (signature) {
+        console.log("Active signature", signature);
+        getAuthStatus(signature);
+        //const data = await response.json();
+        //if(data.isAdmin){
+        setValidator(signature);
+        //}
+      } else {
+        //no error, wait for "connector"
+      }
+    } catch (err) {
+      console.warn({ err });
+      disconnect();
+      setAuthStatus(null);
+      setValidator(null);
+    }
+  };
+
+  const getAuthStatus = async (signature) => {
+    axios({
+      method: "post",
+      url: "/api/auth",
+      headers: {},
+      data: {
+        account: address && address.toLowerCase(),
+        signature: signature,
+        typedData: getTypedData(),
+      },
+    })
+      .then((data, err) => {
+        console.log("User Status Data", data.data.data.authStatus);
+        setAuthStatus(data.data.data.authStatus);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  };
+
+  /**
+   * @dev needs to
+   *
+   * Connect user wallet
+   * Run function to grab signature from user using EIP typedData()
+   * Check if user signs or not
+   *
+   * IF signed, hit /api/auth to determine admin/user status give access to dapp and stay logged in
+   * Else disconnect
+   */
+
+  const init = async () => {
+    if (address) {
+      if (!validator) {
+        await handleSignature();
+      } else {
+        return;
+      }
+    }
+  };
+
+  // useEffect(() => {
+  //   init();
+  // }, [address, validator]);
 
   useEffect(() => {
     setUser(address);
@@ -140,7 +250,8 @@ const Landing = () => {
           </span>
         </div>
 
-        <div
+        {
+          authStatus === null ? <div
           className={styles.nfts}
           onClick={() =>
             user ? router.push('/admin/admin') : alert('Please connect wallet')
@@ -158,7 +269,8 @@ const Landing = () => {
             <h3>Admin</h3>
             <p>Click here to Access Your Admin Dashboard For The Cubicle TFG...</p>
           </span>
-        </div>
+        </div> : <></>
+        }
       </main>
 
       <span className={styles.scrollIcon}>

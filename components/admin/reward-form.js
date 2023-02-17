@@ -1,14 +1,28 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useS3Upload } from "next-s3-upload";
 
-/**
- * 
- * @dev is missing Image upload component
- * @returns 
- */
-
-const CreateRewardForm = ({  selectedReward, setSelectedReward, setRewards }) => {
+const CreateRewardForm = ({
+  selectedReward,
+  setSelectedReward,
+  setRewards,
+}) => {
   const [reward, setReward] = useState(selectedReward);
+  const [file, setFile] = useState(null);
+  let [imageUrl, setImageUrl] = useState();
+  let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
+
+  const handleFileUpload = (event) => {
+    if (event.target.files.length) {
+      setFile(event.target.files[0]);
+      console.log("This is the uploaded file", file);
+    }
+  };
+
+  // let handleFileChange = async file => {
+  //   let { url } = await uploadToS3(file);
+  //   setImageUrl(url);
+  // };
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -22,11 +36,14 @@ const CreateRewardForm = ({  selectedReward, setSelectedReward, setRewards }) =>
     try {
       await axios({
         method: "post",
+        headers: {
+          "content-type": "multipart/form-data",
+        },
         url: "http://localhost:3000/api/rewards-create",
         data: {
           title: reward && reward.title,
           detail: reward && reward.detail,
-          imageStr: "",
+          imageStr: file && file,
           eligibilityCount: reward && reward.eligibilityCount,
         },
       });
@@ -48,7 +65,7 @@ const CreateRewardForm = ({  selectedReward, setSelectedReward, setRewards }) =>
           title: selectedReward && selectedReward.title,
           updatedTitle: reward && reward.title,
           detail: reward && reward.detail,
-          imageStr: "",
+          imageStr: file && file,
           eligibilityCount: reward && reward.eligibilityCount,
         },
       });
@@ -83,15 +100,10 @@ const CreateRewardForm = ({  selectedReward, setSelectedReward, setRewards }) =>
           value={reward && reward.detail}
           onChange={handleFormChange}
         />
-        {/* <img src="#" alt=""> Upload Icon </img> */}
-        {/* <input
-          className="Form-Image"
-          type={"text"}
-          name={"image"}
-          placeholder={"Enter Image..."}
-          value={reward && reward.image}
-          onChange={handleFormChange}
-        /> */}
+
+        
+
+        <input type="file" onChange={handleFileUpload} />
         <input
           className="Form-EligibilityCount"
           type={"number"}
@@ -101,7 +113,7 @@ const CreateRewardForm = ({  selectedReward, setSelectedReward, setRewards }) =>
           onChange={handleFormChange}
         />
         <button onClick={() => setSelectedReward(null)}> Close </button>
-        
+          {console.log(imageUrl)}
         <button type="submit"> Submit </button>
       </form>
     </div>

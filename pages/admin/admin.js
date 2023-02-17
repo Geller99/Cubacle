@@ -7,6 +7,7 @@ import ActiveRewards from "../../components/admin/rewards-active";
 import TokenItem from "../../components/admin/tokenItem/tokenItem";
 
 const Admin = () => {
+  
   const [selectedReward, setSelectedReward] = useState(null);
   const [rewards, setRewards] = useState(null);
   const [selectedProposal, setSelectedProposal] = useState(null);
@@ -109,13 +110,15 @@ const Admin = () => {
         />
       )}
 
-      {/* <div className="Active-Rewards">
+   
+   {/* <div className="Active-Rewards">
         <ActiveRewards
           rewards={rewards}
           setRewards={setRewards}
           setSelectedReward={setSelectedReward}
         />
       </div> */}
+
 
       <div className="Active-Proposal">
         <ActiveProposals

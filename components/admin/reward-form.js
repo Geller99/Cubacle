@@ -27,9 +27,9 @@ const CreateRewardForm = ({
           "Access-Control-Allow-Origin": "*",
         },
       });
-
-      console.log("This is the S3 data", result.config.url);
-      setImageUrl(result.config.url);
+      let tempString = file.name;
+      let targetString = `https://cubacle.s3.us-east-2.amazonaws.com/${tempString.replace(/\s+/g,'+')}`
+      setImageUrl(targetString);
       setFile(null);
     }
   };

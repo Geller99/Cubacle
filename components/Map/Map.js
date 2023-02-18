@@ -90,10 +90,10 @@ const Map = (props) => {
                     <small onClick={() => setShowContent(false)}>
                       See less
                     </small>
-                    <span className={styles.contentImg}>
+                    {/* <span className={styles.contentImg}>
                       <img src={mapContent.mapImage1} alt="Content image" />
                       <img src={mapContent.mapImage2} alt="Content image" />
-                    </span>
+                    </span> */}
                   </div>
                 ) : (
                   <div className={styles.lessContent}>

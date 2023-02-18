@@ -26,7 +26,7 @@ const Header = () => {
         </span>
 
         <div className={styles.userImg}>
-          <Image src={'/Images/userImg.jpg'} height={50} width={50}  alt={''}/>
+          <Image src={'/Images/userIcon.svg'} height={32} width={28}  alt={''}/>
         </div>
       </div>
     </div>

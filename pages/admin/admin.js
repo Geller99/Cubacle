@@ -7,6 +7,7 @@ import ActiveRewards from "../../components/admin/rewards-active";
 import TokenItem from "../../components/admin/tokenItem/tokenItem";
 
 const Admin = () => {
+  
   const [selectedReward, setSelectedReward] = useState(null);
   const [rewards, setRewards] = useState(null);
   const [selectedProposal, setSelectedProposal] = useState(null);
@@ -109,13 +110,15 @@ const Admin = () => {
         />
       )}
 
-      {/* <div className="Active-Rewards">
+   
+   <div className="Active-Rewards">
         <ActiveRewards
           rewards={rewards}
           setRewards={setRewards}
           setSelectedReward={setSelectedReward}
         />
-      </div> */}
+      </div>
+
 
       <div className="Active-Proposal">
         <ActiveProposals
@@ -133,6 +136,9 @@ const Admin = () => {
           onChange={(e) => setCount(e.target.value)}
         />
       </div>
+
+      {/* <img src={"https://cubacle.s3.us-east-2.amazonaws.com/Screenshot%20%28185%29.png?Content-Type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAWGCNUVFULT4P7HH4%2F20230218%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20230218T055212Z&X-Amz-Expires=600&X-Amz-Signature=2f7bc950bf6fb6fcc459d253b72805a40fd7c46a16ae39e120f1aff4fba86b7c&X-Amz-SignedHeaders=host"} /> */}
+
 
       <div className="Admin-TokenInfo">
         {tokenData &&

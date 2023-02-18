@@ -15,7 +15,7 @@ const createReward = async (req, res) => {
     req.body;
 
   try {
-    console.log("Server Data", title, detail, imageStr)
+    console.log("Server Data", req.body)
     // if (signer.toLowerCase() === adminAddress.map((el) => el.toLowerCase())) {
     //     console.log("Creating Proposal...")
     // } else {

@@ -45,7 +45,7 @@ const CreateRewardForm = ({
     const newReward = { ...reward };
     newReward[name] = value;
     setReward(newReward);
-    console.log("Reward form data", reward)
+    console.log("Reward form data", reward);
   };
 
   const handleSubmitReward = async (e) => {
@@ -53,9 +53,7 @@ const CreateRewardForm = ({
     try {
       await axios({
         method: "post",
-        headers: {
-          "content-type": "multipart/form-data",
-        },
+        headers: {},
         url: "http://localhost:3000/api/rewards-create",
         data: {
           title: reward && reward.title,
@@ -132,6 +130,7 @@ const CreateRewardForm = ({
           value={reward && reward.eligibilityCount}
           onChange={handleFormChange}
         />
+
         <button onClick={() => setSelectedReward(null)}> Close </button>
         <button type="submit"> Submit </button>
       </form>

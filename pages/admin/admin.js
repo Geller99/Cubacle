@@ -5,6 +5,7 @@ import CreateProposalForm from "../../components/admin/proposal-form";
 import CreateRewardForm from "../../components/admin/reward-form";
 import ActiveRewards from "../../components/admin/rewards-active";
 import TokenItem from "../../components/admin/tokenItem/tokenItem";
+import styles from '../../styles/admin.module.scss'
 
 const Admin = () => {
   
@@ -80,7 +81,7 @@ const Admin = () => {
 
   return (
     <div>
-      <div className="Admin-Nav">
+      <div className={styles.AdminNav}>
         <p> Welcome to Your Dashboard TFG </p>
         <div>
           <button onClick={() => setSelectedProposal({})}>

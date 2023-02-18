@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import styles from '../styles/feed.module.scss'
 const ProposalsFeed = () => {
   const [proposals, setProposals] = useState(null);
 
@@ -21,7 +21,7 @@ const ProposalsFeed = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.FeedContainer}>
       {proposals &&
         proposals.map((proposal) => {
           return (

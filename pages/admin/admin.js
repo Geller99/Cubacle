@@ -137,7 +137,8 @@ const Admin = () => {
         />
       </div>
 
-      {/* <img src={"https://cubacle.s3.us-east-2.amazonaws.com/Screenshot+(194).png"} /> */}
+     
+    
 
 
       <div className="Admin-TokenInfo">

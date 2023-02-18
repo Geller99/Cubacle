@@ -26,7 +26,7 @@ const Rewards = () => {
             return (
               <div className={styles.reward} key={reward.title}>
                 <div className={styles.rewardDetails}>
-                  <Image src={""} height={92} width={92} alt={""} />
+                  <img src={reward.image}  height={92} width={92} alt={""} />
 
                   <span>
                     <h6>{reward.title}</h6>

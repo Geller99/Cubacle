@@ -1,5 +1,7 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
+import Image from 'next/image';
+import styles from '../../../styles/admin.module.scss';
 
 const RewardItem = ({
   title,
@@ -8,32 +10,60 @@ const RewardItem = ({
   eligibilityCount,
   setSelectedReward,
   reward,
-  setRewards
+  setRewards,
 }) => {
   const handleDeleteReward = async () => {
     try {
       await axios({
-        method: "post",
-        url: "http://localhost:3000/api/rewards-delete",
+        method: 'post',
+        url: 'http://localhost:3000/api/rewards-delete',
         data: {
           title: reward.title,
         },
       });
       setRewards(null);
-      alert("Successfully Deleted");
+      alert('Successfully Deleted');
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", color: "red" }}>
-      <p> {title && title} </p>
+    <div className={styles.reward}>
+      <div className={styles.rewardDetails}>
+        <span className={styles.rewardImg}>
+          <Image src={''} height={16} width={16} alt={''} />
+        </span>
+
+        <span className={styles.rewardTitle}>
+          <h6> {title && title} </h6>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </span>
+      </div>
+
       {/* <p> {detail && detail} </p> */}
       {/* <p> {image && image} </p> */}
       {/* <p> {eligibilityCount} </p> */}
-      <button onClick={() => setSelectedReward(reward)}> edit</button>
-      <button onClick={() => handleDeleteReward()}> delete </button>
+
+      <div className={styles.rewardCta}>
+        <button
+          style={{ background: '#3D0DDF' }}
+          onClick={() => setSelectedReward(reward)}
+        >
+          <Image src={'/Images/editIcon.svg'} height={16} width={16} alt={''} />
+        </button>
+        <button
+          style={{ background: '#39B5DC' }}
+          onClick={() => handleDeleteReward()}
+        >
+          <Image
+            src={'/Images/deleteIcon.svg'}
+            height={16}
+            width={16}
+            alt={''}
+          />
+        </button>
+      </div>
     </div>
   );
 };

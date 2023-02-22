@@ -1,6 +1,7 @@
-import React from "react";
-import axios from "axios";
-
+import React from 'react';
+import axios from 'axios';
+import Image from 'next/image';
+import styles from '../../../styles/admin.module.scss';
 const ProposalItem = ({
   title,
   detail,
@@ -11,25 +12,25 @@ const ProposalItem = ({
   proposal,
   setProposals,
 }) => {
-
   const handleDeleteProposal = async () => {
-    console.log("Deleting...")
+    console.log('Deleting...');
     try {
       await axios({
-        method: "post",
-        url: "http://localhost:3000/api/proposal-delete",
+        method: 'post',
+        url: 'http://localhost:3000/api/proposal-delete',
         data: {
           title: proposal.title,
         },
       });
       setProposals(null);
-      alert("Successfully Deleted");
+      alert('Successfully Deleted');
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div style={{ display: "flex", flexDirection: "row", color: "red" }}>
+    <div 
+    className={styles.proposal}>
       <p> {title && title} </p>
       {/* <p> {detail && detail} </p> */}
       {/* <p> {image && image} </p> */}
@@ -37,8 +38,26 @@ const ProposalItem = ({
       {/* <p> status {active && active} </p>
         <p> +votes {positiveVoteCount && positiveVoteCount} </p>
         <p> +votes {negativeVoteCount && negativeVoteCount} </p> */}
-      <button onClick={() => setSelectedProposal(proposal)}> edit</button>
-      <button onClick={() => handleDeleteProposal()}> delete </button>
+
+      <div className={styles.rewardCta}>
+        <button
+          style={{ background: '#3D0DDF' }}
+          onClick={() => setSelectedProposal(proposal)}
+        >
+          <Image src={'/Images/editIcon.svg'} height={16} width={16} alt={''} />
+        </button>
+        <button
+          style={{ background: '#39B5DC' }}
+          onClick={() => handleDeleteProposal()}
+        >
+          <Image
+            src={'/Images/deleteIcon.svg'}
+            height={16}
+            width={16}
+            alt={''}
+          />
+        </button>
+      </div>
     </div>
   );
 };

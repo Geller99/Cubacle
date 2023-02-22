@@ -5,11 +5,13 @@ const TokenItem = ({
   numberOfDaysListed,
 }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
-      <p>TokenId : {tokenId && tokenId}</p>
-      <p>Owner: {ownerAddress}</p>
-      <p> Status : {listingStatus ? "Listed" : "Unlisted"} </p>
-      <p> Staking Counter: {numberOfDaysListed && numberOfDaysListed} </p>
+    <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
+
+      <p>{ownerAddress}</p>
+      <p>{tokenId && tokenId}</p>
+      <p>{numberOfDaysListed && numberOfDaysListed} </p>
+      <p>  {listingStatus ? "Listed" : "Unlisted"} </p>
+
     </div>
   );
 };

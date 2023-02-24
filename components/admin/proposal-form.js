@@ -116,7 +116,7 @@ const CreateProposalForm = ({
             onChange={() => setActive((prev) => !prev)}
             value={proposal && proposal.active}
           />
-          <p>I've read the terms and ready to proceed</p>
+          <p>Activate Proposal</p>
         </aside>
 
         <div className={styles.proposalModalCta}>

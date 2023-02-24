@@ -80,11 +80,13 @@
                     border: none;
                     color: #FFF;
                     cursor: pointer;
+                    overflow: hidden;
                     
                     p {
                         margin-left: 14px;
                         font-size: 18px;
                         color: #FFF;
+                        overflow: hidden;
                     }
 
                 }

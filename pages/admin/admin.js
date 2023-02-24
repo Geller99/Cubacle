@@ -295,7 +295,7 @@ const Admin = () => {
               type={'text'}
               name="count"
               value={count}
-              placeholder="search listed users"
+              placeholder="search users by listing count"
               onChange={(e) => setCount(e.target.value)}
             />
           </span>

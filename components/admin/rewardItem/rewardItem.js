@@ -32,7 +32,7 @@ const RewardItem = ({
     <div className={styles.reward}>
       <div className={styles.rewardDetails}>
         <span className={styles.rewardImg}>
-          <Image src={''} height={16} width={16} alt={''} />
+          {/* <Image src={""} height={16} width={16} alt={''} /> */}
         </span>
 
         <span className={styles.rewardTitle}>

@@ -1,5 +1,225 @@
-.FeedContainer {
+
+.container {
     display: flex;
-    flex-direction: column;
-    margin-top: 30%;
+    width: 100%;
+    height: 100%;
+
+    .FeedContainer {
+        display: flex;
+        flex-direction: column;
+        margin-top: 15%;
+        width: 100%;
+        height: 100%;
+        max-height: 75vh;
+        border-radius: 20px;
+        background: url(../public/Images/votingBg.png);
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 3rem;
+        overflow: hidden;
+    
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            overflow: hidden;
+            min-height: 70px;
+    
+            h4 {
+                font-size: 32px;
+                font-weight: 600;
+                color: #FFF;
+                overflow: hidden;
+            }
+            p {
+                margin-top: 1rem;
+                font-size: 16px;
+                color: #d6d5d5;
+                overflow: hidden;
+    
+            }
+        }
+    
+        main {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            row-gap: 2rem;
+            height: 100%;
+            overflow-y: scroll;
+    
+            div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                min-height: 100px;
+                width: 100%;
+                padding: 0 4rem;
+                background: #60606058;
+                border-radius: 10px;
+                overflow: hidden;
+    
+                .voteDetails {
+                    display: flex;
+                    flex-direction: column;
+                    flex-basis: 70%;
+                    row-gap: .5rem;
+                    overflow: hidden;
+    
+                    h5 {
+                        font-size: 22px;
+                        color: #F0F0F0;
+                        overflow: hidden;
+                    }
+                    p {
+                        color: #d9d9d9;
+                        overflow: hidden;
+                    }
+                }
+                .voteCta {
+                    display: flex;
+                    justify-content: flex-end;
+                    column-gap: 1rem;
+                    flex-basis: 30%;
+                    button {
+                        width: 100%;
+                        max-width: 150px;
+                        height: 48px;
+                        border-radius: 10px;
+                        border: none;
+                        outline: none;
+                        color: #FFF;
+                    }
+                    #yes {
+                        background: #215498;
+                    }
+                    #no {
+                        background: #9A7CB3;
+                    }
+                    button:hover {
+                        transform: scale(0.95);
+                        opacity: 0.9;
+                        transition: all 0.4s ease;
+                    }
+                }
+            }
+        }
+        main::-webkit-scrollbar {
+            width: 4px;
+          }
+          
+          /* Track */
+          main::-webkit-scrollbar-track {
+            background: #d6d6d6; 
+          }
+           
+          /* Handle */
+          main::-webkit-scrollbar-thumb {
+            background: #824dd8; 
+          }
+          
+          /* Handle on hover */
+          main::-webkit-scrollbar-thumb:hover {
+            background: #9A7CB3; 
+          }
+    }
+}
+@media (max-width: 1278px) {
+    .container {
+
+        .FeedContainer {
+            margin-top: 8%;
+        }
+    }
+}
+@media (max-width: 986px) {
+    .container {
+
+        .FeedContainer {
+            padding: 2rem 1rem;
+            padding-bottom: 1rem;
+            margin-top: 14%;
+
+            main {
+                margin-top: 2rem;
+                div {
+                    padding: 1.5rem;
+
+                    .voteDetails {
+                        flex-basis: 60%;
+                
+                    } 
+                    .voteCta {
+                        flex-basis: 40%;
+                    }   
+                }
+
+            }
+        }
+    }
+}
+@media (max-width: 786px) {
+    .container {
+
+        .FeedContainer {
+            margin-top: 0;
+            height: 100%;
+            padding: 3rem 1rem;
+            padding-bottom: 1rem;
+
+
+            header {
+                height: 110px;
+
+                h4 {
+                    font-size: 24px;
+                }
+                p {
+                    font-size: 14px;
+                    line-height: 24px;
+                    margin-top: .5rem;
+                }
+            }
+
+            main {
+                margin-top: 1rem;
+                row-gap: 1.5rem;
+
+                div {
+                    padding: .8rem;
+                    min-height: 80px;
+
+                    .voteDetails {
+                        flex-basis: 55%;
+                        h5 {
+                            font-size: 14px;
+                        }
+                        p {
+                            font-size: 12px;
+                        }
+                    }
+                    .voteCta {
+                        column-gap: .5rem;
+  
+                        flex-basis: 45%;
+
+                        button {
+                            font-size: 12px;
+                            height: 40px;
+                            border-radius: 5px;
+                        }
+                    }
+                }
+            }
+            main::-webkit-scrollbar {
+                width: 2px;
+              }
+        }
+
+
+    }
+
 }

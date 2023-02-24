@@ -33,8 +33,18 @@
                 background: #3AB5DC;
 
             }
+            #createProposal:hover {
+                background: #3D0DDF !important;
+            }
             #createReward {
                 background: #3D0DDF;
+            }
+            #createReward:hover {
+                background: #3AB5DC;
+            }
+            button:hover {
+                transform: scale(0.98);
+                transition: all 0.4s ease-in-out;
             }
         }
     }
@@ -156,6 +166,10 @@
                 }
             }
         }
+        .userSummary:hover {
+            background: #ececec;
+            transition: all 0.4s ease;
+        }
     }
 
 
@@ -170,13 +184,16 @@
             border-radius: 20px;
             padding: 3rem;
             flex-basis: 40%;
+            height: 100%;
+            max-height: 340px;
+            overflow: hidden;
 
             header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 2rem;
-
+                overflow: hidden;
 
                 h6 {
                     font-size: 20px;
@@ -189,7 +206,7 @@
                 display: flex;
                 flex-direction: column;
                 row-gap: 1rem;
-  
+                overflow-y: auto;
 
 
                 .proposal {
@@ -216,12 +233,31 @@
                             height: 32px;
                             border: none; 
                         }
+                        button:hover {
+                            transform: scale(0.90);
+                            transition: all 0.4s ease;
+                        }
                     }
                 }
             }
-
-
-
+            ::-webkit-scrollbar {
+                width: 4px !important;
+              }
+              
+              /* Track */
+              ::-webkit-scrollbar-track {
+                background: #b7b7b7 !important; 
+              }
+               
+              /* Handle */
+              ::-webkit-scrollbar-thumb {
+                background: #4b21e2 !important; 
+              }
+              
+              /* Handle on hover */
+              ::-webkit-scrollbar-thumb:hover {
+                background: #555 !important; 
+              }
 
         }
 
@@ -232,12 +268,15 @@
             border-radius: 20px;
             padding: 3rem;
             flex-basis: 60%;
+            height: 100%;
+            max-height: 340px;
 
             header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 0rem;
+                overflow: hidden;
 
                 h6 {
                     font-size: 20px;
@@ -280,12 +319,15 @@
                                 font-size: 20px;
                                 font-weight: 500;
                                 overflow: hidden;
-                                margin-bottom: .3rem;
+                                margin-bottom: .5rem;
                             }
                             p {
-                                font: normal normal normal 16px/22px Poppins;
-                                overflow: hidden;
+                                min-width: 100%;
+                                font-size: 14px;
                                 color: #797979;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                white-space: nowrap;
                             }
                         }
                     }
@@ -304,11 +346,38 @@
                             height: 32px;
                             border: none; 
                         }
+                        button:hover {
+                            transform: scale(0.90);
+                            transition: all 0.4s ease;
+                        }
                     }
                 }
 
             } 
+            ::-webkit-scrollbar {
+                width: 4px !important;
+              }
+              
+              /* Track */
+              ::-webkit-scrollbar-track {
+                background: #b7b7b7 !important; 
+              }
+               
+              /* Handle */
+              ::-webkit-scrollbar-thumb {
+                background: #4b21e2 !important; 
+              }
+              
+              /* Handle on hover */
+              ::-webkit-scrollbar-thumb:hover {
+                background: #555 !important; 
+              }
 
+        }
+        .activeProposalsContainer:hover,
+        .activeRewardsContainer:hover {
+            background: #ececec;
+            transition: all 0.4s ease;
         }
     }
 
@@ -345,7 +414,7 @@
                 input {
                     height: 48px;
                     // width: 100%;
-                    max-width: 350px;
+                    min-width: 400px;
                     background: #ECECEC;
                     border-radius: 52px;
                     border: none;
@@ -403,6 +472,7 @@
                 justify-content: space-between;
                 margin-top: 2rem;
                 padding-right: 2rem;
+                height: min-content;
                 overflow: hidden;
 
                 span {
@@ -415,12 +485,15 @@
                 flex-direction: column;
                 row-gap: 1rem;
                 margin-top: 1rem;
+                height: 100%;
+                max-height: 320px;
+                overflow: auto !important;
 
                 div {
                     align-items: center;
                     background: #ECECEC;
                     padding: 0 2rem;
-                    height: 50px;
+                    min-height: 50px;
                     border-radius: 10px;
 
 
@@ -431,6 +504,24 @@
                 }
             }
         }
+        ::-webkit-scrollbar {
+            width: 4px !important;
+          }
+          
+          /* Track */
+          ::-webkit-scrollbar-track {
+            background: #b7b7b7 !important; 
+          }
+           
+          /* Handle */
+            ::-webkit-scrollbar-thumb {
+            background: #4b21e2 !important; 
+            }
+          
+          /* Handle on hover */
+          ::-webkit-scrollbar-thumb:hover {
+            background: #555 !important; 
+          }
     }
 }
 @media screen and (max-width: 1286px) {
@@ -478,9 +569,11 @@
                         padding: 0 !important;
                         padding-bottom: 1rem !important;
                         margin-bottom: 1rem;
+
                         p {
                             font-size: 14px !important;
-
+                            text-overflow: ellipsis !important;
+                            overflow: hidden !important;
                         }
                         h5 {
                             font-size: 22px !important;
@@ -560,10 +653,13 @@
                             h6 {
                                 font-size: 16px !important;
                             }
-                            p {
+                            p { 
                                 font-size: 12px !important;
                                 line-height: normal !important;
                                 font-weight: 400 !important;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                overflow: hidden;
                             }
                         }
                     }
@@ -597,6 +693,11 @@
             display: flex;
             justify-content: flex-end;
             flex-basis: 62%;
+
+            input {
+                font-size: 14px !important;
+                padding-left: 1rem !important;
+            }
         }
     }
 
@@ -734,6 +835,11 @@
                 width: 36px;
                 border-radius: 50%;
             }
+            button:hover {
+                background: #d72c151e;
+                transform: scale(0.95);
+                transition: all 0.4s ease-in-out;
+            }
         }
 
         span {
@@ -741,7 +847,7 @@
             flex-direction: column;
             position: relative;
             row-gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
 
             label {
                 font-size: 16px;
@@ -749,10 +855,14 @@
             }
             input {
                 height: 48px;
-                border: 1px solid #3D0DDF;
+                border: 1px solid #3e0ddf3b;
                 outline: none;
                 border-radius: 10px;
                 padding: 0 1rem;
+            }
+            input:hover {
+                border-color: #3D0DDF;
+                transition: all 0.4s ease-in-out;
             }
             button {
                 position: absolute;
@@ -793,9 +903,20 @@
                 background: #3D0DDF;
                 color: #FFF;
             }
+            #submit:hover {
+                background: #3AB5DC;
+                transform: scale(0.95);
+                transition: all 0.4s ease-in-out;
+            }
             #cancel {
                 background: transparent;
                 border: 1px solid #D72D15;
+            }
+            #cancel:hover {
+                transform: scale(0.95);
+                transition: all 0.4s ease-in-out;
+                color: #FFF;
+                background: #D72D15;
             }
         }
     }
@@ -817,6 +938,7 @@
                 }
             }
             span {
+                margin-bottom: 1.5rem;
                 label {
                     font-size: 14px;
                 }

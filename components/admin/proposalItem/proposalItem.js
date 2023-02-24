@@ -29,8 +29,7 @@ const ProposalItem = ({
     }
   };
   return (
-    <div 
-    className={styles.proposal}>
+    <div className={styles.proposal}>
       <p> {title && title} </p>
       {/* <p> {detail && detail} </p> */}
       {/* <p> {image && image} </p> */}
@@ -41,12 +40,14 @@ const ProposalItem = ({
 
       <div className={styles.rewardCta}>
         <button
+          id={styles.editProposal}
           style={{ background: '#3D0DDF' }}
           onClick={() => setSelectedProposal(proposal)}
         >
           <Image src={'/Images/editIcon.svg'} height={16} width={16} alt={''} />
         </button>
         <button
+          id={styles.deleteProposal}
           style={{ background: '#39B5DC' }}
           onClick={() => handleDeleteProposal()}
         >

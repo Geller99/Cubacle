@@ -478,13 +478,14 @@
         display: flex;
         flex-direction: column;
         background: #F3F3F3;
-        padding: 3rem;
+        padding: 3rem 0;
         border-radius: 20px;
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin: 0 3rem;
             margin-bottom: 1.5rem;
 
             h6 {
@@ -503,9 +504,11 @@
             .listHead {
                 display: flex;
                 justify-content: space-between;
-                margin-top: 2rem;
-                padding-right: 2rem;
+
+                padding-right: 0rem;
                 min-height: 24px;
+                margin: 0 3rem;
+                margin-top: 2rem;
                 overflow: hidden;
 
                 span {
@@ -518,6 +521,9 @@
                 flex-direction: column;
                 row-gap: 1rem;
                 margin-top: 1rem;
+                margin: 0 3rem;
+                margin-right: 2rem;
+                padding-right: 1rem;
                 height: 100%;
                 max-height: 320px;
                 overflow: auto !important;
@@ -783,9 +789,10 @@
 
 
         .adminTokemInfoContainer {
-            padding: 3rem 1rem !important;
+            padding: 2rem 0rem !important;
 
             header {
+                margin: 0 2rem !important;
                 h6 {
                     font-size: 18px !important;
                 }
@@ -795,7 +802,6 @@
 
                 .listHead {
                     padding-right: 0 !important;
-
                     span {
                         font-size: 12px;
                         font-weight: 500;
@@ -803,6 +809,9 @@
                 }
 
                 .listContainer {
+                    margin: 0 2rem;
+                    margin-right: 1rem;
+                    padding-right: 1rem;
                     margin-top: 0 !important;
 
                     div {
@@ -863,6 +872,45 @@
                 .rewardContainer {
                     margin-right: .5rem !important;
                     padding-right: 1rem !important;
+                }
+            }
+        }
+
+        .adminTokemInfoContainer {
+            padding: 2rem 0rem !important;
+
+            header {
+                margin: 0 1rem !important;
+                h6 {
+                    font-size: 18px !important;
+                }
+            }
+
+            .adminTokenInfo {
+
+                .listHead {
+                    padding-right: 0 !important;
+
+                    span {
+                        font-size: 12px;
+                        font-weight: 500;
+                    }
+                }
+
+                .listContainer {
+                    margin: 0 2rem;
+                    margin-right: .5rem;
+                    padding-right: .5rem;
+                    margin-top: 0 !important;
+
+                    div {
+                        padding: 0 1rem !important;
+
+                        p {
+                            font-size: 14px !important;
+                            font-weight: 500;
+                        }
+                    }
                 }
             }
         }

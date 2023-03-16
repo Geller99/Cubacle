@@ -10,8 +10,11 @@
 
 
     main {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        display: flex;
+        // display: grid;
+        // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        justify-content: flex-start;
+        align-items: flex-start;
         column-gap: 2rem;
         row-gap: 2rem;
         width: 100%;
@@ -30,7 +33,7 @@
             align-items: flex-start;
             height: 100%;
             width: 100%;
-            max-width: 400px;
+            max-width: 275px;
             background-color: $primaryBg;
             background-blend-mode: multiply;
             background-position: center center;

@@ -1,5 +1,5 @@
 import RewardItem from "./rewardItem/rewardItem";
-
+import styles from '../../styles/admin.module.scss'
 /**
  *
  * @returns list of all active rewards
@@ -7,7 +7,7 @@ import RewardItem from "./rewardItem/rewardItem";
 
 const ActiveRewards = ({ rewards, setRewards, setSelectedReward }) => {
   return (
-    <div>
+    <div className={styles.rewardContainer}>
       {rewards &&
         rewards.map((reward) => {
           return (
@@ -20,6 +20,7 @@ const ActiveRewards = ({ rewards, setRewards, setSelectedReward }) => {
               setSelectedReward={setSelectedReward && setSelectedReward}
               reward={reward}
               setRewards={setRewards}
+              
             />
           );
         })}

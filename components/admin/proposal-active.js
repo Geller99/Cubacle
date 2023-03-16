@@ -1,5 +1,5 @@
 import ProposalItem from "./proposalItem/proposalItem";
-
+import styles from '../../styles/admin.module.scss'
 /**
  *
  * @returns list of all active proposals
@@ -7,7 +7,7 @@ import ProposalItem from "./proposalItem/proposalItem";
 
 const ActiveProposals = ({ proposals, setProposals, setSelectedProposal }) => {
   return (
-    <div>
+    <div className={styles.activeProposals}>
       {proposals &&
         proposals.map((proposal) => {
           return (

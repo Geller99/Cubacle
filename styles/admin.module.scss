@@ -182,7 +182,7 @@
             flex-direction: column;
             background: #F3F3F3;
             border-radius: 20px;
-            padding: 3rem;
+            padding: 2rem 0;
             flex-basis: 40%;
             height: 100%;
             max-height: 340px;
@@ -192,6 +192,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                margin: 0 3rem;
                 margin-bottom: 2rem;
                 overflow: hidden;
 
@@ -205,59 +206,72 @@
             .ActiveProposal {
                 display: flex;
                 flex-direction: column;
-                row-gap: 1rem;
-                overflow-y: auto;
+                row-gap: 0rem;
+                margin: 0 3rem;
+                margin-right: 2rem;
+                overflow: hidden;
 
-
-                .proposal {
+                .activeProposals {
                     display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    margin-top: 1rem;    
-                    
-                    p {
-                        color: #797979;
-                        font-size: 18px;
-                        overflow: hidden;
-                    }
-                    .rewardCta {
+                    flex-direction: column;
+                    row-gap: 1rem;
+                    padding-right: 1rem;
+                    overflow-y: auto;
+
+                    .proposal {
                         display: flex;
-                        column-gap: 1rem;
-        
-                        button {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 50%;
-                            min-width: 32px;
-                            height: 32px;
-                            border: none; 
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-bottom: 0rem;    
+                        // padding-right: 1rem;
+                        min-height: 32px;
+                        
+                        p {
+                            color: #797979;
+                            font-size: 18px;
+                            overflow: hidden;
                         }
-                        button:hover {
-                            transform: scale(0.90);
-                            transition: all 0.4s ease;
+                        .rewardCta {
+                            display: flex;
+                            column-gap: 1rem;
+            
+                            button {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 50%;
+                                min-width: 32px;
+                                height: 32px;
+                                border: none; 
+                            }
+                            button:hover {
+                                transform: scale(0.90);
+                                transition: all 0.4s ease;
+                            }
                         }
                     }
                 }
+                ::-webkit-scrollbar {
+                    width: 4px !important;
+                  }
+                  
+                  /* Track */
+                  ::-webkit-scrollbar-track {
+                    background: #b7b7b7 !important; 
+                  }
+                   
+                  /* Handle */
+                  ::-webkit-scrollbar-thumb {
+                    background: #4b21e2 !important; 
+                  }
+                  
+                  /* Handle on hover */
+                  ::-webkit-scrollbar-thumb:hover {
+                    background: #555 !important; 
+                  }
+
             }
-            ::-webkit-scrollbar {
-                width: 4px !important;
-              }
-              
-              /* Track */
-              ::-webkit-scrollbar-track {
-                background: #b7b7b7 !important; 
-              }
-               
-              /* Handle */
-              ::-webkit-scrollbar-thumb {
-                background: #4b21e2 !important; 
-              }
-              
-              /* Handle on hover */
-              ::-webkit-scrollbar-thumb:hover {
-                background: #555 !important; 
-              }
+
 
         }
 
@@ -266,7 +280,7 @@
             flex-direction: column;
             background: #F3F3F3;
             border-radius: 20px;
-            padding: 3rem;
+            padding: 2rem 0;
             flex-basis: 60%;
             height: 100%;
             max-height: 340px;
@@ -275,6 +289,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                margin: 0 3rem;
                 margin-bottom: 0rem;
                 overflow: hidden;
 
@@ -284,74 +299,92 @@
                     overflow: hidden;
                 }
             }
+
             .ActiveRewards {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 width: 100%;
-                margin-top: 1.5rem;
-                row-gap: 2rem;
+                margin-top: 1rem;
+                margin-right: 0rem;
+                padding-right: 2rem;
+                overflow: hidden;
 
-
-                .reward {
+                .rewardContainer {
                     display: flex;
-                    column-gap: 2rem;
-                    flex-direction: row;
-                    justify-content: space-between;
+                    flex-direction: column;
+                    row-gap: 1rem;
                     margin-top: 1rem;
+                    padding-right: 1rem;
+                    // min-height: 100%;
+                    overflow-y: auto;
 
-                    .rewardDetails {
+                    .reward {
                         display: flex;
-                        column-gap: 1rem;
-                        
-                        .rewardImg {
+                        justify-content: space-between;
+                        margin-top: 0rem;
+                        padding:0 3rem;
+                        padding-right: 0rem !important;
+                        overflow: hidden !important;
+                        min-height:46px;
+    
+    
+                        .rewardDetails {
                             display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            min-width: 36px;
-                            height: 36px;
-                            border-radius: 50%;
-                            background: #D5D5D5;
-                        }
+                            column-gap: 1rem;
+                            overflow: hidden !important;
 
-                        .rewardTitle {
-                            h6 {
-                                font-size: 20px;
-                                font-weight: 500;
-                                overflow: hidden;
-                                margin-bottom: .5rem;
+                            .rewardImg {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                min-width: 36px;
+                                height: 36px;
+                                border-radius: 50%;
+                                background: #D5D5D5;
                             }
-                            p {
-                                min-width: 100%;
-                                font-size: 14px;
-                                color: #797979;
-                                text-overflow: ellipsis;
-                                overflow: hidden;
-                                white-space: nowrap;
+    
+                            .rewardTitle {
+                                overflow: hidden !important;
+                                h6 {
+                                    font-size: 20px;
+                                    font-weight: 500;
+                                    overflow: hidden;
+                                    margin-bottom: .5rem;
+                                }
+                                p {
+                                    min-width: 100%;
+                                    font-size: 14px;
+                                    color: #797979;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                }
                             }
                         }
-                    }
-        
-                    .rewardCta {
-                        display: flex;
-                        column-gap: 1rem;
-                        // flex-basis: 10%;
-        
-                        button {
+            
+                        .rewardCta {
                             display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 50%;
-                            min-width: 32px;
-                            height: 32px;
-                            border: none; 
-                        }
-                        button:hover {
-                            transform: scale(0.90);
-                            transition: all 0.4s ease;
+                            column-gap: 1rem;
+                            // flex-basis: 10%;
+            
+                            button {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 50%;
+                                min-width: 32px;
+                                height: 32px;
+                                border: none; 
+                            }
+                            button:hover {
+                                transform: scale(0.90);
+                                transition: all 0.4s ease;
+                            }
                         }
                     }
                 }
+                
 
             } 
             ::-webkit-scrollbar {
@@ -472,7 +505,7 @@
                 justify-content: space-between;
                 margin-top: 2rem;
                 padding-right: 2rem;
-                height: min-content;
+                min-height: 24px;
                 overflow: hidden;
 
                 span {
@@ -587,150 +620,198 @@
 
 
         }
-    }
 
 
-    .ProposalsRewardsContainer {
-        flex-direction: column;
-        row-gap: 1rem;
+
+        .ProposalsRewardsContainer {
+            flex-direction: column;
+            row-gap: 1rem;
 
 
-        .activeProposalsContainer {
-            padding: 2rem 1rem !important;
-            flex-basis: auto !important;
-            header {
+            .activeProposalsContainer {
+                padding: 2rem 2rem;
+                padding-right: 0;
+                flex-basis: auto;
 
-                h6 {
-                    font-size: 18px !important;
-                }
-            }
-            .ActiveProposal {                 
-                .proposal {
-                    margin-top: 1rem !important;
-                    p {
-                        font-size: 16px !important;
-                    }
+                header {
+                    margin: 1rem 0rem;
+                    margin-top: 0;
+                    padding-right: 2rem;
+                    min-height: 20px;
 
-                    .rewardCta {
-                        column-gap: .5rem !important;
-
-                        button {
-                            min-width: 30px !important;
-                            height: 30px !important;
-                        }
+                    h6 {
+                        font-size: 18px;
                     }
                 }
-                
+                .ActiveProposal {     
+                    margin: 0;
+                    padding: 0; 
+                    margin-right: 1rem;
+            
+                    .activeProposals {
+                        margin-top: 1rem;
+                        padding-right: 1rem;
+                        // row-gap: 4rem;
 
-
-            }
-
-        }
-
-        .activeRewardsContainer {
-            padding: 2rem 1rem !important;
-            flex-basis: auto !important;
-
-            header {
-                h6 {
-                    font-size: 18px !important;
-                }
-            }
-
-            .ActiveRewards {
-
-                .reward {
-                    column-gap: 0 !important;
-                    .rewardDetails {
-                        column-gap: .5rem;
-                        flex-basis: 78%;
-
-                        .rewardImg {
-                            min-width: 30px !important;
-                            height: 30px !important;
-                        }
-                        .rewardTitle {
-                            h6 {
-                                font-size: 16px !important;
+                        .proposal {
+                            margin-top: 0rem;
+                            margin: 0;
+                            padding: 0;
+                            // margin-right:1rem;
+        
+                            p {
+                                font-size: 16px;
                             }
-                            p { 
-                                font-size: 12px !important;
-                                line-height: normal !important;
-                                font-weight: 400 !important;
-                                text-overflow: ellipsis;
-                                white-space: nowrap;
-                                overflow: hidden;
+        
+                            .rewardCta {
+                                column-gap: .7rem;
+        
+                                button {
+                                    min-width: 26px;
+                                    height: 26px;
+        
+                                    img {
+                                        width: 12px  !important;
+                                    }
+                                }
                             }
                         }
                     }
-                    .rewardCta {
-                        flex-basis: 22%;
-                        column-gap: .5rem !important;
-                        justify-content: flex-end;
 
-                        button {    
-                            min-width: 30px !important;
-                            height: 30px !important;
-                        }
-                    }
+                    
+
+
                 }
 
             }
-        }
-    }
+
+            .activeRewardsContainer {
+                padding: 2rem 2rem;
+                padding-right: 0;
+                flex-basis: auto;
+
+                header {
+                    margin: 1rem 0rem;
+                    margin-top: 0;
+                    padding-right: 2rem;
+                    min-height: 20px;
+                    h6 {
+                        font-size: 18px !important;
+                    }
+                }
+
+                .ActiveRewards {
+                    margin: 0;
+                    padding: 0;
+
+                    .rewardContainer {
+                        margin-top: 1rem;
+                        margin-right: 1rem;
+                        padding-right: 1rem;
+                        // row-gap: 3rem;
+
+                        .reward {
+                            column-gap: 0;
+                            margin: 0;
+                            padding: 0;
+    
+                            .rewardDetails {
+                                column-gap: .5rem;
+                                flex-basis: 78%;
+    
+                                .rewardImg {
+                                    min-width: 30px !important;
+                                    height: 30px !important;
+                                }
+                                .rewardTitle {
+                                    h6 {
+                                        font-size: 14px !important;
+                                    }
+                                    p { 
+                                        font-size: 12px !important;
+                                        line-height: normal !important;
+                                        font-weight: 400 !important;
+                                        text-overflow: ellipsis;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                    }
+                                }
+                            }
+                            .rewardCta {
+                                flex-basis: 22%;
+                                column-gap: .7rem !important;
+                                justify-content: flex-end;
+    
+                                button {    
+                                    min-width: 26px !important;
+                                    height: 26px !important;
+    
+                                    img {
+                                        width: 12px  !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
 
-    .adminSearchBarContainer {
-        padding: 0 1rem !important;
-        column-gap: 1rem;
-
-        h6 {
-            font-size: 18px !important;
-            flex-basis: 38%;
-        }
-
-        .adminSearchBar {
-            display: flex;
-            justify-content: flex-end;
-            flex-basis: 62%;
-
-            input {
-                font-size: 14px !important;
-                padding-left: 1rem !important;
+                }
             }
         }
-    }
 
 
-    .adminTokemInfoContainer {
-        padding: 3rem 1rem !important;
+        .adminSearchBarContainer {
+            padding: 0 1rem !important;
+            column-gap: 1rem;
 
-        header {
             h6 {
                 font-size: 18px !important;
+                flex-basis: 38%;
+            }
+
+            .adminSearchBar {
+                display: flex;
+                justify-content: flex-end;
+                flex-basis: 62%;
+
+                input {
+                    font-size: 14px !important;
+                    padding-left: 1rem !important;
+                }
             }
         }
 
-        .adminTokenInfo {
 
-            .listHead {
-                padding-right: 0 !important;
+        .adminTokemInfoContainer {
+            padding: 3rem 1rem !important;
 
-                span {
-                    font-size: 12px;
-                    font-weight: 500;
+            header {
+                h6 {
+                    font-size: 18px !important;
                 }
             }
 
-            .listContainer {
-                margin-top: 0 !important;
+            .adminTokenInfo {
 
-                div {
-                    padding: 0 1rem !important;
+                .listHead {
+                    padding-right: 0 !important;
 
-                    p {
-                        font-size: 14px !important;
+                    span {
+                        font-size: 12px;
                         font-weight: 500;
+                    }
+                }
+
+                .listContainer {
+                    margin-top: 0 !important;
+
+                    div {
+                        padding: 0 1rem !important;
+
+                        p {
+                            font-size: 14px !important;
+                            font-weight: 500;
+                        }
                     }
                 }
             }
@@ -754,6 +835,34 @@
                 
                 div {
                     column-gap: 1rem !important;
+                }
+            }
+        }
+        .activeProposalsContainer {
+            padding: 2rem 1rem !important;
+            padding-right: 0 !important;
+    
+            header {
+                padding-right: 1rem !important;
+            }
+
+            .ActiveProposal {
+                margin-right: .5rem !important;
+            }
+        }
+
+        .activeRewardsContainer {
+            padding: 2rem 1rem !important;
+            padding-right: 0 !important;
+
+            header {
+                padding-right: 1rem !important;
+            }
+            .ActiveRewards {
+                margin-right: 0;
+                .rewardContainer {
+                    margin-right: .5rem !important;
+                    padding-right: 1rem !important;
                 }
             }
         }

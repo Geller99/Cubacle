@@ -51,6 +51,30 @@ const ProposalsFeed = () => {
                 </div>
               );
             })}
+
+          {proposals &&
+            proposals.map((proposal) => {
+              return (
+                <div
+                  key={proposal.title}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    color: 'red',
+                  }}
+                >
+                  <span className={styles.voteDetails}>
+                    <h5> {proposal.title}</h5>
+                    <p> {proposal.detail} </p>
+                  </span>
+
+                  <span className={styles.voteCta}>
+                    <button id={styles.yes}> Vote Yes </button>
+                    <button id={styles.no}> Vote No </button>
+                  </span>
+                </div>
+              );
+            })}
         </main>
       </div>
     </section>

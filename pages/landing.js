@@ -1,98 +1,154 @@
 import React, { useState, useEffect } from 'react';
 import { useAccount, useDisconnect } from 'wagmi';
-import { domain, types, value } from "../config/EIPValidator";
 import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+const {
+  recoverTypedSignature,
+  SignTypedDataVersion,
+} = require("@metamask/eth-sig-util");
+
+
+// 60 seconds * 60 minutes = 3600 = 1 hour
+const SESSION_LIFETIME = 3600;
+
 const Landing = () => {
   const router = useRouter();
   const { address, connector } = useAccount();
   const { disconnect } = useDisconnect();
-  const [user, setUser] = useState('');
-  const [authStatus, setAuthStatus] = useState(null);
-  const [validator, setValidator] = useState(null);
-
   
-  const getTypedData = () => {
+  const [authStatus, setAuthStatus] = useState(null);
+  const [sessionState, setSessionState] = useState();
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const user = address;
+
+
+  const createTypedData = () => {
     const typedData = {
-      domain,
-      message: value,
+      domain: {
+        name: "Cubicle Dashboard Approval",
+        version: "1",
+        chainId: 1,
+        verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+      },
+      message: {
+        account: address.toLowerCase(),
+        timestamp: Math.round(Date.now() / 1000),
+        title: "The Cubicle",
+        contents:
+          "Welcome to the Cubicle, this signature ensures our systems can verify ownership of Cubex NFTs for members who wish to participate in staking, voting and rewards activities",
+      },
       primaryType: "Message",
       types: {
-        ...types,
         EIP712Domain: [
           { name: "name", type: "string" },
           { name: "chainId", type: "uint256" },
           { name: "version", type: "string" },
           { name: "verifyingContract", type: "address" },
         ],
+        Message: [
+          { name: "account", type: "address" },
+          { name: "timestamp", type: "uint32" },
+          { name: "title", type: "string" },
+          { name: "contents", type: "string" },
+        ],
       },
     };
     return typedData;
   };
 
-  const requestSignature = () => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        if (!connector) {
-          resolve(null);
-          return;
-        }
-        const request = {
-          method: "eth_signTypedData_v4",
-          from: address,
-          params: [address, JSON.stringify(getTypedData())],
-        };
-        const provider = await connector.getProvider();
-        await provider.request(request).then(resolve).catch(reject);
-      } catch (err) {
-        reject(err);
-      }
-    });
-  };
+  const fetchAuthStatus = async (session) => {
+    try{
+      const [data, err] = await axios({
+        method: "post",
+        url: "/api/auth",
+        headers: {},
+        data: session,
+      });
 
-  const handleSignature = async () => {
-    try {
-      const signature = await requestSignature();
-      if (signature) {
-        console.log("Active signature", signature);
-        getAuthStatus(signature);
-        //const data = await response.json();
-        //if(data.isAdmin){
-        setValidator(signature);
-        //}
-      } else {
-        //no error, wait for "connector"
-      }
-    } catch (err) {
-      console.warn({ err });
-      disconnect();
-      setAuthStatus(null);
-      setValidator(null);
+      //TODO: is valid?
+
+      console.log("User Status Data", data.data.data.authStatus);
+      setAuthStatus(data.data.data.authStatus);
+      return true;
+    }
+    catch(err){
+      console.log({ err });
+      return false;
     }
   };
 
-  const getAuthStatus = async (signature) => {
-    axios({
-      method: "post",
-      url: "/api/auth",
-      headers: {},
-      data: {
-        account: address && address.toLowerCase(),
-        signature: signature,
-        typedData: getTypedData(),
-      },
-    })
-      .then((data, err) => {
-        console.log("User Status Data", data.data.data.authStatus);
-        setAuthStatus(data.data.data.authStatus);
-      })
-      .catch((err) => {
-        console.log({ err });
-      });
+  const getSession = () => {
+    if(sessionState){
+      if(isValidSession(sessionState))
+        return sessionState;
+    }
+
+    //TODO: get sessionStorage();
+    const sessionJSON = localStorage.getItem(address.toLowerCase());
+    if(sessionJSON){
+      let sessionStorage = null;
+      try{
+        sessionStorage = JSON.parse(sessionJSON);
+      }
+      catch(err){
+        return null;
+      }
+
+      if(isValidSession(sessionStorage))
+        return sessionStorage;
+    }
+
+    return null;
   };
+
+  const getSessionExpiration = (session) => {
+    return session.typedData.message.timestamp + SESSION_LIFETIME;
+  };
+
+  const isValidSession = (session) => {
+    if(isValidSignature(session)){
+      const created = session.typedData.message.timestamp;
+      const expires = created + SESSION_LIFETIME;
+      const now = Math.round(Date.now() / 1000);
+      return expires > now;
+    }
+
+    return false;
+  };
+
+  const isValidSignature = (session) => {
+    try{
+      console.log({ session });
+      const signer = recoverTypedSignature({
+        data:      session.typedData,
+        signature: session.signature,
+        version:   SignTypedDataVersion.V4,
+      });
+
+      return signer.toLowerCase() == session.typedData.message.account.toLowerCase();
+    }
+    catch(err){
+      console.warn({ err });
+
+      return false;
+    }
+  };
+
+  const requestSignature = async (typedData) => {
+    const json = JSON.stringify(typedData);
+    const request = {
+      method: "eth_signTypedData_v4",
+      from: address,
+      params: [address, json],
+    };
+    const provider = await connector.getProvider();
+    return (await provider.request(request));
+  };
+
 
   /**
    * @dev needs to
@@ -105,25 +161,60 @@ const Landing = () => {
    * Else disconnect
    */
 
-  const init = async () => {
-    if (address) {
-      if (!validator) {
-        await handleSignature();
-      } else {
+  // Logic:
+  // premise: we don't know the address until the provider is connected
+  //   so we'll wait for the address to exist
+  // 1. when we have the address, check if a signature exists
+  // 2. if it exists, check if it's valid
+  // 3. if it's valid, we can add this to state
+  // else. generate a new signature
+  //
+  // NOTE: we need to keep the data so that the timstamp doesn't change
+  const handleInit = async () => {
+    if (address){
+      let session = getSession();
+      if(isValidSession(session)){
+        const ts = getSessionExpiration(session);
+        const dt = new Date(ts * 1000);
+        console.info(`Existing session expires at ${dt.toISOString()}`);
+
+        //TODO: isEqual
+        if(session !== sessionState)
+          setSessionState(session);
+
         return;
       }
+      else if(connector){
+        const typedData = createTypedData();
+        const signature = await requestSignature(typedData);
+        if(await fetchAuthStatus(signature)){
+          const session = {
+            typedData,
+            signature
+          };
+
+          const ts = getSessionExpiration(session);
+          const dt = new Date(ts * 1000);
+          console.info(`New session expires at ${dt.toISOString()}`);
+
+          localStorage.setItem(address.toLowerCase(), JSON.stringify(session));
+          setSessionState(session);
+          return;
+        }
+      }
+
+      //default
+      localStorage.removeItem(address.toLowerCase());
+      setSessionState(null);
+      disconnect();
     }
   };
 
-  // useEffect(() => {
-  //   init();
-  // }, [address, validator]);
-
   useEffect(() => {
-    setUser(address);
-  }, [address]);
+    handleInit();
+  }, [address, connector]);
 
-  const [scrollLeft, setScrollLeft] = useState(0);
+
 
   const handleClick = (direction) => {
     const container = document.querySelector(`.${styles.container}`);

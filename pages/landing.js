@@ -12,7 +12,7 @@ const {
 
 
 // 60 seconds * 60 minutes = 3600 = 1 hour
-const SESSION_LIFETIME = 3600;
+const SESSION_LIFETIME = 120; //3600;
 
 const Landing = () => {
   const router = useRouter();
@@ -62,7 +62,7 @@ const Landing = () => {
 
   const fetchAuthStatus = async (session) => {
     try{
-      const [data, err] = await axios({
+      const response = await axios({
         method: "post",
         url: "/api/auth",
         headers: {},
@@ -70,15 +70,17 @@ const Landing = () => {
       });
 
       //TODO: is valid?
-
-      console.log("User Status Data", data.data.data.authStatus);
-      setAuthStatus(data.data.data.authStatus);
-      return true;
+      if(response?.data?.status === "success"){
+        console.log("User Status Data", response.data.data.authStatus);
+        setAuthStatus(response.data.data.authStatus);
+        return true;
+      }
     }
     catch(err){
       console.log({ err });
-      return false;
     }
+
+    return false;
   };
 
   const getSession = () => {
@@ -187,12 +189,12 @@ const Landing = () => {
       else if(connector){
         const typedData = createTypedData();
         const signature = await requestSignature(typedData);
-        if(await fetchAuthStatus(signature)){
-          const session = {
-            typedData,
-            signature
-          };
+        const session = {
+          typedData,
+          signature
+        };
 
+        if(await fetchAuthStatus(session)){
           const ts = getSessionExpiration(session);
           const dt = new Date(ts * 1000);
           console.info(`New session expires at ${dt.toISOString()}`);

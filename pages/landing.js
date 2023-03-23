@@ -124,7 +124,6 @@ const Landing = () => {
 
   const isValidSignature = (session) => {
     try{
-      console.log({ session });
       const signer = recoverTypedSignature({
         data:      session.typedData,
         signature: session.signature,

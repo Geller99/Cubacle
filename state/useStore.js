@@ -12,6 +12,7 @@ const {
 // 60 seconds * 60 minutes = 3600 = 1 hour
 const SESSION_LIFETIME = 120; //3600;
 
+let signaturePromise = null;
 export const useStore = () => {
   // public
   const { address, connector } = useAccount();
@@ -114,15 +115,39 @@ export const useStore = () => {
     return typedData;
   };
 
+  // debounce the signature
   const requestSignature = async (typedData) => {
-    const json = JSON.stringify(typedData);
-    const request = {
-      method: "eth_signTypedData_v4",
-      from: address,
-      params: [address, json],
-    };
-    const provider = await connector.getProvider();
-    return (await provider.request(request));
+    try{
+      if(!signaturePromise)
+        signaturePromise = _requestSignature(typedData);
+
+      return (await signaturePromise);
+    }
+    catch(err){
+      throw err;
+    }
+    finally{
+      signaturePromise = null;
+    }
+  };
+
+  const _requestSignature = (typedData) => {
+    return new Promise(async (resolve, reject) => {
+      try{
+        const json = JSON.stringify(typedData);
+        const request = {
+          method: "eth_signTypedData_v4",
+          from: address,
+          params: [address, json],
+        };
+        const provider = await connector.getProvider();
+        const signature = await provider.request(request);
+        resolve(signature);
+      }
+      catch(err){
+        reject(err);
+      }
+    });
   };
 
   const start = async () => {

@@ -1,155 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useAccount, useDisconnect } from 'wagmi';
+import { useRouter } from 'next/router';
+import { useStore } from '../state/useStore';
+
 import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-
-const {
-  recoverTypedSignature,
-  SignTypedDataVersion,
-} = require("@metamask/eth-sig-util");
 
 
-// 60 seconds * 60 minutes = 3600 = 1 hour
-const SESSION_LIFETIME = 120; //3600;
+
 
 const Landing = () => {
   const router = useRouter();
-  const { address, connector } = useAccount();
-  const { disconnect } = useDisconnect();
+  const session = useStore();
+  //const { address, connector } = useAccount();
+  //const { disconnect } = useDisconnect();
   
-  const [authStatus, setAuthStatus] = useState(null);
-  const [sessionState, setSessionState] = useState();
+  //const [authStatus, setAuthStatus] = useState(null);
+  //const [sessionState, setSessionState] = useState();
   const [scrollLeft, setScrollLeft] = useState(0);
 
-  const user = address;
-
-
-  const createTypedData = () => {
-    const typedData = {
-      domain: {
-        name: "Cubicle Dashboard Approval",
-        version: "1",
-        chainId: 1,
-        verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
-      },
-      message: {
-        account: address.toLowerCase(),
-        timestamp: Math.round(Date.now() / 1000),
-        title: "The Cubicle",
-        contents:
-          "Welcome to the Cubicle, this signature ensures our systems can verify ownership of Cubex NFTs for members who wish to participate in staking, voting and rewards activities",
-      },
-      primaryType: "Message",
-      types: {
-        EIP712Domain: [
-          { name: "name", type: "string" },
-          { name: "chainId", type: "uint256" },
-          { name: "version", type: "string" },
-          { name: "verifyingContract", type: "address" },
-        ],
-        Message: [
-          { name: "account", type: "address" },
-          { name: "timestamp", type: "uint32" },
-          { name: "title", type: "string" },
-          { name: "contents", type: "string" },
-        ],
-      },
-    };
-    return typedData;
-  };
-
-  const fetchAuthStatus = async (session) => {
-    try{
-      const response = await axios({
-        method: "post",
-        url: "/api/auth",
-        headers: {},
-        data: session,
-      });
-
-      //TODO: is valid?
-      if(response?.data?.status === "success"){
-        console.log("User Status Data", response.data.data.authStatus);
-        setAuthStatus(response.data.data.authStatus);
-        return true;
-      }
-    }
-    catch(err){
-      console.log({ err });
-    }
-
-    return false;
-  };
-
-  const getSession = () => {
-    if(sessionState){
-      if(isValidSession(sessionState))
-        return sessionState;
-    }
-
-    //TODO: get sessionStorage();
-    const sessionJSON = localStorage.getItem(address.toLowerCase());
-    if(sessionJSON){
-      let sessionStorage = null;
-      try{
-        sessionStorage = JSON.parse(sessionJSON);
-      }
-      catch(err){
-        return null;
-      }
-
-      if(isValidSession(sessionStorage))
-        return sessionStorage;
-    }
-
-    return null;
-  };
-
-  const getSessionExpiration = (session) => {
-    return session.typedData.message.timestamp + SESSION_LIFETIME;
-  };
-
-  const isValidSession = (session) => {
-    if(isValidSignature(session)){
-      const created = session.typedData.message.timestamp;
-      const expires = created + SESSION_LIFETIME;
-      const now = Math.round(Date.now() / 1000);
-      return expires > now;
-    }
-
-    return false;
-  };
-
-  const isValidSignature = (session) => {
-    try{
-      const signer = recoverTypedSignature({
-        data:      session.typedData,
-        signature: session.signature,
-        version:   SignTypedDataVersion.V4,
-      });
-
-      return signer.toLowerCase() == session.typedData.message.account.toLowerCase();
-    }
-    catch(err){
-      console.warn({ err });
-
-      return false;
-    }
-  };
-
-  const requestSignature = async (typedData) => {
-    const json = JSON.stringify(typedData);
-    const request = {
-      method: "eth_signTypedData_v4",
-      from: address,
-      params: [address, json],
-    };
-    const provider = await connector.getProvider();
-    return (await provider.request(request));
-  };
-
+  const user = session.address;
 
   /**
    * @dev needs to
@@ -172,48 +41,18 @@ const Landing = () => {
   //
   // NOTE: we need to keep the data so that the timstamp doesn't change
   const handleInit = async () => {
-    if (address){
-      let session = getSession();
-      if(isValidSession(session)){
-        const ts = getSessionExpiration(session);
-        const dt = new Date(ts * 1000);
-        console.info(`Existing session expires at ${dt.toISOString()}`);
+    if (await session.isValid())
+      return;
 
-        //TODO: isEqual
-        if(session !== sessionState)
-          setSessionState(session);
-
-        return;
-      }
-      else if(connector){
-        const typedData = createTypedData();
-        const signature = await requestSignature(typedData);
-        const session = {
-          typedData,
-          signature
-        };
-
-        if(await fetchAuthStatus(session)){
-          const ts = getSessionExpiration(session);
-          const dt = new Date(ts * 1000);
-          console.info(`New session expires at ${dt.toISOString()}`);
-
-          localStorage.setItem(address.toLowerCase(), JSON.stringify(session));
-          setSessionState(session);
-          return;
-        }
-      }
-
-      //default
-      localStorage.removeItem(address.toLowerCase());
-      setSessionState(null);
-      disconnect();
-    }
+    if(!(await session.start()))
+      await session.stop(true);
   };
 
+
+  // always check
   useEffect(() => {
     handleInit();
-  }, [address, connector]);
+  });
 
 
 
@@ -351,7 +190,7 @@ const Landing = () => {
         </div>
 
         {
-          authStatus === null ? <div
+          session.authStatus === null ? <div
           className={styles.nfts}
           onClick={() =>
             user ? router.push('/admin/admin') : alert('Please connect wallet')

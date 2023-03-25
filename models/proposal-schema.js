@@ -14,10 +14,6 @@ const proposalSchema = new mongoose.Schema({
         required: [true, 'detail must be provided'],
         unique: true
     },
-    duration: {
-        type: Number,
-        required: [true, 'duration must be provided']
-    },
     active: {
         type: Boolean,
         require: true

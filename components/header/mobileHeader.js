@@ -70,14 +70,9 @@ const MobileHeader = () => {
             />
           </span>
 
-          <div className={mobileNavStyles.userImg}>
-            <Image
-              src={"/Images/userImg.jpg"}
-              height={32}
-              width={32}
-              alt={""}
-            />
-          </div>
+          <div className={mobileNavStyles.userImg} onClick={() => router.push('/admin/admin')}>
+          <Image src={'/Images/userIcon.svg'} height={24} width={24}  alt={''}/>
+        </div>
         </div>
       </main>
 

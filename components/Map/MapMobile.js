@@ -37,10 +37,10 @@ const MobileMap = ({ setOpenModal, show, contentId }) => {
             <article className={styles.contentParagraph}>
               <div className={styles.fullContent}>
                 {map.mapContent}
-                <span className={styles.contentImgMobile}>
+                {/* <span className={styles.contentImgMobile}>
                   <img src={map.mapImage1} alt="Content image" />
                   <img src={map.mapImage2} alt="Content image" />
-                </span>
+                </span> */}
               </div>
             </article>
           </main>

@@ -6,10 +6,11 @@
     justify-content: space-between;
     align-items: center;
     width: 92%;
-    position: absolute;
+    position: fixed;
     left: 8%;
     padding:0 4%; 
-    padding-top: 5.5%;
+    padding-top: 5%;
+    padding-bottom: 1rem;
     z-index: 11;
 }
 
@@ -73,11 +74,16 @@
         cursor: pointer;
     }
     
-    .cta:hover {
+    .cta:hover,
+    .userImg:hover {
         cursor: pointer;
         background: #cccccc;
     }
     .userImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #FFFFFF;
         height: 50px;
         width: 50px;
         box-shadow: 0px 0px 10px #bebebe78;
@@ -161,12 +167,16 @@
                 }
 
                 .userImg {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     width: 32px;
                     height: 32px;
                     margin: .2rem;
                     padding: 0;
                     border-radius: 50%;
                     box-shadow: 3px 4px 6px #00000029;
+                    background: #FFFFFF;
                 }
             }
         }

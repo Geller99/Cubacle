@@ -11,11 +11,15 @@
     display: flex;
     height: 75%;
     width: 100%;
-    margin-top: 13%;
+    margin-top: 12%;
     border-radius: 20px;
     overflow: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    position: absolute;
+    top: 0;
+    top: 0;
+    width: 84%;
 
 
     .mapContainer {
@@ -412,7 +416,10 @@
     .container {
         margin-top: 0;
         height: 100%;
-        margin-bottom: 3rem;
+        margin-bottom: 0rem;
+        position: relative;
+        top: none;
+        width: 100%;
 
 
 

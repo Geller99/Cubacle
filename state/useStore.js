@@ -10,7 +10,7 @@ const {
 
 
 // 60 seconds * 60 minutes = 3600 = 1 hour
-const SESSION_LIFETIME = 120; //3600;
+const SESSION_LIFETIME = 3600;
 
 let signaturePromise = null;
 export const useStore = () => {

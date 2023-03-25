@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import {useDisconnect} from 'wagmi';
 import { useStore } from '../state/useStore';
 
 import styles from '../styles/landing.module.scss';
@@ -12,6 +13,7 @@ const Landing = () => {
   const router = useRouter();
   const session = useStore();
   const [scrollLeft, setScrollLeft] = useState(0);
+  const { disconnect } = useDisconnect();
 
   const user = session.address;
 
@@ -39,8 +41,16 @@ const Landing = () => {
     if (await session.isValid())
       return;
 
-    if(!(await session.start()))
+
+    const isConnected = await session.start();
+    if(!isConnected){
+      //cleanup
+      if(session.address || session.connector){
+        await disconnect(); 
+      }
+
       await session.stop(true);
+    }
   };
 
 

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useAccount, useDisconnect} from 'wagmi';
+import {useAccount, useDisconnect, WagmiConfig} from 'wagmi';
 
 import axios from 'axios';
 
@@ -15,7 +15,9 @@ const SESSION_LIFETIME = 3600;
 let signaturePromise = null;
 export const useStore = () => {
   // public
-  const { address, connector } = useAccount();
+  const { address: wagmiAddress, connector } = useAccount();
+
+  const [address, setAddress] = useState(null);
   const [authStatus, setAuthStatus] = useState();
   //const { disconnect } = useDisconnect();
 
@@ -26,8 +28,12 @@ export const useStore = () => {
 
   // public
   const isValid = async () => {
-    if(!address)
+    if(!wagmiAddress){
+      if(address)
+        setAddress(null);
+
       return false;
+    }
 
 
     // check state first
@@ -40,15 +46,16 @@ export const useStore = () => {
         const response = await fetchAuthStatus(stateSession);
         if(response?.data?.status === "success"){
           console.debug("update storageSession with stateSession (1)");
-          localStorage.setItem(address.toLowerCase(), JSON.stringify(stateSession));
+          localStorage.setItem(wagmiAddress.toLowerCase(), JSON.stringify(stateSession));
 
           console.debug("setAuthStatus (1)");
+          setAddress(wagmiAddress);
           setAuthStatus(response.data.data.authStatus);
         }
       }
       else if(!isMatch(stateSession, storageSession)){
         console.debug("update storageSession with stateSession (2)");
-        localStorage.setItem(address.toLowerCase(), JSON.stringify(stateSession));
+        localStorage.setItem(wagmiAddress.toLowerCase(), JSON.stringify(stateSession));
       }
 
       return true;
@@ -65,6 +72,8 @@ export const useStore = () => {
       const response = await fetchAuthStatus(storageSession);
       if(response?.data?.status === "success"){
         console.debug("setAuthStatus (2)");
+
+        setAddress(wagmiAddress);
         setAuthStatus(response.data.data.authStatus);
 
         console.debug("setSessionState");
@@ -74,10 +83,6 @@ export const useStore = () => {
     }
 
     console.debug("storageSession is NOT valid", storageSession);
-
-    // nothing valid, cleanup
-    await stop();
-
     return false;
   };
 
@@ -90,7 +95,7 @@ export const useStore = () => {
         verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
       },
       message: {
-        account: address.toLowerCase(),
+        account: wagmiAddress.toLowerCase(),
         timestamp: getTimestamp(), // seconds
         title: "The Cubicle",
         contents:
@@ -124,7 +129,7 @@ export const useStore = () => {
       return (await signaturePromise);
     }
     catch(err){
-      throw err;
+      return null;
     }
     finally{
       signaturePromise = null;
@@ -137,8 +142,8 @@ export const useStore = () => {
         const json = JSON.stringify(typedData);
         const request = {
           method: "eth_signTypedData_v4",
-          from: address,
-          params: [address, json],
+          from: wagmiAddress,
+          params: [wagmiAddress, json],
         };
         const provider = await connector.getProvider();
         const signature = await provider.request(request);
@@ -152,35 +157,47 @@ export const useStore = () => {
 
   const start = async () => {
     console.debug('start');
-    if(!address || !connector)
+    if(!wagmiAddress || !connector){
+      //if(address)
+      //  setAddress(null);
+
       return false;
+    }
 
 
     const typedData = createTypedData();
     const signature = await requestSignature(typedData);
-    const session = {
-      typedData,
-      signature
-    };
+    if(signature){
+      const session = {
+        typedData,
+        signature
+      };
 
 
-    const response = await fetchAuthStatus(session);
-    console.debug(response);
-    if(response?.data?.status === "success"){
-      localStorage.setItem(address.toLowerCase(), JSON.stringify(session));
-      setAuthStatus(response.data.data.authStatus);
-      setSessionState(session);
-      return true;
+      const response = await fetchAuthStatus(session);
+      if(response?.data?.status === "success"){
+        localStorage.setItem(wagmiAddress.toLowerCase(), JSON.stringify(session));
+
+        setAddress(wagmiAddress);
+        setAuthStatus(response.data.data.authStatus);
+        setSessionState(session);
+        return true;
+      }
     }
+
+    // failover
+    if(address)
+      setAddress(null);
 
     return false;
   };
 
   const stop = async (triggerDisconnect) => {
     console.debug("stop");
-    if(address)
-      localStorage.removeItem(address.toLowerCase());
+    if(wagmiAddress)
+      localStorage.removeItem(wagmiAddress.toLowerCase());
 
+    setAddress(null);
     setAuthStatus(null);
     setSessionState(null);
 
@@ -219,7 +236,7 @@ export const useStore = () => {
   // abstraction
   const getStorageSession = () => {
     try{
-      const sessionJSON = localStorage.getItem(address.toLowerCase());
+      const sessionJSON = localStorage.getItem(wagmiAddress.toLowerCase());
       return JSON.parse(sessionJSON);
     }
     catch(err){
@@ -280,14 +297,14 @@ export const useStore = () => {
 
   const isValidSignature = (session) => {
     try{
-      if(!address)
+      if(!wagmiAddress)
         return false;
 
       const account = session.typedData.message.account;
       if(!account)
         return false;
 
-      if(address.toLowerCase() !== account.toLowerCase())
+      if(wagmiAddress.toLowerCase() !== account.toLowerCase())
         return false;
 
       const signer = recoverTypedSignature({
@@ -298,7 +315,7 @@ export const useStore = () => {
       if (!signer)
         return false;
 
-      return address.toLowerCase() === signer.toLowerCase();
+      return wagmiAddress.toLowerCase() === signer.toLowerCase();
     }
     catch(err){
       console.warn({ err });

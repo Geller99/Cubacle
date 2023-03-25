@@ -11,11 +11,6 @@ import Image from 'next/image';
 const Landing = () => {
   const router = useRouter();
   const session = useStore();
-  //const { address, connector } = useAccount();
-  //const { disconnect } = useDisconnect();
-  
-  //const [authStatus, setAuthStatus] = useState(null);
-  //const [sessionState, setSessionState] = useState();
   const [scrollLeft, setScrollLeft] = useState(0);
 
   const user = session.address;

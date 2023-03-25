@@ -15,10 +15,11 @@ const SESSION_LIFETIME = 120; //3600;
 export const useStore = () => {
   // public
   const { address, connector } = useAccount();
+  const [authStatus, setAuthStatus] = useState();
   //const { disconnect } = useDisconnect();
 
+
   // private
-  const [authStatus, setAuthStatus] = useState(null);
   const [sessionState, setSessionState] = useState();
 
 
@@ -295,6 +296,5 @@ export const useStore = () => {
     stop
   };
 
-  //return { user, setUser, signer, setSigner };
   return session;
 }

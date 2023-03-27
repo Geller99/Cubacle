@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useAccount, useDisconnect, WagmiConfig} from 'wagmi';
+import {useAccount} from 'wagmi';
 
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ export const useStore = () => {
 
   const [address, setAddress] = useState(null);
   const [authStatus, setAuthStatus] = useState();
-  //const { disconnect } = useDisconnect();
+  
 
 
   // private
@@ -328,6 +328,7 @@ export const useStore = () => {
     // variables
     address,
     authStatus,
+    setAuthStatus,
     connector,
 
     // read

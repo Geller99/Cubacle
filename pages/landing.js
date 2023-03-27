@@ -47,8 +47,8 @@ const Landing = () => {
       //cleanup
       if(session.address || session.connector){
         await disconnect(); 
+        session.setAuthStatus(null);
       }
-
       await session.stop(true);
     }
   };
@@ -195,7 +195,7 @@ const Landing = () => {
         </div>
 
         {
-          session.authStatus === null ? <div
+          session.authStatus === "Admin" ? <div
           className={styles.nfts}
           onClick={() =>
             user ? router.push('/admin/admin') : alert('Please connect wallet')
@@ -208,6 +208,8 @@ const Landing = () => {
             width={80}
             alt={''}
           />
+
+          {console.log("Auth Status", session.authStatus )}
 
           <span>
             <h3>Admin</h3>

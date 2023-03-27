@@ -1,12 +1,16 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import ActiveProposals from '../../components/admin/proposal-active';
-import CreateProposalForm from '../../components/admin/proposal-form';
-import CreateRewardForm from '../../components/admin/reward-form';
-import ActiveRewards from '../../components/admin/rewards-active';
-import TokenItem from '../../components/admin/tokenItem/tokenItem';
-import styles from '../../styles/admin.module.scss';
-import Image from 'next/image';
+import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
+import ActiveProposals from "../../components/admin/proposal-active";
+import CreateProposalForm from "../../components/admin/proposal-form";
+import CreateRewardForm from "../../components/admin/reward-form";
+import ActiveRewards from "../../components/admin/rewards-active";
+import TokenItem from "../../components/admin/tokenItem/tokenItem";
+import styles from "../../styles/admin.module.scss";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { MyStore } from "../../state/myStore";
+import { useStore } from "../../state/useStore";
+
 const Admin = () => {
   const [selectedReward, setSelectedReward] = useState(null);
   const [rewards, setRewards] = useState(null);
@@ -14,6 +18,8 @@ const Admin = () => {
   const [proposals, setProposals] = useState(null);
   const [tokenData, setTokenData] = useState(null);
   const [count, setCount] = useState(0);
+  const session = useContext(MyStore);
+  const router = useRouter();
 
   useEffect(() => {
     if (!rewards) {
@@ -27,44 +33,52 @@ const Admin = () => {
     }
   }, [proposals]);
 
+  /**
+   * @dev protects admin route via existing signature and auth status
+   */
+
+  useEffect(() => {
+    // session.authStatus === "Admin" ? null : router.push('/')
+  }, []);
+
   const fetchActiveRewards = async () => {
     try {
-      await fetch('/api/rewards-getAll')
+      await fetch("/api/rewards-getAll")
         .then((res) => res.json())
         .then((data) => {
-          console.log('Rewards data', data);
+          console.log("Rewards data", data);
           setRewards(data.data);
         });
     } catch (error) {
-      console.log('Rewards Fetch Error, error');
+      console.log("Rewards Fetch Error, error");
     }
   };
 
   const fetchActiveProposals = async () => {
     try {
-      await fetch('/api/proposal-getAll')
+      await fetch("/api/proposal-getAll")
         .then((res) => res.json())
         .then((data) => {
-          console.log('Proposal data', data);
+          console.log("Proposal data", data);
           setProposals(data.data);
         });
     } catch (error) {
-      console.log('Proposal error', error);
+      console.log("Proposal error", error);
     }
   };
 
   const fetchTokenData = async () => {
     try {
       await axios({
-        method: 'post',
-        url: 'http://localhost:3000/api/fetchUserData',
+        method: "post",
+        url: "http://localhost:3000/api/fetchUserData",
         data: {
           count: count ? count : 0,
           fetchListedOwners: null,
           fetchUnlistedOwners: null,
         },
       }).then((data) => {
-        console.log('Token Data', data.data.data.tokenData);
+        console.log("Token Data", data.data.data.tokenData);
         setTokenData(data.data.data.tokenData);
       });
     } catch (error) {
@@ -121,10 +135,10 @@ const Admin = () => {
 
             <Image
               className={styles.icon}
-              src={'/Images/moreIcon.svg'}
+              src={"/Images/moreIcon.svg"}
               height={20}
               width={20}
-              alt={''}
+              alt={""}
             />
           </header>
 
@@ -133,10 +147,10 @@ const Admin = () => {
               <aside>
                 <Image
                   className={styles.icon}
-                  src={'/Images/qtyHandIcon.svg'}
+                  src={"/Images/qtyHandIcon.svg"}
                   height={36}
                   width={36}
-                  alt={''}
+                  alt={""}
                 />
               </aside>
 
@@ -148,10 +162,10 @@ const Admin = () => {
               <aside>
                 <Image
                   className={styles.icon}
-                  src={'/Images/willRecieveIcon.svg'}
+                  src={"/Images/willRecieveIcon.svg"}
                   height={36}
                   width={36}
-                  alt={''}
+                  alt={""}
                 />
               </aside>
 
@@ -167,10 +181,10 @@ const Admin = () => {
 
             <Image
               className={styles.icon}
-              src={'/Images/moreIcon.svg'}
+              src={"/Images/moreIcon.svg"}
               height={20}
               width={20}
-              alt={''}
+              alt={""}
             />
           </header>
 
@@ -198,10 +212,10 @@ const Admin = () => {
 
             <Image
               className={styles.icon}
-              src={'/Images/moreIcon.svg'}
+              src={"/Images/moreIcon.svg"}
               height={20}
               width={20}
-              alt={''}
+              alt={""}
             />
           </header>
 
@@ -210,10 +224,10 @@ const Admin = () => {
               <aside>
                 <Image
                   className={styles.icon}
-                  src={'/Images/totalCustomersIcon.svg'}
+                  src={"/Images/totalCustomersIcon.svg"}
                   height={36}
                   width={36}
-                  alt={''}
+                  alt={""}
                 />
               </aside>
 
@@ -225,10 +239,10 @@ const Admin = () => {
               <aside>
                 <Image
                   className={styles.icon}
-                  src={'/Images/supplierIcon.svg'}
+                  src={"/Images/supplierIcon.svg"}
                   height={36}
                   width={36}
-                  alt={''}
+                  alt={""}
                 />
               </aside>
 
@@ -246,10 +260,10 @@ const Admin = () => {
 
             <Image
               className={styles.icon}
-              src={'/Images/moreIcon.svg'}
+              src={"/Images/moreIcon.svg"}
               height={20}
               width={20}
-              alt={''}
+              alt={""}
             />
           </header>
           <div className={styles.ActiveProposal}>
@@ -267,10 +281,10 @@ const Admin = () => {
 
             <Image
               className={styles.icon}
-              src={'/Images/moreIcon.svg'}
+              src={"/Images/moreIcon.svg"}
               height={20}
               width={20}
-              alt={''}
+              alt={""}
             />
           </header>
 
@@ -292,7 +306,7 @@ const Admin = () => {
         <div className={styles.adminSearchBar}>
           <span>
             <input
-              type={'text'}
+              type={"text"}
               name="count"
               value={count}
               placeholder="search users by listing count"
@@ -301,10 +315,10 @@ const Admin = () => {
           </span>
           <Image
             className={styles.icon}
-            src={'/Images/searchIcon.svg'}
+            src={"/Images/searchIcon.svg"}
             height={30}
             width={30}
-            alt={''}
+            alt={""}
           />
         </div>
       </div>
@@ -315,10 +329,10 @@ const Admin = () => {
 
           <Image
             className={styles.icon}
-            src={'/Images/moreIcon.svg'}
+            src={"/Images/moreIcon.svg"}
             height={20}
             width={20}
-            alt={''}
+            alt={""}
           />
         </header>
         <div className={styles.adminTokenInfo}>
@@ -328,6 +342,8 @@ const Admin = () => {
             <span>Staking Count</span>
             <span>Status</span>
           </div>
+          {console.log("Admin Auth Check", session.authStatus)}
+        
 
           <div className={styles.listContainer}>
             {tokenData &&

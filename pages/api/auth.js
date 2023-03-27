@@ -3,33 +3,32 @@ const {
   SignTypedDataVersion,
 } = require("@metamask/eth-sig-util");
 
-const adminAddress = ["0xa33a70FABFeb361Fe891C208B1c27ec0b64baBEB"];
+const adminAddress = [
+  "0xa33a70FABFeb361Fe891C208B1c27ec0b64baBEB",
+  "0x5013983D5691886140f24Abd66d2D7072f62991b",
+];
+
 const accountAuth = (req, res) => {
   if (req.method !== "POST") {
     res.status(405).send({ message: "Only POST requests allowed" });
     return;
   }
 
-
   try {
-    const {
-      typedData,
-      signature,
-    } = req.body;
+    const { typedData, signature } = req.body;
 
-    const account = typedData.message.account;
     const signer = recoverTypedSignature({
       data: typedData,
       signature: signature,
       version: SignTypedDataVersion.V4,
     });
-    console.log("Signer", signer);
-
-    //TODO: does signer === account?
-
 
     let authStatus;
-    if (signer.toLowerCase() === adminAddress[0].toLowerCase()) {
+    if (
+      adminAddress
+        .map((address) => address.toLowerCase())
+        .includes(signer.toLowerCase())
+    ) {
       authStatus = "Admin";
     } else {
       authStatus = "User";
@@ -39,7 +38,7 @@ const accountAuth = (req, res) => {
     res.status(201).json({
       status: "success",
       data: {
-        authStatus
+        authStatus,
       },
     });
   } catch (error) {

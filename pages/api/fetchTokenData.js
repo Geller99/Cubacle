@@ -1,5 +1,6 @@
 import connectMongo from '../../config/connectMongo';
 import TokenModel from '../../models/tokenSchema';
+
 /**
  * @dev 
  * 
@@ -12,11 +13,14 @@ import TokenModel from '../../models/tokenSchema';
 
 
 const fetchTokenData = async (req, res) => {
+
+    
     connectMongo();
     if (req.method !== "POST") {
       res.status(405).send({ message: "Only POST requests allowed" });
       return;
     }
+
   
     const tokenIds = req.body;
   

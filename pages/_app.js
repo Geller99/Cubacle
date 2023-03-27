@@ -40,6 +40,7 @@ const client = createClient({
 });
 
 const App = ({ Component, pageProps }) => {
+  
   const myStore = useStore();
 
   return (

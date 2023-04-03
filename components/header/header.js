@@ -37,7 +37,7 @@ const Header = () => {
           />
         </span>
 
-        <div className={styles.userImg} onClick={() => router.push('/admin/admin')}>
+        <div className={styles.userImg}>
           <Image src={'/Images/userIcon.svg'} height={28} width={28} alt={''} />
         </div>
       </div>

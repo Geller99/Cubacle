@@ -10,21 +10,21 @@ const adminAddress = ["0xa33a70FABFeb361Fe891C208B1c27ec0b64baBEB", "0x5013983D5
 
 const createProposal = async (req, res, next) => {
 
-  const {
-    typedData,
-    signature,
-  } = req.body;
+  // const {
+  //   typedData,
+  //   signature,
+  // } = req.body;
 
-  const signer = recoverTypedSignature({
-    data: typedData,
-    signature: signature,
-    version: SignTypedDataVersion.V4,
-  });
+  // const signer = recoverTypedSignature({
+  //   data: typedData,
+  //   signature: signature,
+  //   version: SignTypedDataVersion.V4,
+  // });
 
 
-if (!(adminAddress.map((address) => address.toLowerCase()).includes(signer.toLowerCase()))) {
-    res.status(405).send({ message: "Only Admin" });  
-}
+// if (!(adminAddress.map((address) => address.toLowerCase()).includes(signer.toLowerCase()))) {
+//     res.status(405).send({ message: "Only Admin" });  
+// }
 
   if (req.method !== "POST") {
     res.status(405).send({ message: "Only POST requests allowed" });

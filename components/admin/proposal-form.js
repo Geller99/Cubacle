@@ -28,7 +28,7 @@ const CreateProposalForm = ({
     try {
       await axios({
         method: 'post',
-        url: 'http://localhost:3000/api/proposal-create',
+        url: '/api/proposal-create',
         data: {
           title: proposal && proposal.title,
           detail: proposal && proposal.detail,
@@ -48,7 +48,7 @@ const CreateProposalForm = ({
     try {
       await axios({
         method: 'post',
-        url: 'http://localhost:3000/api/proposal-update',
+        url: '/api/proposal-update',
         data: {
           title: selectedProposal && selectedProposal.title,
           updatedTitle: proposal && proposal.title,

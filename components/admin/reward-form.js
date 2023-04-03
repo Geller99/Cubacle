@@ -59,7 +59,7 @@ const CreateRewardForm = ({
       await axios({
         method: 'post',
         headers: {},
-        url: 'http://localhost:3000/api/rewards-create',
+        url: '/api/rewards-create',
         data: {
           title: reward && reward.title,
           detail: reward && reward.detail,
@@ -80,7 +80,7 @@ const CreateRewardForm = ({
     try {
       await axios({
         method: 'post',
-        url: 'http://localhost:3000/api/rewards-update',
+        url: '/api/rewards-update',
         data: {
           title: selectedReward && selectedReward.title,
           updatedTitle: reward && reward.title,

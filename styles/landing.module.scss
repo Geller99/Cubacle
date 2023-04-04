@@ -384,12 +384,12 @@
 
 @media (max-height: 708px) {
     .container {
-        margin-top: 13% !important;
+        margin-top: 9% !important;
         margin-bottom: 0 !important;
         main {
 
             div {
-                min-height: 350px !important;
+                min-height: 370px !important;
             }
         }
     }
@@ -400,7 +400,107 @@
     
 //     }
 // }
-@media (max-height: 860px) and (max-width: 800px) {
+@media (max-height: 686px) and (max-width: 1386px) {
+
+    .container {
+        margin-top: 10% !important;
+
+        main {
+
+            div {
+                min-height: 380px !important;
+            }
+        }
+    }
+}
+
+
+@media (max-height: 706px) and (max-width: 1386px) {
+
+    .container {
+        margin-top:15% !important;
+
+        main {
+
+            div {
+                min-height: 350px !important;
+            }
+        }
+    }
+}
+
+
+
+@media (max-height: 860px) and (max-width: 10git86px) {
+
+    .container {
+        margin-top: 28% !important;
+
+        main {
+
+            div {
+                min-height: 400px !important;
+            }
+        }
+    }
+}
+
+@media (max-height: 786px) and (max-width: 1186px) {
+
+    .container {
+        margin-top: 5% !important;
+
+        main {
+
+            div {
+                min-height: 380px !important;
+            }
+        }
+    }
+}
+
+@media (max-height: 786px) and (max-width: 1186px) {
+
+    .container {
+        margin-top: 10% !important;
+
+        main {
+
+            div {
+                min-height: 380px !important;
+            }
+        }
+    }
+}
+@media (max-height: 786px) and (max-width: 1086px) {
+
+    .container {
+        margin-top: 20% !important;
+
+        main {
+
+            div {
+                min-height: 380px !important;
+            }
+        }
+    }
+}
+
+@media (max-height: 696px) and (max-width: 1386px) {
+
+    .container {
+        margin-top: 10% !important;
+
+        main {
+
+            div {
+                min-height: 370px !important;
+            }
+        }
+    }
+}
+
+@media (max-height: 860px) and (max-width: 786px) {
 
     .container {
         margin-top: 0% !important;

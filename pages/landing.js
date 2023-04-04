@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { useRouter } from 'next/router';
 import {useDisconnect} from 'wagmi';
 import { useStore } from '../state/useStore';
@@ -61,15 +61,17 @@ const Landing = () => {
 
 
 
+
+  const mainLaRef = useRef(null);
   const handleClick = (direction) => {
-    const container = document.querySelector(`.${styles.container}`);
-    setScrollLeft(scrollLeft + direction * 200);
-    container.scrollLeft += direction * 200;
+    setScrollLeft((prevScrollLeft) => prevScrollLeft + direction * 200);
+    mainLaRef.current.scrollLeft += direction * 200;
   };
+
   return (
     <div className={styles.landingContainer}>
       <section className={styles.container}>
-        <main className={styles.main}>
+        <main ref={mainLaRef} className={styles.main}>
           <div
             className={styles.nfts}
             onClick={() =>

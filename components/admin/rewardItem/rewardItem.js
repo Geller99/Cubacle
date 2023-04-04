@@ -37,7 +37,7 @@ const RewardItem = ({
 
         <span className={styles.rewardTitle}>
           <h6> {title && title} </h6>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          <p> {detail && detail} </p> 
         </span>
       </div>
 

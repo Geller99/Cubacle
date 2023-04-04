@@ -16,7 +16,7 @@ const RewardItem = ({
     try {
       await axios({
         method: 'post',
-        url: 'http://localhost:3000/api/rewards-delete',
+        url: '/api/rewards-delete',
         data: {
           title: reward.title,
         },

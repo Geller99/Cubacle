@@ -6,6 +6,7 @@ const {
 const adminAddress = [
   "0xa33a70FABFeb361Fe891C208B1c27ec0b64baBEB",
   "0x5013983D5691886140f24Abd66d2D7072f62991b",
+  "0x575dC6dd8c838F8E015349BbF55b90E718efF537",
 ];
 
 const accountAuth = (req, res) => {

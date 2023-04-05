@@ -19,6 +19,7 @@ export const useStore = () => {
 
   const [address, setAddress] = useState(null);
   const [authStatus, setAuthStatus] = useState();
+  const [userTypedData, setUserTypedData] = useState();
   
 
 

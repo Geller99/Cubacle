@@ -16,7 +16,11 @@
         align-items: center;
         margin-top: 2rem;
         overflow: hidden;
-
+        p {
+            font-size: 24px;
+            font-weight: 500;
+            overflow: hidden;
+        }
         .adminCta {
             display: flex;
             column-gap: 1rem;
@@ -184,8 +188,8 @@
             border-radius: 20px;
             padding: 2rem 0;
             flex-basis: 40%;
-            height: 100%;
-            max-height: 340px;
+            // height: 100%;
+            max-height: 360px;
             overflow: hidden;
 
             header {
@@ -282,15 +286,15 @@
             border-radius: 20px;
             padding: 2rem 0;
             flex-basis: 60%;
-            height: 100%;
-            max-height: 340px;
+            // height: 100%;
+            max-height: 360px;
 
             header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 margin: 0 3rem;
-                margin-bottom: 0rem;
+                min-height: 20px;
                 overflow: hidden;
 
                 h6 {
@@ -346,6 +350,7 @@
     
                             .rewardTitle {
                                 overflow: hidden !important;
+
                                 h6 {
                                     font-size: 20px;
                                     font-weight: 500;
@@ -353,7 +358,8 @@
                                     margin-bottom: .5rem;
                                 }
                                 p {
-                                    min-width: 100%;
+                                    width: 100%;
+                                    max-width: 500px;
                                     font-size: 14px;
                                     color: #797979;
                                     text-overflow: ellipsis;
@@ -565,7 +571,7 @@
 }
 @media screen and (max-width: 1286px) {
     .adminContainer {
-        margin: 3rem 0 !important;
+        margin: 3rem 0;
         row-gap: 1rem;
         // min-height: 100% !important;
         // overflow-y: scroll !important;
@@ -630,14 +636,16 @@
 
 
         .ProposalsRewardsContainer {
+            display: block;
             flex-direction: column;
             row-gap: 1rem;
+
 
 
             .activeProposalsContainer {
                 padding: 2rem 2rem;
                 padding-right: 0;
-                flex-basis: auto;
+                margin-bottom: 1rem;
 
                 header {
                     margin: 1rem 0rem;
@@ -694,7 +702,6 @@
             .activeRewardsContainer {
                 padding: 2rem 2rem;
                 padding-right: 0;
-                flex-basis: auto;
 
                 header {
                     margin: 1rem 0rem;
@@ -828,16 +835,38 @@
     }
 }
 
-@media (max-width: 748px) {
+@media (max-width: 986px) {
+    .adminContainer {
+
+        .AdminNav {
+            p {
+                font-size: 22px;
+            }
+
+            .adminCta {
+
+                button {
+                    padding: 0 1rem;
+                }
+            }
+        }
+        .adminOverviewContainer {
+            flex-direction: column;
+            row-gap: 1rem;
+            margin-top: 1rem;
+        }
+    }
+}
+
+@media (max-width: 786px) {
     
     .adminContainer {
         padding: 0 1rem;
-        margin: 0 !important;
+        margin: 0;
 
 
         .adminOverviewContainer {
-            flex-direction: column;
-            row-gap: 2rem;
+            margin-top: 0;
 
             .userSummary {
                 padding: 2rem !important;

@@ -21,7 +21,7 @@ const Rewards = () => {
   return (
     <div className={styles.container}>
       <section className={styles.rewardsContainer}>
-        <main className={styles.rewards}>
+        <main className={styles.rewards} id={styles.activeRewards}>
           {rewards &&
             rewards.map((reward, idx) => {
               return (

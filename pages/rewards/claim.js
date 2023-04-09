@@ -35,7 +35,7 @@ const ClaimRewards = () => {
   const [unique, setUnique] = useState([]);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
+  const [toggleState, setToggleState] = useState(1);
   let myContract = new ethers.Contract(
     '0x53C0340464BB6C3b443dd45459e12D996a247F77',
     rewardsabi,
@@ -150,6 +150,9 @@ const ClaimRewards = () => {
     }
   };
 
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
   const claimRewards = [
     {
       rewardImg: CubexRewardImg,
@@ -177,11 +180,35 @@ const ClaimRewards = () => {
           unique={unique}
         />
       </Modal>
-      <section className={styles.rewardsContainer}>
-        <main className={styles.rewards}>
-          <header>
+      <section className={styles.rewardsContainer} id={styles.rewardContainer}>
+        <header className={styles.rewardTabs}>
+          <span
+            className={`${styles.tab} ${
+              toggleState === 1 ? styles['activeTab'] : ''
+            }`}
+            onClick={() => toggleTab(1)}
+          >
+            Active Claims
+            <span>02</span>
+          </span>
+          <div className={styles.spacer}></div>
+          <span
+            className={`${styles.tab} ${
+              toggleState === 2 ? styles['activeTab'] : ''
+            }`}
+            onClick={() => toggleTab(2)}
+          >
+            Previous Claims <span>00</span>
+          </span>
+        </header>
+        <main
+          className={`${styles['rewards']} ${
+            toggleState === 1 ? styles['activeRewards'] : ''
+          }`}
+        >
+          {/* <header>
             <h4>Active Claims</h4>
-          </header>
+          </header> */}
           {claimRewards.map((claimreward, idx) => {
             return (
               <div className={styles.reward} key={claimreward.rewardName}>
@@ -226,11 +253,13 @@ const ClaimRewards = () => {
           })}
         </main>
 
-        <main className={styles.rewards} id={styles.previousClaims}>
-          <header>
-            <h4>Previous Claims</h4>
-          </header>
-          {claimRewards.map((claimreward, idx) => {
+        <main
+          className={`${styles['rewards']} ${
+            toggleState === 2 ? styles['activeRewards'] : ''
+          }`}
+        >
+
+          {/* {claimRewards.map((claimreward, idx) => {
             return (
               <div className={styles.reward} key={claimreward.rewardName}>
                 <div className={styles.rewardDetails}>
@@ -271,7 +300,7 @@ const ClaimRewards = () => {
                 </span>
               </div>
             );
-          })}
+          })} */}
         </main>
       </section>
     </div>

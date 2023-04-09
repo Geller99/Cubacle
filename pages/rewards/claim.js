@@ -179,6 +179,57 @@ const ClaimRewards = () => {
       </Modal>
       <section className={styles.rewardsContainer}>
         <main className={styles.rewards}>
+          <header>
+            <h4>Active Claims</h4>
+          </header>
+          {claimRewards.map((claimreward, idx) => {
+            return (
+              <div className={styles.reward} key={claimreward.rewardName}>
+                <div className={styles.rewardDetails}>
+                  <Image
+                    src={claimreward.rewardImg}
+                    height={92}
+                    width={92}
+                    alt={''}
+                  />
+                  <span>
+                    <h6>{claimreward.rewardName}</h6>
+                    <p>{claimreward.rewardDescription}</p>
+                  </span>
+                </div>
+
+                <span className={styles.claimRewardCta}>
+                  <button
+                    className={styles.learnMore}
+                    onClick={claimreward.learnMoreBtn}
+                  >
+                    {' '}
+                    Learn More{' '}
+                  </button>
+
+                  <button
+                    className={styles.amount}
+                    onClick={claimreward.claimRewardBtn}
+                  >
+                    <Image
+                      className={styles.icon}
+                      src={'/Images/4Icon.png'}
+                      height={22}
+                      width={22}
+                      alt={''}
+                    />
+                    <p>Claim</p>
+                  </button>
+                </span>
+              </div>
+            );
+          })}
+        </main>
+
+        <main className={styles.rewards} id={styles.previousClaims}>
+          <header>
+            <h4>Previous Claims</h4>
+          </header>
           {claimRewards.map((claimreward, idx) => {
             return (
               <div className={styles.reward} key={claimreward.rewardName}>

@@ -8,6 +8,8 @@
 
 
     .rewardsContainer {
+        // display: flex;
+        // flex-direction: column;
         background: #F3F3F3;
         width: 100%;
         height: 100%;
@@ -23,9 +25,18 @@
             display: flex;
             flex-direction: column;
             row-gap: 2rem;
-            min-height: 68vh;
+            // min-height: 68vh;
             padding-right: 1rem;
             overflow: hidden;
+
+            header {
+
+                h4 {
+                    font-size: 22px;
+                    overflow: hidden;
+                    color: #3D09DF;
+                }
+            }
 
             .reward {
                 display: flex;
@@ -137,6 +148,9 @@
 
             }
         }
+        #previousClaims {
+            margin-top: 3rem;
+        }
     }
 
     ::-webkit-scrollbar{
@@ -184,10 +198,16 @@
             .rewards {
                 min-height: 100%;
                 margin: 0;
+                margin-top: 1rem;
                 padding-right: 6px;
                 row-gap: 1rem;
     
-    
+                header {
+
+                    h4 {
+                        font-size: 20px;
+                    }
+                }
                 .reward {
                     justify-content: left;
                     // align-items: flex-start;

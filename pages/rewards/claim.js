@@ -58,13 +58,13 @@ const ClaimRewards = () => {
 
     const output = await Promise.all(promises);
     const newUnique = [...unique];
-   
-    for(let i = 0; i < tokenIds.length; ++i ){
-      console.log(tokenIds[i], output[i])
-      if(output[i] === false){
+
+    for (let i = 0; i < tokenIds.length; ++i) {
+      console.log(tokenIds[i], output[i]);
+      if (output[i] === false) {
         newUnique.push(tokenIds[i]);
       }
-      console.log(newUnique)
+      console.log(newUnique);
     }
     setUnique(newUnique);
   };
@@ -127,8 +127,7 @@ const ClaimRewards = () => {
 
   useEffect(() => {
     bulkCheck();
-  },[tokenIds]);
-
+  }, [tokenIds]);
 
   const claimRewardsHandler = async () => {
     if (tokenIds.length < 1) {
@@ -169,8 +168,6 @@ const ClaimRewards = () => {
     },
   ];
 
-
-
   return (
     <div className={styles.container}>
       <Modal onClose={() => setShowModal(false)} show={showModal}>
@@ -180,52 +177,103 @@ const ClaimRewards = () => {
           unique={unique}
         />
       </Modal>
-
-      <main className={styles.rewards}>
-        {claimRewards.map((claimreward, idx) => {
-          return (
-            <div className={styles.reward} key={claimreward.rewardName}>
-              <div className={styles.rewardDetails}>
-                <Image
-                  src={claimreward.rewardImg}
-                  height={92}
-                  width={92}
-                  alt={''}
-                />
-                <span>
-                  <h6>{claimreward.rewardName}</h6>
-                  <p>{claimreward.rewardDescription}</p>
-                </span>
-              </div>
-
-              <span className={styles.claimRewardCta}>
-                <button
-                  className={styles.learnMore}
-                  onClick={claimreward.learnMoreBtn}
-                >
-                  {' '}
-                  Learn More{' '}
-                </button>
-
-                <button
-                  className={styles.amount}
-                  onClick={claimreward.claimRewardBtn}
-                >
+      <section className={styles.rewardsContainer}>
+        <main className={styles.rewards}>
+          <header>
+            <h4>Active Claims</h4>
+          </header>
+          {claimRewards.map((claimreward, idx) => {
+            return (
+              <div className={styles.reward} key={claimreward.rewardName}>
+                <div className={styles.rewardDetails}>
                   <Image
-                    className={styles.icon}
-                    src={'/Images/4Icon.png'}
-                    height={22}
-                    width={22}
+                    src={claimreward.rewardImg}
+                    height={92}
+                    width={92}
                     alt={''}
                   />
-                  <p>Claim</p>
-                </button>
-              </span>
-             
-            </div>
-          );
-        })}
-      </main>
+                  <span>
+                    <h6>{claimreward.rewardName}</h6>
+                    <p>{claimreward.rewardDescription}</p>
+                  </span>
+                </div>
+
+                <span className={styles.claimRewardCta}>
+                  <button
+                    className={styles.learnMore}
+                    onClick={claimreward.learnMoreBtn}
+                  >
+                    {' '}
+                    Learn More{' '}
+                  </button>
+
+                  <button
+                    className={styles.amount}
+                    onClick={claimreward.claimRewardBtn}
+                  >
+                    <Image
+                      className={styles.icon}
+                      src={'/Images/4Icon.png'}
+                      height={22}
+                      width={22}
+                      alt={''}
+                    />
+                    <p>Claim</p>
+                  </button>
+                </span>
+              </div>
+            );
+          })}
+        </main>
+
+        <main className={styles.rewards} id={styles.previousClaims}>
+          <header>
+            <h4>Previous Claims</h4>
+          </header>
+          {claimRewards.map((claimreward, idx) => {
+            return (
+              <div className={styles.reward} key={claimreward.rewardName}>
+                <div className={styles.rewardDetails}>
+                  <Image
+                    src={claimreward.rewardImg}
+                    height={92}
+                    width={92}
+                    alt={''}
+                  />
+                  <span>
+                    <h6>{claimreward.rewardName}</h6>
+                    <p>{claimreward.rewardDescription}</p>
+                  </span>
+                </div>
+
+                <span className={styles.claimRewardCta}>
+                  <button
+                    className={styles.learnMore}
+                    onClick={claimreward.learnMoreBtn}
+                  >
+                    {' '}
+                    Learn More{' '}
+                  </button>
+
+                  <button
+                    className={styles.amount}
+                    onClick={claimreward.claimRewardBtn}
+                  >
+                    <Image
+                      className={styles.icon}
+                      src={'/Images/4Icon.png'}
+                      height={22}
+                      width={22}
+                      alt={''}
+                    />
+                    <p>Claim</p>
+                  </button>
+                </span>
+              </div>
+            );
+          })}
+        </main>
+      </section>
     </div>
   );
 };

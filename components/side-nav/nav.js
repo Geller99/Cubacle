@@ -32,11 +32,11 @@ const SideNav = () => {
             <Image src={'/Images/2Icon.png'} height={36} width={36} alt={''}/>
           </li>
 
-          <li onClick={() => router.push('/rewards/rewards')}>
+          <li onClick={() => router.push('/rewards')}>
             <Image src={'/Images/3Icon.png'} height={36} width={28} alt={''}/>
           </li>
 
-          <li onClick={() => router.push('/rewards/claim')}>
+          <li onClick={() => router.push('/claim')}>
             <Image src={'/Images/4Icon.png'} height={32} width={30} alt={''} />
           </li>
 

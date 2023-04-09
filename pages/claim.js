@@ -1,7 +1,7 @@
-import styles from '../../styles/rewards.module.scss';
+import styles from '../styles/rewards.module.scss';
 import Image from 'next/image';
-import CubexRewardImg from '../../public/Images/claimImageCard.gif';
-import CubexXmasImg from '../../public/Images/xmasClaim.jpg';
+import CubexRewardImg from '../public/Images/claimImageCard.gif';
+import CubexXmasImg from '../public/Images/xmasClaim.jpg';
 import {
   usePrepareContractWrite,
   useContractWrite,

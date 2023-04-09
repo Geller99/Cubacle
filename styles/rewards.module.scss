@@ -184,7 +184,43 @@
     }
 
 }
+@media (max-width: 1186px) {
+    .container {
 
+        .rewardsContainer {
+            margin-top: 10%;
+        }
+    }
+}
+@media (max-width: 986px) {
+    .container {
+
+        .rewardsContainer {
+            margin-top: 14%;
+            padding: 36px 1.5rem !important;
+
+            .rewards {
+                padding-right: 0rem;
+                .reward {
+                    padding: 1rem 1rem !important;
+                    .rewardDetails {
+                        span {
+                            h6 {
+                                font-size: 18px !important;
+                            }
+                            p {
+                                font-size: 14px !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+    }
+}
 @media (max-width: 786px) {
 
     .container {
@@ -238,6 +274,7 @@
                         span {
                             overflow: hidden;
                             margin-left: 0rem;
+
                             h6 {
                                 font-size: 16px;
                             }
@@ -340,4 +377,12 @@
     transform: scale(0.97);
     opacity: 0.9;
     transition: all 0.2s linear;
+}
+
+
+@media (max-height: 868px) and (min-width: 800px) {
+
+    .rewardsContainer {
+        margin-top: 8% !important;
+    }
 }

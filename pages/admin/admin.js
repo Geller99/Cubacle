@@ -72,6 +72,10 @@ const Admin = () => {
     try {
       const init = {
         method: "post",
+        headers: {
+          // TODO: check this
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(session.sessionState)
       };
 

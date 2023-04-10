@@ -1,0 +1,177 @@
+@import './variable.module.scss';
+
+
+.ModalWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 111;
+}
+
+
+.ModalBody {
+  display: flex;
+  // justify-content: space-between;
+  flex-direction: column;
+  background: #FFF;
+  width: 500px;
+  min-height: 500px;
+  border-radius: 15px;
+  padding: 3rem 2rem;
+
+  .ModalHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+
+    h4 {
+      font-size: 24px;
+      font-weight: 600;
+      overflow: hidden;
+    }
+
+    a {
+      font-size: 28px;
+      color: #e12424;
+      text-decoration: none;
+      overflow: hidden;
+    }
+  }
+
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    overflow: hidden;
+
+
+    p {
+      font-size: 18px;
+      color: #333333;
+      line-height: 36px;
+
+    }
+
+    main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0303482a;
+      width: 100%;
+      height: 50px;
+      border-radius: 5px;
+      margin-top: 1rem;
+    }
+
+    span {
+      display: flex;
+      column-gap: 1rem;
+      width: 100%;
+      margin-top: 3rem;
+
+
+      button {
+        width: 100%;
+        height: 50px;
+        flex-basis: 50%;
+        border-radius: 10px;
+        outline: none;
+      }
+      button:nth(1) {
+        border: none;
+        outline: none;
+      }
+
+      @mixin child($n) {
+        &:nth-child(#{$n}){
+              background:red;
+        }
+    }
+   
+    span{
+        @include child(2);
+       }
+    }
+
+  }
+
+
+
+}
+
+@media (max-width: 786px) {
+  .ModalWrapper {
+    padding: 0 1rem;
+
+    .ModalBody {
+      min-height: 400px;
+      padding: 2rem 1.5rem;
+
+
+      .ModalHeader {
+
+        h4 {
+          font-size: 20px;
+        }
+      }
+      .contentContainer {
+        margin-top: 2rem;
+
+
+
+
+
+        p {
+          font-size: 14px;
+          color: #333333;
+          line-height: 26px;
+    
+        }
+        main {
+          margin-top: 0;
+        }
+        span {
+          column-gap: .5rem;
+          margin-top: 1rem;
+
+          button {
+            height: 42px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+
+
+  }
+}
+
+.closeBtn {
+  border: 1px solid #e12424;
+  background: none;
+}
+.closeBtn:hover {
+  transition: all 0.2s linear;
+  transform: scale(0.97);
+}
+.connectBtn {
+  border: none;
+  color: #FFF;
+  background: $primaryBg;
+}
+.connectBtn:hover {
+  transition: all 0.2s linear;
+  transform: scale(0.97);
+}

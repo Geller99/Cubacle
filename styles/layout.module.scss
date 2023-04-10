@@ -3,21 +3,26 @@
     justify-items: center;
     overflow: hidden !important;
     height: 100vh;
-
+       
     .main {
         display: flex;
         justify-content: center;
-        align-items: center;
-        position: relative;
+        // align-items: center;
+        // position: relative;
+        height: 100%;
         padding: 0 4%;
         flex-basis: 92%;
         margin-left: 8%;
-        margin-top: 3%;
+        // margin-top: 3%;
         overflow: hidden;
     }
 }
 
-
+@media (min-width:786px) {
+    .container {
+        height: 100% !important;
+    }
+}
 @media (max-width: 1286px) {
     .container {
         .main {
@@ -36,7 +41,6 @@
 
     .container {
         flex-direction: column;
-
         // .mobileHeader {
         //     flex-basis: 30%;
         // }
@@ -46,7 +50,9 @@
             justify-content: flex-start;
             width: 100%;
             margin: 0;
+            margin-bottom: 1rem;
             padding: 0 1rem;
+            overflow-y: scroll;
         }
     }
 }

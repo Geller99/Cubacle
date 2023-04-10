@@ -5,6 +5,7 @@
     // justify-content: space-between;
     flex-direction: column;
     padding: 2% 0;
+    background: #FFF;
     border-right: 2px solid #D3D3D3;
     width: 8%;
     min-width: 120px;
@@ -12,6 +13,7 @@
     min-height: 100vh;
     overflow: hidden;
     position: fixed;
+    z-index: 111;
 
     .logo {
         display: flex;

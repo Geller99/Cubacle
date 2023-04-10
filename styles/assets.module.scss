@@ -11,7 +11,7 @@
         flex-direction: column;
         width: 100%;
         height: 75%;
-        margin-top: 12%;
+        margin-top: 15%;
         padding: 36px;
         border-radius: 20px;
 
@@ -48,24 +48,25 @@
             position: relative;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            column-gap: 2rem;
+            column-gap: 1rem;
             row-gap: 2rem;
             margin-top: 2rem;
-
+            // overflow: hidden;
 
             .asset {
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                background: #FFFFFF 0% 0% no-repeat padding-box;
+                background: #FFF;
                 border: 2px solid #ECEDEF;
                 border-radius: 20px;
-                height: 100%;
-                min-height: 350px;
+                height: 380px;
+                max-width: 250px;
+                cursor: pointer;
                 overflow: hidden;
 
                 img {
-                    height: 200px;
+                    height: 240px;
                     background: #FCFBFC 0% 0% no-repeat padding-box;
                     border-radius: 20px 20px 0px 0px;
                     width: 100%;
@@ -105,27 +106,56 @@
                 .assetTitle {
                     display: flex;
                     flex-direction: column;
-                    padding: 30px 20px;
+                    padding: 24px 20px;
 
-                    .collectionName {
-                        text-align: left;
-                        font: normal normal normal 16px/25px Poppins;
-                        letter-spacing: 0px;
-                        color: #717171;
-                        padding-bottom: 12px;
+                    div {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding-bottom: 1rem;
                         border-bottom: 2px solid #ECEDEF;
+                        overflow: hidden;
+                        
+
+                        .assetState {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 5px;
+                            padding: 5px;
+                            border: 1px solid #3c47de61;
+                            font-size: 12px;
+                            overflow: hidden;
+                        }
+
+                        .collectionName {
+                            text-align: left;
+                            font-size: 16px;
+                            font-weight: 500;
+                            letter-spacing: 0px;
+                            color: #111;
+                            overflow: hidden;
+                        }
+
                     }
 
 
-                    .assetName {
-                        font: normal normal 600 16px/25px Poppins;
+
+
+                    .assetDays {
+                        font: normal normal 400 16px/25px Poppins;
                         letter-spacing: 0px;
-                        color: #717171;
-                        margin-top: 12px;
+                        color: #646464;
+                        margin-top: 16px;
+                        overflow: hidden;
                     }
                 }
 
 
+            }
+            .asset:hover {
+                transition: all 0.3s linear;
+                transform: rotate(.5deg);
             }
         }
 
@@ -134,6 +164,7 @@
 
 
 }
+
 @media (max-width: 1086px) {
     .container{ 
         
@@ -152,7 +183,7 @@
             padding: 26px;
             height: 100%;
             margin-top: 0;
-
+            overflow: hidden;
             .tab {
                 min-height: 48px;
                 p {
@@ -168,7 +199,34 @@
         }
         .assets {
             row-gap: 1.5rem;
-            margin-top: 1rem;
+            margin-top: 1rem !important;
+            min-height: 100%;
+            padding-bottom: 4rem;
+            justify-items: center;
+
+
+            .asset {
+                width: 100%;
+                max-width: 270px !important;
+                // max-height: -moz-max-content;
+                height: 100%;
+                min-height: 430px; 
+                overflow: hidden;
+
+
+                img {
+                    height: 300px !important;
+                }
+
+
+                .collectionName {
+                    font-size: 14px;
+                }
+            }
+            .asset:hover {
+                transition: all 0.1s linear;
+                transform: rotate(2deg);
+            }
         }
     }
 }

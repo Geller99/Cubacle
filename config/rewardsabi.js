@@ -26,16 +26,22 @@ export const rewardsabi = [
     type: "event",
   },
   {
-    inputs: [],
-    name: "COLLECTION",
-    outputs: [{ internalType: "contract IERC721", name: "", type: "address" }],
-    stateMutability: "view",
-    type: "function",
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "claimedToken",
+    type: "event",
   },
   {
     inputs: [],
-    name: "award",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "COLLECTION",
+    outputs: [{ internalType: "contract IERC721", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
@@ -56,18 +62,6 @@ export const rewardsabi = [
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "address", name: "", type: "address" },
-      { internalType: "address", name: "from", type: "address" },
-      { internalType: "uint256", name: "tokenId", type: "uint256" },
-      { internalType: "bytes", name: "", type: "bytes" },
-    ],
-    name: "onERC721Received",
-    outputs: [{ internalType: "bytes4", name: "", type: "bytes4" }],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "owner",
     outputs: [{ internalType: "address", name: "", type: "address" }],
@@ -82,31 +76,10 @@ export const rewardsabi = [
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "address", name: "to", type: "address" },
-      { internalType: "uint256", name: "tokenId", type: "uint256" },
-      { internalType: "bytes", name: "data", type: "bytes" },
-    ],
-    name: "safeTransferTo",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "address", name: "to", type: "address" },
-      { internalType: "uint256", name: "tokenId", type: "uint256" },
-    ],
-    name: "safeTransferTo",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "newAward", type: "uint256" }],
-    name: "setAward",
-    outputs: [],
-    stateMutability: "nonpayable",
+    inputs: [],
+    name: "rewardAmount",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -130,6 +103,13 @@ export const rewardsabi = [
     type: "function",
   },
   {
+    inputs: [{ internalType: "uint256", name: "_rewardVal", type: "uint256" }],
+    name: "setRewardAmount",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "bytes4", name: "interfaceId", type: "bytes4" }],
     name: "supportsInterface",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
@@ -139,37 +119,13 @@ export const rewardsabi = [
   {
     inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     name: "tokens",
-    outputs: [
-      { internalType: "address", name: "owner", type: "address" },
-      { internalType: "uint32", name: "blockid", type: "uint32" },
-      { internalType: "uint32", name: "timestamp", type: "uint32" },
-    ],
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
     name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "address", name: "to", type: "address" },
-      { internalType: "uint256", name: "tokenId", type: "uint256" },
-    ],
-    name: "transferTo",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "uint256", name: "tokenId", type: "uint256" },
-      { internalType: "address", name: "to", type: "address" },
-    ],
-    name: "withdraw",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

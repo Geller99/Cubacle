@@ -22,10 +22,7 @@ const Profile = () => {
   const submit = () => {
     return (
       <div className="Profile">
-        <ConnectButton />
-
-        {/* Connected to  {activeUser && activeUser}  */}
-        {/* <button onClick={() => disconnect()}>Disconnect</button> */}
+        <ConnectButton chainStatus="none" />
       </div>
     );
   };

@@ -21,6 +21,7 @@ import Layout from "../components/Layout";
 import { useStore } from "../state/useStore";
 import { MyStore } from "../state/myStore";
 
+
 const { chains, provider, webSocketProvider } = configureChains(
   [chain.mainnet, chain.polygon, chain.goerli],
   [alchemyProvider({ apiKey: "Nvjk-5BRH6VLoWqiFTVWzZPacNMGaHYC" })]
@@ -39,6 +40,7 @@ const client = createClient({
 });
 
 const App = ({ Component, pageProps }) => {
+  
   const myStore = useStore();
 
   return (

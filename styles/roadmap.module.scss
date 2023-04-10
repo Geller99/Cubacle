@@ -1,0 +1,633 @@
+@import './variable.module.scss';
+
+.container::-webkit-scrollbar {
+    display: none;
+
+}
+#containerMobile {
+    display: none;
+}
+.container {
+    display: flex;
+    height: 75%;
+    width: 100%;
+    margin-top: 12%;
+    border-radius: 20px;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    position: absolute;
+    top: 0;
+    top: 0;
+    width: 84%;
+
+
+    .mapContainer {
+        // background: url(../public/Images/Map1New.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        height: 150%;
+        min-width: 150%;
+        overflow: hidden;
+
+        .mapImage {
+            // min-height: 350%;
+            cursor: move;
+        }
+
+
+
+
+        #mapId {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            height: 70px;
+            width: 70px;
+            background: #FFF;
+            box-shadow: 0px 0px 12px #00000090;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0px;
+            color: #000000;
+            position: absolute;
+            left: 43%;
+            top: 43%;
+            cursor: pointer !important;
+            // z-index: 11111;
+            // transform: translate(50%);
+        }
+        #mapId:hover {
+            transform: scale(0.90);
+            transition: all .3s linear;
+            cursor: pointer;
+        }
+        .mobileMapId {
+            display: none;
+        }
+        .mapId7 {
+            width: 90px!important;
+            height: 90px!important;
+        }
+
+        .mapId-1 {
+            left: 42% !important;
+            top: 46% !important;
+        }   
+        .mapContentContainer-1 {
+            left: 46% !important;
+            top: 46% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-2 {
+            left: 52% !important;
+            top: 58% !important;
+        }   
+        .mapContentContainer-2 {
+            left: 52% !important;
+            top: 50% !important;
+        }
+
+        .mapId-3 {
+            left: 68% !important;
+            top: 26% !important;
+        }   
+        .mapContentContainer-3 {
+            left: 75% !important;
+            top: 25% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-4 {
+            left: 26% !important;
+            top: 32% !important;
+        }   
+        .mapContentContainer-4 {
+            left: 30% !important;
+            top: 20% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-5 {
+            left: 12% !important;
+            top: 85% !important;
+        }   
+        .mapContentContainer-5 {
+            left: 18% !important;
+            top: 52% !important;
+            transform: translateY(0%) !important;
+            margin-bottom: 2rem !important;
+        }
+
+        .mapId-6 {
+            left: 40% !important;
+            top: 14% !important;
+        }   
+        .mapContentContainer-6 {
+            left: 46% !important;
+            top: 12% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-7 {
+            width: 90px!important;
+            height: 90px!important;
+            left: 38% !important;
+            top: 60% !important;
+
+        }   
+        .mapContentContainer-7 {
+            left: 45% !important;
+            top: 52% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-9 {
+
+            left: 28% !important;
+            top: 68% !important;
+
+        }   
+        .mapContentContainer-9 {
+            left: 32% !important;
+            top: 53% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-10 {
+
+            left: 8% !important;
+            top: 53% !important;
+
+        }   
+        .mapContentContainer-10 {
+            left: 14% !important;
+            top: 50% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-11 {
+
+            left: 5% !important;
+            top: 45% !important;
+
+        }   
+        .mapContentContainer-11 {
+            left: 6% !important;
+            top: 42% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-12 {
+
+            left: 57% !important;
+            top: 70% !important;
+
+        }   
+        .mapContentContainer-12 {
+            left: 60% !important;
+            top: 58% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-13 {
+
+            left: 50% !important;
+            top: 4% !important;
+
+        }   
+        .mapContentContainer-13 {
+            left: 57% !important;
+            top: 1% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-14 {
+
+            left: 72% !important;
+            top: 70% !important;
+
+        }   
+        .mapContentContainer-14 {
+            left: 77% !important;
+            top: 50% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-15 {
+
+            left: 80% !important;
+            top: 15% !important;
+
+        }   
+        .mapContentContainer-15 {
+            left: 78% !important;
+            top: 12% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mapId-16 {
+
+            left: 43% !important;
+            top: 89% !important;
+
+        }   
+        .mapContentContainer-16 {
+            left: 51% !important;
+            top: 52% !important;
+            transform: translateY(0%) !important;
+        }
+
+        .mat {
+            display: none !important;
+        }
+        #mapContentContainer {
+            display: flex;
+            position: absolute;
+            left: 45%;
+            top:25%;
+            transform: translateX(-45%);
+            transform: translateY(0%);
+        }
+
+        #mapContentContainer {
+            display: flex;
+            position: absolute;
+            left: 45%;
+            top:25%;
+            transform: translateX(-45%);
+            transform: translateY(0%);
+
+
+            .triangle {
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 16px 0 16px 30px;
+                border-color: transparent transparent transparent #FFFFFF;
+                transform: rotate(180deg);
+                margin-top: 7rem;
+            }
+
+
+            .mapContent {
+                display: flex;
+                flex-direction: column;
+                min-height: min-content;
+                background: #FFF;
+                padding: 12px;
+                border-radius: 10px;
+
+
+                header {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    column-gap: .5rem;
+                    // max-width: 250px;
+
+                    // h3 {
+                    //     font-size: 24px;
+                    //     font-weight: bold;
+                    //     color: #000;
+                    //     overflow: hidden;
+                    //     flex-basis: 18%;
+                    // }
+
+                    h4 {
+                        // max-width: 250px;
+                        max-width: 425px;
+                        font-size: 22px;
+                        color: #000;
+                        font-weight: 500;
+                        // flex-basis: 82%;
+                        width: 100%;
+                        overflow: hidden;
+                    }
+                }
+                
+                .mapContentTag {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+                    column-gap: .5rem;
+
+
+                    .tag1 {
+                        font-size: 10px;
+                        font-weight: bold;
+                        color: #FFF;
+                        background: #3D0CDF 0% 0% no-repeat padding-box;
+                        padding: 3px 9px;
+                        border-radius: 24px;
+                    }
+                    .tag2 {
+                        font-size: 10px;
+                        font-weight: bold;
+                        color: #D5D5D5;
+                        background: #FFFFFF 0% 0% no-repeat padding-box;
+                        border: 1px solid #D5D5D5;
+                        border-radius: 24px;
+                        padding: 3px 9px;
+                    }
+                }
+                article {
+                    margin-top: 12px;
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: #717171;
+                    line-height: 18px;
+                    overflow: hidden;
+
+                    .fullContent {
+                        max-width: 425px;
+                        transition: all 0.4s linear;
+                    }
+                    .lessContent {
+                        max-width: 300px;
+                        overflow: hidden;
+                        transition: all 0.4s linear;
+                    }
+                    small {
+                        font-size: 12px;
+                        font-weight: 600;
+                        color: #3D0CDF;
+                        margin-left: 5px;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
+
+                    div {
+                        
+
+
+                        .contentImg {
+                            display: flex;
+                            column-gap: 1rem;
+                            margin-top: 24px;
+
+
+                            img {
+                                height: 100px;
+                                flex-basis: 50%;
+                                object-fit: cover;
+                                object-position: center center;
+                                border-radius: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+
+    .popupContainer {
+        display: flex;
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 1186px) {
+    .mapContentContainer {
+        left: 20% !important;
+        top: 20% !important;
+    }
+    
+}
+@media screen and (max-width: 986px) {
+    .mapContentContainer {
+        left: 10% !important;
+    }
+    
+}
+@media screen and (max-width: 786px) {
+    #containerMobile {
+        display: flex;
+    }
+    #containerWindows {
+        display: none;
+    }
+    .container {
+        margin-top: 0;
+        height: 100%;
+        margin-bottom: 0rem;
+        position: relative;
+        top: none;
+        width: 100%;
+
+
+
+        .mapContainer {
+            height: 200%;
+            min-width: 450%;
+            // z-index: 11111;
+
+            #mapId {
+                display: none !important;
+                left: 18%;
+                top: 32%;
+            }
+            #mobileMapId {
+                display: flex !important;
+                // display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                height: 70px;
+                width: 70px;
+                background: #FFF !important;
+                box-shadow: 0px 0px 12px #00000090;
+                text-align: center;
+                font-size: 26px;
+                font-weight: 600;
+                letter-spacing: 0px;
+                // color: #000000;
+                position: absolute;
+                z-index: 111111;
+            }
+ 
+            .mapContentContainer-2 {
+                left: 52% !important;
+                top: 50% !important;
+            }
+            #mapContentContainer {
+
+                .triangle {
+                    margin-top: 0;
+                    transform: rotate(90deg);
+                    margin-left: 3rem;
+                    display: none;
+                }
+
+                .mapContent {
+                    display: none !important;
+
+                    header {
+
+                        h4 {
+                            font-size: 24px;
+                        }
+                    }
+
+                    article {
+                        font-size: 10px;
+                        line-height: 18px;
+                        
+
+
+                        .fullContent {
+                            width: 100%;
+                            max-width: 330px;
+                        }
+                        .lessContent {
+                            max-width: 250px;
+                        }
+
+                        small {
+                            font-size: 10px;
+                        }
+
+
+                        div {
+                        
+
+
+                            .contentImg {
+                                display: flex;
+                                column-gap: .5rem;
+                                margin-top: 16px;
+    
+    
+                                img {
+                                    height: 80px;
+                                    border-radius: 5px;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+.mobileContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 111111;
+
+
+
+    main {
+        max-height:85%;
+        max-width: 95%;
+        margin: auto 1rem;
+        background: #FFF;
+        padding: 1rem 1rem;
+        border-radius: 10px;
+        position: relative;
+
+
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            column-gap: .5rem;
+
+    
+                h4 {
+                    font-size: 22px !important;
+                    color: #000;
+                    font-weight: 500;
+                    overflow: hidden;
+                }
+
+
+            .closeBtn {
+                min-width: 36px;
+                height: 36px;
+                border: 2px solid #FFF;
+                color: #c31a1a;
+                font-size: 20px;
+                background: #33323247;
+                border-radius: 50%;
+            }
+
+        }
+
+        .mapContentTag {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            column-gap: .5rem;
+
+
+            .tag1 {
+                font-size: 10px;
+                font-weight: bold;
+                color: #FFF;
+                background: #3D0CDF 0% 0% no-repeat padding-box;
+                padding: 3px 9px;
+                border-radius: 24px;
+            }
+            .tag2 {
+                font-size: 10px;
+                font-weight: bold;
+                color: #D5D5D5;
+                background: #FFFFFF 0% 0% no-repeat padding-box;
+                border: 1px solid #D5D5D5;
+                border-radius: 24px;
+                padding: 3px 9px;
+            }
+        }
+
+
+        .contentParagraph {
+            font-size: 12px;
+            line-height: 16px;
+            margin-top: 1rem;
+
+
+            .contentImgMobile {
+                display: flex;
+                column-gap: .5rem;
+                margin-top: 1rem;
+
+                img {
+                    height: 80px;
+                    flex-basis: 50%;
+                    object-fit: cover;
+                    object-position: center center;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 786px){
+    .mobileContainer {
+        display: none;
+    }
+}
+
+

@@ -70,7 +70,12 @@ const Admin = () => {
 
   const fetchActiveRewards = async () => {
     try {
-      await fetch("/api/rewards-getAll")
+      const init = {
+        method: "post",
+        body: JSON.stringify(session.sessionState)
+      };
+
+      await fetch("/api/rewards-getAll", init)
         .then((res) => res.json())
         .then((data) => {
           console.log("Rewards data", data);

@@ -311,8 +311,6 @@ export const useStore = () => {
     connector,
     sessionState,
 
-    //setAuthStatus,
-
     // read
     isValid,
 

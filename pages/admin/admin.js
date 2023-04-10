@@ -98,7 +98,7 @@ const Admin = () => {
     try {
       await axios({
         method: "post",
-        url: "http://localhost:3000/api/fetchUserData",
+        url: "/api/fetchUserData",
         data: {
           count: count ? count : 0,
           fetchListedOwners: null,

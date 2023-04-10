@@ -1,21 +1,21 @@
-import styles from '../../styles/rewards.module.scss';
+import styles from '../styles/rewards.module.scss';
 import Image from 'next/image';
-import CubexRewardImg from '../../public/Images/claimImageCard.gif';
-import CubexXmasImg from '../../public/Images/xmasClaim.jpg';
+import CubexRewardImg from '../public/Images/claimImageCard.gif';
+import CubexXmasImg from '../public/Images/xmasClaim.jpg';
 import {
   usePrepareContractWrite,
   useContractWrite,
   useAccount,
   useProvider,
 } from 'wagmi';
-import { testabi } from '../../config/testabi';
-import { rewardsabi } from '../../config/rewardsabi';
+import { testabi } from '../config/testabi';
+import { rewardsabi } from '../config/rewardsabi';
 import { useContractRead } from 'wagmi';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { ethers } from 'ethers';
-import Modal from '../../components/modal/modal';
-import { StakingClaim } from '../../components/rewards/stakingclaim';
+import Modal from '../components/modal/modal';
+import { StakingClaim } from '../components/rewards/stakingclaim';
 // import { element } from '@rainbow-me/rainbowkit/dist/css/reset.css';
 
 /**

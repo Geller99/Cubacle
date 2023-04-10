@@ -116,7 +116,7 @@ const Landing = () => {
             className={styles.rewards}
             onClick={() =>
               user
-                ? router.push('/rewards/rewards')
+                ? router.push('/rewards')
                 : alert('Please connect wallet')
             }
           >
@@ -138,7 +138,7 @@ const Landing = () => {
             className={styles.claimRewards}
             onClick={() =>
               user
-                ? router.push('/rewards/claim')
+                ? router.push('/claim')
                 : alert('Please connect wallet')
             }
           >

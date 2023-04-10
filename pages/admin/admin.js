@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
+import {useDisconnect} from 'wagmi';
+
 import ActiveProposals from "../../components/admin/proposal-active";
 import CreateProposalForm from "../../components/admin/proposal-form";
 import CreateRewardForm from "../../components/admin/reward-form";
@@ -8,7 +10,7 @@ import TokenItem from "../../components/admin/tokenItem/tokenItem";
 import styles from "../../styles/admin.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { MyStore } from "../../state/myStore";
+//import { MyStore } from "../../state/myStore";
 import { useStore } from "../../state/useStore";
 
 const Admin = () => {
@@ -18,8 +20,10 @@ const Admin = () => {
   const [proposals, setProposals] = useState(null);
   const [tokenData, setTokenData] = useState(null);
   const [count, setCount] = useState(0);
-  const session = useContext(MyStore);
+  //const session = useContext(MyStore);
   const router = useRouter();
+  const session = useStore();
+  const { disconnect } = useDisconnect();
 
   useEffect(() => {
     if (!rewards) {
@@ -40,6 +44,29 @@ const Admin = () => {
   useEffect(() => {
     // session.authStatus === "Admin" ? null : router.push('/')
   }, []);
+
+
+  const handleInit = async () => {
+    if (await session.isValid())
+      return;
+
+
+    const isConnected = await session.start();
+    if(!isConnected){
+      //cleanup
+      if(session.address || session.connector){
+        await disconnect(); 
+        session.setAuthStatus(null);
+      }
+      await session.stop(true);
+    }
+  };
+
+
+  // always check
+  useEffect(() => {
+    handleInit();
+  });
 
   const fetchActiveRewards = async () => {
     try {
@@ -342,7 +369,7 @@ const Admin = () => {
             <span>Staking Count</span>
             <span>Status</span>
           </div>
-          {console.log("Admin Auth Check", session.authStatus)}
+          {console.log("===Admin Auth Check===", session.authStatus)}
         
 
           <div className={styles.listContainer}>

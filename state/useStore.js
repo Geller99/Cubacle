@@ -160,7 +160,6 @@ export const useStore = () => {
     }
 
     const typedData = createTypedData();
-    setUserTypedData(typedData);
     const signature = await requestSignature(typedData);
     if (signature) {
       const session = {

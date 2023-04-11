@@ -10,8 +10,7 @@ import TokenItem from "../../components/admin/tokenItem/tokenItem";
 import styles from "../../styles/admin.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
-//import { MyStore } from "../../state/myStore";
-import { useStore } from "../../state/useStore";
+import { MyStore } from "../../state/myStore";
 
 const Admin = () => {
   const [selectedReward, setSelectedReward] = useState(null);
@@ -20,9 +19,9 @@ const Admin = () => {
   const [proposals, setProposals] = useState(null);
   const [tokenData, setTokenData] = useState(null);
   const [count, setCount] = useState(0);
-  //const session = useContext(MyStore);
+  const session = useContext(MyStore);
   const router = useRouter();
-  const session = useStore();
+
   const { disconnect } = useDisconnect();
 
   useEffect(() => {
@@ -37,16 +36,11 @@ const Admin = () => {
     }
   }, [proposals]);
 
-  /**
-   * @dev protects admin route via existing signature and auth status
-   */
 
-  useEffect(() => {
-    // session.authStatus === "Admin" ? null : router.push('/')
-  }, []);
-
-
+  // @see Layout.js
   const handleInit = async () => {
+    //session.init(disconnect);
+
     if (await session.isValid())
       return;
 
@@ -55,22 +49,37 @@ const Admin = () => {
     if(!isConnected){
       //cleanup
       if(session.address || session.connector){
-        await disconnect(); 
-        session.setAuthStatus(null);
+        await disconnect();
       }
+      
       await session.stop(true);
     }
   };
 
 
-  // always check
+  /**
+   * @dev protects admin route via existing signature and auth status
+   */
   useEffect(() => {
-    handleInit();
-  });
+    async () => {
+      await handleInit();
+      session.authStatus === "Admin" ? null : router.push('/')
+    }
+  }, []);
+
 
   const fetchActiveRewards = async () => {
     try {
-      await fetch("/api/rewards-getAll")
+      const init = {
+        method: "post",
+        headers: {
+          // TODO: check this
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(session.sessionState)
+      };
+
+      await fetch("/api/rewards-getAll", init)
         .then((res) => res.json())
         .then((data) => {
           console.log("Rewards data", data);

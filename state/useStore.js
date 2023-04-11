@@ -308,10 +308,8 @@ export const useStore = () => {
     // variables
     address,
     authStatus,
-    setAuthStatus,
-    userTypedData,
-    setUserTypedData,
     connector,
+    sessionState,
 
     // read
     isValid,

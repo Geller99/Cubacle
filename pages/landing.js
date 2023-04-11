@@ -1,65 +1,17 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useContext, useState, useEffect, useRef} from 'react';
 import { useRouter } from 'next/router';
 import {useDisconnect} from 'wagmi';
-import { useStore } from '../state/useStore';
+import { MyStore } from "../state/myStore";
 
 import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
 
 
-
-
 const Landing = () => {
   const router = useRouter();
-  const session = useStore();
+  const session = useContext(MyStore);
   const [scrollLeft, setScrollLeft] = useState(0);
-  const { disconnect } = useDisconnect();
-
   const user = session.address;
-
-  /**
-   * @dev needs to
-   *
-   * Connect user wallet
-   * Run function to grab signature from user using EIP typedData()
-   * Check if user signs or not
-   *
-   * IF signed, hit /api/auth to determine admin/user status give access to dapp and stay logged in
-   * Else disconnect
-   */
-
-  // Logic:
-  // premise: we don't know the address until the provider is connected
-  //   so we'll wait for the address to exist
-  // 1. when we have the address, check if a signature exists
-  // 2. if it exists, check if it's valid
-  // 3. if it's valid, we can add this to state
-  // else. generate a new signature
-  //
-  // NOTE: we need to keep the data so that the timstamp doesn't change
-  const handleInit = async () => {
-    if (await session.isValid())
-      return;
-
-
-    const isConnected = await session.start();
-    if(!isConnected){
-      //cleanup
-      if(session.address || session.connector){
-        await disconnect(); 
-        session.setAuthStatus(null);
-      }
-      await session.stop(true);
-    }
-  };
-
-
-  // always check
-  useEffect(() => {
-    handleInit();
-  });
-
-
 
 
   const mainLaRef = useRef(null);

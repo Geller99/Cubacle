@@ -259,6 +259,18 @@ const ClaimRewards = () => {
           }`}
         >
 
+          <div className={styles.nullContainer}>
+            <div>
+              <Image
+                src="/Images/nullIcon.svg"
+                height={200}
+                width={200}
+                alt={''}
+              />
+
+              <h3>No Active Reward</h3>
+            </div>
+          </div>
           {/* {claimRewards.map((claimreward, idx) => {
             return (
               <div className={styles.reward} key={claimreward.rewardName}>

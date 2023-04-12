@@ -203,6 +203,30 @@
             transition: all 0.5s linear;
         }
 
+
+        .nullContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+
+            div {
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                h3 {
+                    overflow: hidden;
+                    margin-top: 2rem;
+                    font-size: 24px;
+                }
+            }
+
+
+        }
+
     }
     #rewardContainer {
         padding-bottom: 8rem;

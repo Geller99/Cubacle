@@ -48,7 +48,7 @@ const App = ({ Component, pageProps }) => {
       <RainbowKitProvider chains={chains}>
         <MyStore.Provider value={myStore}>
           <Layout>
-            <Component {...pageProps} />{" "}
+            <Component {...pageProps} />
           </Layout>
         </MyStore.Provider>
       </RainbowKitProvider>

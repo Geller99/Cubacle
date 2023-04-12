@@ -25,7 +25,7 @@ const ProposalsFeed = () => {
       <div className={styles.FeedContainer}>
         <header>
           <h4>Votes</h4>
-          <p>The Cubicle text underneath: Welcome to the Official DAO of CubeX!</p>
+          <p>Welcome to the Official DAO of CubeX!</p>
         </header>
         <main>
           {proposals &&

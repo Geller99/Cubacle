@@ -68,18 +68,30 @@ const Admin = () => {
   }, []);
 
 
+  // const fetchActiveRewards = async () => {
+  //   try {
+  //     const init = {
+  //       method: "post",
+  //       headers: {
+  //         // TODO: check this
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify(session.sessionState)
+  //     };
+
+  //     await fetch("/api/rewards-getAll", init)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log("Rewards data", data);
+  //         setRewards(data.data);
+  //       });
+  //   } catch (error) {
+  //     console.log("Rewards Fetch Error, error");
+  //   }
+  // };
   const fetchActiveRewards = async () => {
     try {
-      const init = {
-        method: "post",
-        headers: {
-          // TODO: check this
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(session.sessionState)
-      };
-
-      await fetch("/api/rewards-getAll", init)
+      await fetch("/api/rewards-getAll")
         .then((res) => res.json())
         .then((data) => {
           console.log("Rewards data", data);

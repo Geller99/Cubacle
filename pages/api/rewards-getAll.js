@@ -3,8 +3,8 @@ import RewardModel from "../../models/rewards-schema";
 
 
 const getAllRewards = async (req, res) => {
-  if (req.method !== "POST") {
-    res.status(405).send({ message: "Only POST requests allowed" });
+  if (req.method !== "GET") {
+    res.status(405).send({ message: "Only GET requests allowed" });
     return;
   }
 

@@ -1,8 +1,17 @@
 import connectMongo from "../../config/connectMongo";
 import RewardsModel from "../../models/rewards-schema";
+const {
+  recoverTypedSignature,
+  SignTypedDataVersion,
+} = require("@metamask/eth-sig-util");
 
-
-// const adminAddress = ["0xa33a70FABFeb361Fe891C208B1c27ec0b64baBEB"];
+const adminAddress = [
+  "0xa33a70FABFeb361Fe891C208B1c27ec0b64baBEB",
+  "0x5013983D5691886140f24Abd66d2D7072f62991b",
+  "0x575dC6dd8c838F8E015349BbF55b90E718efF537",
+  "0xb265d9496Ae60CABe0ea1D3eab059B8Bb1911428",
+  "0x282D35Ee1b589F003db896b988fc59e2665Fa6a1",
+];
 
 const createReward = async (req, res) => {
   if (req.method !== "POST") {
@@ -13,19 +22,24 @@ const createReward = async (req, res) => {
 
   const { title, detail, imageStr, eligibilityCount, typedData, signature } =
     req.body;
+  
+  const signer = recoverTypedSignature({
+      data: typedData,
+      signature: signature,
+      version: SignTypedDataVersion.V4,
+    });
+  
+    if (
+      !adminAddress
+        .map((address) => address.toLowerCase())
+        .includes(signer.toLowerCase())
+    ) {
+      res.status(405).send({ message: "Only Admin" });
+    }
 
   try {
-    console.log("Server Data", req.body)
 
-    
-    // if (signer.toLowerCase() === adminAddress.map((el) => el.toLowerCase())) {
-    //     console.log("Creating Proposal...")
-    // } else {
-    //   res
-    //   .status(405)
-    //   .send({ message: "This account is not allowed to initiate proposals" });
-    // }
-
+  
     const newReward = await RewardsModel.create({
       title: title,
       detail: detail,

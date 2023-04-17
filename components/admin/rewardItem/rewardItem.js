@@ -11,6 +11,7 @@ const RewardItem = ({
   setSelectedReward,
   reward,
   setRewards,
+  session
 }) => {
   const handleDeleteReward = async () => {
     try {
@@ -19,6 +20,8 @@ const RewardItem = ({
         url: '/api/rewards-delete',
         data: {
           title: reward.title,
+          signature: session && session.signature,
+          typedData: session && session.typedData
         },
       });
       setRewards(null);

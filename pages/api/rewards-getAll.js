@@ -3,32 +3,11 @@ import RewardModel from "../../models/rewards-schema";
 
 
 const getAllRewards = async (req, res) => {
+
   if (req.method !== "GET") {
-    res.status(405).send({ message: "Only POST requests allowed" });
+    res.status(405).send({ message: "Only GET requests allowed" });
     return;
   }
-
-
-  // const { typedData, signature } = req.body;
-
-  // const signer = recoverTypedSignature({
-  //   data: typedData,
-  //   signature: signature,
-  //   version: SignTypedDataVersion.V4,
-  // });
-
-  // let authStatus;
-  // if (
-  //   adminAddress
-  //     .map((address) => address.toLowerCase())
-  //     .includes(signer.toLowerCase())
-  // ) {
-  //   authStatus = "Admin";
-  // } else {
-  //   authStatus = "User";
-  //   console.log("Valid Signer", signer.toLowerCase());
-  // }
-
 
   try {
     connectMongo();

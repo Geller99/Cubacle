@@ -12,6 +12,7 @@ const CreateProposalForm = ({
   selectedProposal,
   setSelectedProposal,
   setProposals,
+  session
 }) => {
   const [proposal, setProposal] = useState(selectedProposal);
   const [active, setActive] = useState(false);
@@ -33,6 +34,8 @@ const CreateProposalForm = ({
           title: proposal && proposal.title,
           detail: proposal && proposal.detail,
           active: active,
+          signature: session && session.signature,
+          typedData: session && session.typedData
         },
       });
       setProposals(null);
@@ -54,6 +57,8 @@ const CreateProposalForm = ({
           updatedTitle: proposal && proposal.title,
           detail: proposal && proposal.detail,
           active: active ? active : false,
+          signature: session && session.signature,
+          typedData: session && session.typedData
         },
       });
       setProposals(null);

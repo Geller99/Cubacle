@@ -9,6 +9,7 @@ const CreateRewardForm = ({
   selectedReward,
   setSelectedReward,
   setRewards,
+  session
 }) => {
   const [reward, setReward] = useState(selectedReward);
   const [file, setFile] = useState(null);
@@ -49,7 +50,7 @@ const CreateRewardForm = ({
     const { name, value } = event.target;
     const newReward = { ...reward };
     newReward[name] = value;
-    setReward(newReward);
+    setReward({ ...reward, [name]: value })
     console.log('Reward form data', reward);
   };
 
@@ -65,6 +66,8 @@ const CreateRewardForm = ({
           detail: reward && reward.detail,
           imageStr: imageUrl && imageUrl,
           eligibilityCount: reward && reward.eligibilityCount,
+          signature: session && session.signature,
+          typedData: session && session.typedData
         },
       });
       setRewards(null);
@@ -87,6 +90,8 @@ const CreateRewardForm = ({
           detail: reward && reward.detail,
           imageStr: imageUrl && imageUrl,
           eligibilityCount: reward && reward.eligibilityCount,
+          signature: session && session.signature,
+          typedData: session && session.typedData
         },
       });
       setRewards(null);

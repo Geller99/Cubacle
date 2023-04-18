@@ -5,7 +5,7 @@ import styles from '../../styles/admin.module.scss'
  * @returns list of all active rewards
  */
 
-const ActiveRewards = ({ rewards, setRewards, setSelectedReward }) => {
+const ActiveRewards = ({ rewards, setRewards, setSelectedReward, session}) => {
   return (
     <div className={styles.rewardContainer}>
       {rewards &&
@@ -20,6 +20,7 @@ const ActiveRewards = ({ rewards, setRewards, setSelectedReward }) => {
               setSelectedReward={setSelectedReward && setSelectedReward}
               reward={reward}
               setRewards={setRewards}
+              session={session}
               
             />
           );

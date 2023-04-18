@@ -11,7 +11,9 @@ const ProposalItem = ({
   setSelectedProposal,
   proposal,
   setProposals,
+  session
 }) => {
+
   const handleDeleteProposal = async () => {
     console.log('Deleting...');
     try {
@@ -20,6 +22,8 @@ const ProposalItem = ({
         url: '/api/proposal-delete',
         data: {
           title: proposal.title,
+          signature: session && session.signature,
+          typedData: session && session.typedData
         },
       });
       setProposals(null);

@@ -68,18 +68,10 @@ const Admin = () => {
   }, []);
 
 
+  
   const fetchActiveRewards = async () => {
     try {
-      const init = {
-        method: "post",
-        headers: {
-          // TODO: check this
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(session.sessionState)
-      };
-
-      await fetch("/api/rewards-getAll", init)
+      await fetch("/api/rewards-getAll")
         .then((res) => res.json())
         .then((data) => {
           console.log("Rewards data", data);
@@ -153,6 +145,7 @@ const Admin = () => {
           selectedReward={selectedReward}
           setSelectedReward={setSelectedReward}
           setRewards={setRewards}
+          session={session && session.sessionState}
         />
       )}
 
@@ -161,6 +154,7 @@ const Admin = () => {
           selectedProposal={selectedProposal}
           setSelectedProposal={setSelectedProposal}
           setProposals={setProposals}
+          session={session && session.sessionState}
         />
       )}
 
@@ -307,6 +301,7 @@ const Admin = () => {
               proposals={proposals}
               setProposals={setProposals}
               setSelectedProposal={setSelectedProposal}
+              session={session && session.sessionState}
             />
           </div>
         </div>
@@ -329,6 +324,7 @@ const Admin = () => {
               rewards={rewards}
               setRewards={setRewards}
               setSelectedReward={setSelectedReward}
+              session={session && session.sessionState}
             />
           </div>
         </div>
@@ -378,7 +374,8 @@ const Admin = () => {
             <span>Staking Count</span>
             <span>Status</span>
           </div>
-          {console.log("===Admin Auth Check===", session.authStatus)}
+
+          {console.log("===Admin Auth Check===", session.sessionState)}
         
 
           <div className={styles.listContainer}>

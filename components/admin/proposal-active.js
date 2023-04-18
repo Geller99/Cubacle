@@ -5,7 +5,7 @@ import styles from '../../styles/admin.module.scss'
  * @returns list of all active proposals
  */
 
-const ActiveProposals = ({ proposals, setProposals, setSelectedProposal }) => {
+const ActiveProposals = ({ proposals, setProposals, setSelectedProposal, session }) => {
   return (
     <div className={styles.activeProposals}>
       {proposals &&
@@ -21,6 +21,7 @@ const ActiveProposals = ({ proposals, setProposals, setSelectedProposal }) => {
               setSelectedProposal={setSelectedProposal}
               proposal={proposal}
               setProposals={setProposals}
+              session={session}
             />
           );
         })}

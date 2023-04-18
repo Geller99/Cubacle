@@ -86,7 +86,11 @@ const Map = (props) => {
               <article>
                 {showContent ? (
                   <div className={styles.fullContent}>
-                    {mapContent.mapContent}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: mapContent.mapContent,
+                      }}
+                    ></div>
                     <small onClick={() => setShowContent(false)}>
                       See less
                     </small>
@@ -97,8 +101,14 @@ const Map = (props) => {
                   </div>
                 ) : (
                   <div className={styles.lessContent}>
-                    {mapContent.mapContent.substring(0, 180)}...
-                    <small onClick={() => setShowContent(true)}>See more</small>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: mapContent.mapContent.substring(0, 248),
+                      }}
+                    ></div>
+                    <small onClick={() => setShowContent(true)}>
+                      ...See more
+                    </small>
                   </div>
                 )}
               </article>

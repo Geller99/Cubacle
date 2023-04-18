@@ -64,12 +64,12 @@
             }
             .activeTab,
             .tab:hover {
-                border-color: #000000;
+                border-color: #3D0DDF;
                 color: #000;
                 transition: all 0.5s ease;
 
                 span {
-                    background-color: #000;
+                    background-color: #3D0DDF;
                     color: #FFF;
                 }
             }
@@ -201,6 +201,30 @@
         #activeRewards {
             display: block;
             transition: all 0.5s linear;
+        }
+
+
+        .nullContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+
+            div {
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                h3 {
+                    overflow: hidden;
+                    margin-top: 2rem;
+                    font-size: 24px;
+                }
+            }
+
+
         }
 
     }

@@ -8,6 +8,7 @@
     transition: all 0.5s ease-out;
 
 
+
     main {
         display: flex;
         // display: grid;
@@ -21,6 +22,11 @@
         padding-bottom: 2rem;
         position: relative;
         transition: all 0.5s linear;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS devices */
+        -ms-overflow-style: none; /* hide scrollbar on IE and Edge */
+        scrollbar-width: none; /* hide scrollbar on Firefox */
 
 
         div {

@@ -15,7 +15,6 @@ const MobileMap = ({ setOpenModal, show, contentId }) => {
 
   const modalContent = show ? (
     <section className={styles.mobileContainer}>
-      
       {MapData?.filter((item) => contentId === item.mapId).map((map, idx) => {
         return (
           <main key={idx}>
@@ -36,7 +35,8 @@ const MobileMap = ({ setOpenModal, show, contentId }) => {
 
             <article className={styles.contentParagraph}>
               <div className={styles.fullContent}>
-                {map.mapContent}
+                {/* {map.mapContent} */}
+                <div dangerouslySetInnerHTML={{ __html: map.mapContent }}></div>
                 {/* <span className={styles.contentImgMobile}>
                   <img src={map.mapImage1} alt="Content image" />
                   <img src={map.mapImage2} alt="Content image" />

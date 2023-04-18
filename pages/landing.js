@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect, useRef} from 'react';
 import { useRouter } from 'next/router';
-import {useDisconnect} from 'wagmi';
 import { MyStore } from "../state/myStore";
-
 import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
 
@@ -13,6 +11,44 @@ const Landing = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const user = session.address;
 
+  /**
+   * @dev needs to
+   *
+   * Connect user wallet
+   * Run function to grab signature from user using EIP typedData()
+   * Check if user signs or not
+   *
+   * IF signed, hit /api/auth to determine admin/user status give access to dapp and stay logged in
+   * Else disconnect
+   */
+
+  // Logic:
+  // premise: we don't know the address until the provider is connected
+  //   so we'll wait for the address to exist
+  // 1. when we have the address, check if a signature exists
+  // 2. if it exists, check if it's valid
+  // 3. if it's valid, we can add this to state
+  // else. generate a new signature
+  //
+  // NOTE: we need to keep the data so that the timstamp doesn't change
+  // const handleInit = async () => {
+  //   if (await session.isValid()) return;
+
+  //   const isConnected = await session.start();
+  //   if (!isConnected) {
+  //     //cleanup
+  //     if (session.address || session.connector) {
+  //       await disconnect();
+  //       session.setAuthStatus(null);
+  //     }
+  //     await session.stop(true);
+  //   }
+  // };
+
+  // // always check
+  // useEffect(() => {
+  //   handleInit();
+  // });
 
   const mainLaRef = useRef(null);
   const handleClick = (direction) => {
@@ -23,7 +59,36 @@ const Landing = () => {
   return (
     <div className={styles.landingContainer}>
       <section className={styles.container}>
-        <main ref={mainLaRef} className={styles.main}>
+        <main
+          className={styles.main}
+          ref={mainLaRef}
+          //         onTouchStart={(e) => {
+          //   e.stopPropagation();
+          // }} onDragStart={(e) => {
+          //   e.preventDefault();
+          //   e.stopPropagation();
+          //   const startX = e.clientX || e.touches[0].clientX;
+          //   const scrollLeft = e.currentTarget.scrollLeft;
+
+          //   e.currentTarget.addEventListener('mousemove', onMouseMove);
+          //   e.currentTarget.addEventListener('touchmove', onMouseMove);
+          //   e.currentTarget.addEventListener('mouseup', onMouseUp);
+          //   e.currentTarget.addEventListener('touchend', onMouseUp);
+
+          //   function onMouseMove(e) {
+          //     const x = e.clientX || e.touches[0].clientX;
+          //     const distance = x - startX;
+          //     e.currentTarget.scrollLeft = scrollLeft - distance;
+          //   }
+
+          //   function onMouseUp(e) {
+          //     e.currentTarget.removeEventListener('mousemove', onMouseMove);
+          //     e.currentTarget.removeEventListener('touchmove', onMouseMove);
+          //     e.currentTarget.removeEventListener('mouseup', onMouseUp);
+          //     e.currentTarget.removeEventListener('touchend', onMouseUp);
+          //   }
+          // }}
+        >
           <div
             className={styles.nfts}
             onClick={() =>
@@ -128,50 +193,57 @@ const Landing = () => {
             </span>
           </div>
 
-        <div
-          className={styles.nfts}
-          onClick={() =>
-            user ? router.push('/feed') : alert('Please connect wallet')
-          }
-        >
-          <Image
-            className={styles.icon}
-            src={'/Images/1Icon.png'}
-            height={80}
-            width={80}
-            alt={''}
-          />
+          <div
+            className={styles.nfts}
+            onClick={() =>
+              user ? router.push('/feed') : alert('Please connect wallet')
+            }
+          >
+            <Image
+              className={styles.icon}
+              src={'/Images/1Icon.png'}
+              height={80}
+              width={80}
+              alt={''}
+            />
 
-          <span>
-            <h3>Vote</h3>
-            <p>Click here to Vote on Active Proposals For CubexDAO...</p>
-          </span>
-        </div>
+            <span>
+              <h3>Vote</h3>
+              <p>Click here to Vote on Active Proposals For CubexDAO...</p>
+            </span>
+          </div>
 
-        {
-          session.authStatus === "Admin" ? <div
-          className={styles.nfts}
-          onClick={() =>
-            user ? router.push('/admin/admin') : alert('Please connect wallet')
-          }
-        >
-          <Image
-            className={styles.icon}
-            src={'/Images/1Icon.png'}
-            height={80}
-            width={80}
-            alt={''}
-          />
+          {session.authStatus === 'Admin' ? (
+            <div
+              className={styles.nfts}
+              onClick={() =>
+                user
+                  ? router.push('/admin/admin')
+                  : alert('Please connect wallet')
+              }
+            >
+              <Image
+                className={styles.icon}
+                src={'/Images/1Icon.png'}
+                height={80}
+                width={80}
+                alt={''}
+              />
 
-          {console.log("Auth Status", session.authStatus )}
+              {console.log('Auth Status', session.authStatus)}
 
-          <span>
-            <h3>Admin</h3>
-            <p>Click here to Access Your Admin Dashboard For The Cubicle TFG...</p>
-          </span>
-        </div> : <></>
-        }
-      </main>
+              <span>
+                <h3>Admin</h3>
+                <p>
+                  Click here to Access Your Admin Dashboard For The Cubicle
+                  TFG...
+                </p>
+              </span>
+            </div>
+          ) : (
+            <></>
+          )}
+        </main>
 
         {/* <span className={styles.scrollIcon}>
         <span className={styles.scrollIconWheelOuter}>
@@ -191,7 +263,7 @@ const Landing = () => {
         </button>
 
         <button onClick={() => handleClick(2)}>
-        <Image
+          <Image
             className={styles.icon}
             src={'/Images/rightArrow.svg'}
             height={24}

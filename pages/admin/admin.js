@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
+import {useDisconnect} from 'wagmi';
+
 import ActiveProposals from "../../components/admin/proposal-active";
 import CreateProposalForm from "../../components/admin/proposal-form";
 import CreateRewardForm from "../../components/admin/reward-form";
@@ -9,7 +11,6 @@ import styles from "../../styles/admin.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { MyStore } from "../../state/myStore";
-import { useStore } from "../../state/useStore";
 
 const Admin = () => {
   const [selectedReward, setSelectedReward] = useState(null);
@@ -20,6 +21,8 @@ const Admin = () => {
   const [count, setCount] = useState(0);
   const session = useContext(MyStore);
   const router = useRouter();
+
+  const { disconnect } = useDisconnect();
 
   useEffect(() => {
     if (!rewards) {
@@ -33,17 +36,50 @@ const Admin = () => {
     }
   }, [proposals]);
 
+
+  // @see Layout.js
+  const handleInit = async () => {
+    //session.init(disconnect);
+
+    if (await session.isValid())
+      return;
+
+
+    const isConnected = await session.start();
+    if(!isConnected){
+      //cleanup
+      if(session.address || session.connector){
+        await disconnect();
+      }
+      
+      await session.stop(true);
+    }
+  };
+
+
   /**
    * @dev protects admin route via existing signature and auth status
    */
-
   useEffect(() => {
-    // session.authStatus === "Admin" ? null : router.push('/')
+    async () => {
+      await handleInit();
+      session.authStatus === "Admin" ? null : router.push('/')
+    }
   }, []);
+
 
   const fetchActiveRewards = async () => {
     try {
-      await fetch("/api/rewards-getAll")
+      const init = {
+        method: "post",
+        headers: {
+          // TODO: check this
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(session.sessionState)
+      };
+
+      await fetch("/api/rewards-getAll", init)
         .then((res) => res.json())
         .then((data) => {
           console.log("Rewards data", data);
@@ -71,7 +107,7 @@ const Admin = () => {
     try {
       await axios({
         method: "post",
-        url: "http://localhost:3000/api/fetchUserData",
+        url: "/api/fetchUserData",
         data: {
           count: count ? count : 0,
           fetchListedOwners: null,
@@ -342,7 +378,7 @@ const Admin = () => {
             <span>Staking Count</span>
             <span>Status</span>
           </div>
-          {console.log("Admin Auth Check", session.authStatus)}
+          {console.log("===Admin Auth Check===", session.authStatus)}
         
 
           <div className={styles.listContainer}>

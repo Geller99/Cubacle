@@ -1,4 +1,5 @@
-import Landing from './landing.js';
+
+import Landing from './landing';
 
 const Home = () => {
   const render = () => {

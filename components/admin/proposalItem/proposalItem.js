@@ -17,7 +17,7 @@ const ProposalItem = ({
     try {
       await axios({
         method: 'post',
-        url: 'http://localhost:3000/api/proposal-delete',
+        url: '/api/proposal-delete',
         data: {
           title: proposal.title,
         },

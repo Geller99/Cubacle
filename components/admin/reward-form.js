@@ -105,8 +105,8 @@ const CreateRewardForm = ({
         }
       >
         <header>
-          <h4>Create New Proposal</h4>
-          <p>Fill the form below to create new proposal</p>
+          <h4>Create New Reward</h4>
+          <p>Fill the form below to create new reward</p>
           <button onClick={() => setSelectedReward(null)}>
             <Image
               className={styles.icon}

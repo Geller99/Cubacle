@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef} from 'react';
 import { useRouter } from 'next/router';
-import { useDisconnect } from 'wagmi';
-import { useStore } from '../state/useStore';
+import {useDisconnect} from 'wagmi';
+import { MyStore } from "../state/myStore";
 
 import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
 
+
 const Landing = () => {
   const router = useRouter();
-  const session = useStore();
+  const session = useContext(MyStore);
   const [scrollLeft, setScrollLeft] = useState(0);
-  const { disconnect } = useDisconnect();
-
   const user = session.address;
 
   /**
@@ -136,7 +135,7 @@ const Landing = () => {
             className={styles.rewards}
             onClick={() =>
               user
-                ? router.push('/rewards/rewards')
+                ? router.push('/rewards')
                 : alert('Please connect wallet')
             }
           >
@@ -158,7 +157,7 @@ const Landing = () => {
             className={styles.claimRewards}
             onClick={() =>
               user
-                ? router.push('/rewards/claim')
+                ? router.push('/claim')
                 : alert('Please connect wallet')
             }
           >

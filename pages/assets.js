@@ -70,24 +70,59 @@ const Assets = () => {
   );
 
   // step 3a
+  // const fetchTokenData = async (fetchTokenIds) => {
+  //   console.log("step 3a", fetchTokenIds);
+
+  //   const sortedTokens = fetchTokenIds.map((el) => {
+  //     return {
+  //       contractAddress: contractAddy,
+  //       tokenId: el,
+  //     };
+  //   });
+  //   try {
+  //     const response = await alchemy.nft.getNftMetadataBatch(sortedTokens);
+  //     console.log("Data", response);
+  //     //setTokenInfo(response);
+  //     return response;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return [];
+  //   }
+  // };
+
   const fetchTokenData = async (fetchTokenIds) => {
     console.log("step 3a", fetchTokenIds);
-
-    const sortedTokens = fetchTokenIds.map((el) => {
-      return {
-        contractAddress: contractAddy,
-        tokenId: el,
-      };
-    });
-    try {
-      const response = await alchemy.nft.getNftMetadataBatch(sortedTokens);
-      //console.log("Data", response);
-      //setTokenInfo(response);
-      return response;
-    } catch (error) {
-      console.log(error);
-      return [];
+    
+    const batchSize = 50; // set the batch size to 50
+    
+    const batches = [];
+    for (let i = 0; i < fetchTokenIds.length; i += batchSize) {
+      batches.push(fetchTokenIds.slice(i, i + batchSize));
     }
+    
+    const responses = [];
+    
+    for (const batch of batches) {
+      const sortedTokens = batch.map((el) => {
+        return {
+          contractAddress: contractAddy,
+          tokenId: el,
+        };
+      });
+      
+      try {
+        const response = await alchemy.nft.getNftMetadataBatch(sortedTokens);
+        console.log("Data", response);
+        responses.push(response);
+      } catch (error) {
+        console.log(error);
+        responses.push([]);
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 1000)); // wait for 1 second before making the next batch request
+    }
+    
+    return responses.flat(); // flatten the array of responses
   };
 
   // step 3b

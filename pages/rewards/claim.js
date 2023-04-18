@@ -268,7 +268,7 @@ const ClaimRewards = () => {
                 alt={''}
               />
 
-              <h3>No Active Reward</h3>
+              <h3>No Previous Claims</h3>
             </div>
           </div>
           {/* {claimRewards.map((claimreward, idx) => {

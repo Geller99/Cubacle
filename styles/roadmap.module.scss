@@ -119,7 +119,7 @@
         }   
         .mapContentContainer-5 {
             left: 18% !important;
-            top: 52% !important;
+            top: 72% !important;
             transform: translateY(0%) !important;
             margin-bottom: 2rem !important;
         }
@@ -137,13 +137,13 @@
         .mapId-7 {
             width: 90px!important;
             height: 90px!important;
-            left: 38% !important;
-            top: 60% !important;
+            left: 37% !important;
+            top: 58% !important;
 
         }   
         .mapContentContainer-7 {
-            left: 45% !important;
-            top: 52% !important;
+            left: 39% !important;
+            top: 48% !important;
             transform: translateY(0%) !important;
         }
 
@@ -191,7 +191,7 @@
         }   
         .mapContentContainer-12 {
             left: 60% !important;
-            top: 58% !important;
+            top: 45% !important;
             transform: translateY(0%) !important;
         }
 
@@ -208,15 +208,19 @@
         }
 
         .mapId-14 {
-
             left: 72% !important;
             top: 70% !important;
 
         }   
         .mapContentContainer-14 {
-            left: 77% !important;
-            top: 50% !important;
+            left: 68% !important;
+            top: 25% !important;
             transform: translateY(0%) !important;
+
+
+            .fullContent {
+                max-width: 700px !important;
+            }
         }
 
         .mapId-15 {
@@ -226,21 +230,29 @@
 
         }   
         .mapContentContainer-15 {
-            left: 78% !important;
+            left: 72% !important;
             top: 12% !important;
             transform: translateY(0%) !important;
+
+            .fullContent {
+                max-width: 580px !important;
+            }
         }
 
         .mapId-16 {
 
             left: 43% !important;
-            top: 89% !important;
+            top: 79% !important;
 
         }   
         .mapContentContainer-16 {
             left: 51% !important;
-            top: 52% !important;
+            top: 55% !important;
             transform: translateY(0%) !important;
+
+            .fullContent {
+                max-width: 700px !important;
+            }
         }
 
         .mat {
@@ -259,7 +271,7 @@
             display: flex;
             position: absolute;
             left: 45%;
-            top:25%;
+            top:20%;
             transform: translateX(-45%);
             transform: translateY(0%);
 
@@ -271,7 +283,7 @@
                 border-width: 16px 0 16px 30px;
                 border-color: transparent transparent transparent #FFFFFF;
                 transform: rotate(180deg);
-                margin-top: 7rem;
+                margin-top: 10rem;
             }
 
 
@@ -345,8 +357,13 @@
                     overflow: hidden;
 
                     .fullContent {
-                        max-width: 425px;
+                        max-width: 550px;
                         transition: all 0.4s linear;
+                        
+                        p {
+                            margin-bottom: 4px;
+                            // line-height: 20px;
+                        }
                     }
                     .lessContent {
                         max-width: 300px;
@@ -360,6 +377,9 @@
                         margin-left: 5px;
                         text-decoration: none;
                         cursor: pointer;
+                    }
+                    a {
+                        color: #3D0CDF;
                     }
 
                     div {

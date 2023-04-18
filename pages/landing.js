@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import {useDisconnect} from 'wagmi';
+import { useDisconnect } from 'wagmi';
 import { useStore } from '../state/useStore';
 
 import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
-
-
-
 
 const Landing = () => {
   const router = useRouter();
@@ -38,29 +35,23 @@ const Landing = () => {
   //
   // NOTE: we need to keep the data so that the timstamp doesn't change
   const handleInit = async () => {
-    if (await session.isValid())
-      return;
-
+    if (await session.isValid()) return;
 
     const isConnected = await session.start();
-    if(!isConnected){
+    if (!isConnected) {
       //cleanup
-      if(session.address || session.connector){
-        await disconnect(); 
+      if (session.address || session.connector) {
+        await disconnect();
         session.setAuthStatus(null);
       }
       await session.stop(true);
     }
   };
 
-
   // always check
   useEffect(() => {
     handleInit();
   });
-
-
-
 
   const mainLaRef = useRef(null);
   const handleClick = (direction) => {
@@ -71,7 +62,36 @@ const Landing = () => {
   return (
     <div className={styles.landingContainer}>
       <section className={styles.container}>
-        <main ref={mainLaRef} className={styles.main}>
+        <main
+          className={styles.main}
+          ref={mainLaRef}
+          //         onTouchStart={(e) => {
+          //   e.stopPropagation();
+          // }} onDragStart={(e) => {
+          //   e.preventDefault();
+          //   e.stopPropagation();
+          //   const startX = e.clientX || e.touches[0].clientX;
+          //   const scrollLeft = e.currentTarget.scrollLeft;
+
+          //   e.currentTarget.addEventListener('mousemove', onMouseMove);
+          //   e.currentTarget.addEventListener('touchmove', onMouseMove);
+          //   e.currentTarget.addEventListener('mouseup', onMouseUp);
+          //   e.currentTarget.addEventListener('touchend', onMouseUp);
+
+          //   function onMouseMove(e) {
+          //     const x = e.clientX || e.touches[0].clientX;
+          //     const distance = x - startX;
+          //     e.currentTarget.scrollLeft = scrollLeft - distance;
+          //   }
+
+          //   function onMouseUp(e) {
+          //     e.currentTarget.removeEventListener('mousemove', onMouseMove);
+          //     e.currentTarget.removeEventListener('touchmove', onMouseMove);
+          //     e.currentTarget.removeEventListener('mouseup', onMouseUp);
+          //     e.currentTarget.removeEventListener('touchend', onMouseUp);
+          //   }
+          // }}
+        >
           <div
             className={styles.nfts}
             onClick={() =>
@@ -176,50 +196,57 @@ const Landing = () => {
             </span>
           </div>
 
-        <div
-          className={styles.nfts}
-          onClick={() =>
-            user ? router.push('/feed') : alert('Please connect wallet')
-          }
-        >
-          <Image
-            className={styles.icon}
-            src={'/Images/1Icon.png'}
-            height={80}
-            width={80}
-            alt={''}
-          />
+          <div
+            className={styles.nfts}
+            onClick={() =>
+              user ? router.push('/feed') : alert('Please connect wallet')
+            }
+          >
+            <Image
+              className={styles.icon}
+              src={'/Images/1Icon.png'}
+              height={80}
+              width={80}
+              alt={''}
+            />
 
-          <span>
-            <h3>Vote</h3>
-            <p>Click here to Vote on Active Proposals For CubexDAO...</p>
-          </span>
-        </div>
+            <span>
+              <h3>Vote</h3>
+              <p>Click here to Vote on Active Proposals For CubexDAO...</p>
+            </span>
+          </div>
 
-        {
-          session.authStatus === "Admin" ? <div
-          className={styles.nfts}
-          onClick={() =>
-            user ? router.push('/admin/admin') : alert('Please connect wallet')
-          }
-        >
-          <Image
-            className={styles.icon}
-            src={'/Images/1Icon.png'}
-            height={80}
-            width={80}
-            alt={''}
-          />
+          {session.authStatus === 'Admin' ? (
+            <div
+              className={styles.nfts}
+              onClick={() =>
+                user
+                  ? router.push('/admin/admin')
+                  : alert('Please connect wallet')
+              }
+            >
+              <Image
+                className={styles.icon}
+                src={'/Images/1Icon.png'}
+                height={80}
+                width={80}
+                alt={''}
+              />
 
-          {console.log("Auth Status", session.authStatus )}
+              {console.log('Auth Status', session.authStatus)}
 
-          <span>
-            <h3>Admin</h3>
-            <p>Click here to Access Your Admin Dashboard For The Cubicle TFG...</p>
-          </span>
-        </div> : <></>
-        }
-      </main>
+              <span>
+                <h3>Admin</h3>
+                <p>
+                  Click here to Access Your Admin Dashboard For The Cubicle
+                  TFG...
+                </p>
+              </span>
+            </div>
+          ) : (
+            <></>
+          )}
+        </main>
 
         {/* <span className={styles.scrollIcon}>
         <span className={styles.scrollIconWheelOuter}>
@@ -239,7 +266,7 @@ const Landing = () => {
         </button>
 
         <button onClick={() => handleClick(2)}>
-        <Image
+          <Image
             className={styles.icon}
             src={'/Images/rightArrow.svg'}
             height={24}

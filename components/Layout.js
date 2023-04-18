@@ -34,5 +34,4 @@ const Layout = ({ children }) => {
     </section>
   );
 };
-
 export default Layout;

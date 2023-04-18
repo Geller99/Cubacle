@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect, useRef} from 'react';
 import { useRouter } from 'next/router';
-import {useDisconnect} from 'wagmi';
 import { MyStore } from "../state/myStore";
-
 import styles from '../styles/landing.module.scss';
 import Image from 'next/image';
 
@@ -33,24 +31,24 @@ const Landing = () => {
   // else. generate a new signature
   //
   // NOTE: we need to keep the data so that the timstamp doesn't change
-  const handleInit = async () => {
-    if (await session.isValid()) return;
+  // const handleInit = async () => {
+  //   if (await session.isValid()) return;
 
-    const isConnected = await session.start();
-    if (!isConnected) {
-      //cleanup
-      if (session.address || session.connector) {
-        await disconnect();
-        session.setAuthStatus(null);
-      }
-      await session.stop(true);
-    }
-  };
+  //   const isConnected = await session.start();
+  //   if (!isConnected) {
+  //     //cleanup
+  //     if (session.address || session.connector) {
+  //       await disconnect();
+  //       session.setAuthStatus(null);
+  //     }
+  //     await session.stop(true);
+  //   }
+  // };
 
-  // always check
-  useEffect(() => {
-    handleInit();
-  });
+  // // always check
+  // useEffect(() => {
+  //   handleInit();
+  // });
 
   const mainLaRef = useRef(null);
   const handleClick = (direction) => {
